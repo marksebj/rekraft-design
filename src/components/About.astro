@@ -1,0 +1,176 @@
+---
+---
+<section id="about" class="section about">
+  <div class="frame">
+    <header class="about-head">
+      <span class="eyebrow">04 &mdash; About</span>
+      <h2 class="display-2 reveal-words" data-reveal-headline>
+        A studio built by someone who&rsquo;s sat on <em class="italic-accent">your side of the table.</em>
+      </h2>
+    </header>
+
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p class="about-lead">
+          Rekraft Design is the studio arm of Rekraft. We take on a small number of projects for founders and businesses who care how they&rsquo;re seen.
+        </p>
+        <p>
+          Our founder Mark spent over a decade inside international property portfolios, leading operations across Europe and hiring hundreds of agencies and suppliers along the way. Multi-million pound budgets. Brutal deadlines. No patience for fluff.
+        </p>
+        <p>
+          That experience shapes how we work. We know what a good brief looks like. We know what &ldquo;good&rdquo; feels like to a serious client. And we know how much of traditional agency output is wasted motion.
+        </p>
+        <p>
+          Rekraft Design exists to be the studio we&rsquo;d have wanted to hire, back when we were on the buying side.
+        </p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num font-display">10+</span>
+            <span class="about-stat-label font-mono">years in property &amp; FM</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num font-display">100s</span>
+            <span class="about-stat-label font-mono">agencies &amp; suppliers hired</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num font-display">1</span>
+            <span class="about-stat-label font-mono">unfair advantage</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="about-founder fade-up">
+        <div class="about-founder-img">
+          <img src="/images/mark-founder.jpg" alt="Mark, Founder of Rekraft Design" loading="lazy" />
+        </div>
+        <div class="about-founder-meta">
+          <div class="about-founder-name-wrap">
+            <h3 class="about-founder-name display-3">Mark</h3>
+            <span class="about-founder-role font-mono">Founder</span>
+          </div>
+          <dl class="about-founder-details">
+            <div><dt class="font-mono">Based</dt><dd>London, UK</dd></div>
+            <div><dt class="font-mono">Focus</dt><dd>Brand. Web. Social.</dd></div>
+            <div><dt class="font-mono">Available</dt><dd>Q3 2026</dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(100px, 12vw, 180px);
+  }
+
+  .about-head {
+    display: grid;
+    gap: 20px;
+    max-width: 960px;
+    margin-bottom: clamp(56px, 8vw, 100px);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+
+  .about-text { display: grid; gap: 18px; }
+  .about-lead {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 1.8vw + 12px, 32px);
+    line-height: 1.3;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+  .about-text p {
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    max-width: 60ch;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+  .about-stat { display: grid; gap: 6px; }
+  .about-stat-num {
+    font-size: clamp(36px, 3vw + 16px, 56px);
+    line-height: 1;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+  .about-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+
+  .about-founder {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: clamp(24px, 2vw, 32px);
+    display: grid;
+    gap: 24px;
+    position: sticky;
+    top: 120px;
+  }
+  .about-founder-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .about-founder-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .about-founder-meta { display: grid; gap: 20px; }
+  .about-founder-name-wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .about-founder-name { line-height: 1; }
+  .about-founder-role {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-lime);
+  }
+
+  .about-founder-details {
+    display: grid;
+    gap: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+  .about-founder-details > div {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .about-founder-details dt {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .about-founder-details dd {
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-founder { position: static; }
+    .about-stats { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>

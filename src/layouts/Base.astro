@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Rekraft Design — Independent design studio · London',
+  description = 'Brand, websites, and social for brands that mean business. Made to stand out. Built to stand up.',
+  canonical = 'https://rekraft.design/',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content="https://rekraft.design/images/ReKraft Logo.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://rekraft.design/images/ReKraft Logo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+  <!-- Fonts: Instrument Serif (display) + Inter Tight (body) + JetBrains Mono (labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Rekraft Design",
+      "description": "Independent design studio. Brand, websites, and social for brands that mean business.",
+      "url": "https://rekraft.design",
+      "logo": "https://rekraft.design/images/ReKraft Logo.png",
+      "email": "mark@rekraft.design",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressCountry": "GB"
+      },
+      "priceRange": "£££",
+      "serviceType": ["Brand Identity", "Website Design", "Website Development", "Social Media Design"]
+    }
+  </script>
+</head>
+<body>
+  <div class="scroll-progress" data-progress></div>
+  <div class="cursor-glow" data-glow></div>
+
+  <slot />
+
+  <script>
+    import '../scripts/motion.ts';
+  </script>
+</body>
+</html>

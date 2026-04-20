@@ -1,0 +1,121 @@
+---
+---
+<footer class="footer">
+  <div class="frame footer-inner">
+    <div class="footer-mark">
+      <img src="/images/ReKraft Logo.png" alt="Rekraft Design" width="28" height="28" />
+      <div class="footer-wordmark">
+        <span class="footer-brand">rekraft</span>
+        <span class="footer-brand-sub">design</span>
+      </div>
+    </div>
+
+    <div class="footer-lockup">
+      <p class="footer-tagline">
+        Made to stand out. <em class="italic-accent">Built to stand up.</em>
+      </p>
+    </div>
+
+    <nav class="footer-nav">
+      <div class="footer-col">
+        <span class="footer-col-h font-mono">Studio</span>
+        <a href="#work">Work</a>
+        <a href="#approach">Approach</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h font-mono">Contact</span>
+        <a href="mailto:mark@rekraft.design">mark@rekraft.design</a>
+        <a href="#contact">Start a project</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h font-mono">Family</span>
+        <a href="https://rekraft.agency" target="_blank" rel="noopener">Rekraft Agency &rarr;</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h font-mono">Legal</span>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </nav>
+
+    <div class="footer-base">
+      <span class="font-mono">&copy; 2026 Rekraft Design &middot; London, UK</span>
+      <span class="font-mono">Made with care.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(56px, 6vw, 96px);
+    background: var(--color-bg);
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: clamp(40px, 5vw, 80px);
+  }
+
+  .footer-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-mark img { width: 26px; height: 26px; border-radius: 5px; }
+  .footer-wordmark { display: flex; align-items: baseline; gap: 6px; }
+  .footer-brand { font-family: var(--font-sans); font-weight: 600; font-size: 15px; }
+  .footer-brand-sub { font-family: var(--font-display); font-style: italic; font-size: 16px; color: var(--color-cream); opacity: 0.85; }
+
+  .footer-lockup {
+    padding-block: clamp(24px, 4vw, 48px);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .footer-col { display: grid; gap: 10px; align-content: start; }
+  .footer-col-h {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    margin-bottom: 4px;
+  }
+  .footer-col a {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--color-ink-muted);
+    transition: color .3s var(--ease-out-expo);
+  }
+  .footer-col a:hover { color: var(--color-ink); }
+
+  .footer-base {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    padding-top: clamp(20px, 2vw, 32px);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 720px) {
+    .footer-nav { grid-template-columns: repeat(2, 1fr); }
+    .footer-base { flex-direction: column; gap: 8px; }
+  }
+</style>

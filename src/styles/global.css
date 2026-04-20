@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Rekraft Design — Global Tokens
+   Editorial studio aesthetic. Shared brand DNA with rekraft.agency but
+   a distinct visual language (serif display, warm bone white, restrained lime).
+   ========================================================================== */
+
+@theme {
+  /* Surfaces — warm cream paper base, deeper cream for elevation, pure white cards for highlights */
+  --color-bg: #F2EDE1;
+  --color-surface: #E8E2D2;
+  --color-card: #FFFFFF;
+  --color-card-hover: #FAF6EC;
+  --color-border: #D8D1BF;
+  --color-border-active: #A59E8A;
+
+  /* Text — near-black ink on warm cream */
+  --color-ink: #141418;
+  --color-ink-muted: #4F4B43;
+  --color-ink-dim: #86807A;
+  --color-ink-faint: #B8B1A3;
+
+  /* Accents */
+  --color-lime: #1E2E4A;            /* deep ink blue / navy — structural accent. Classic editorial counterpoint to cream + burgundy. */
+  --color-lime-soft: rgba(30, 46, 74, 0.10);
+  --color-lime-glow: rgba(30, 46, 74, 0.18);
+  --color-cream: #8B1E2A;           /* rich cherry burgundy — italic emphasis (Tommy SVJ wrap) */
+  --color-ambient: rgba(139, 30, 42, 0.10);  /* subtle burgundy-tinted ambient glow for hero / manifesto */
+
+  /* Fonts */
+  --font-display: "Instrument Serif", "Times New Roman", ui-serif, Georgia, serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(.19, 1, .22, 1);
+  --ease-out-quart: cubic-bezier(.25, 1, .5, 1);
+}
+
+/* --- Reset & base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+body {
+  overflow-x: clip;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+img, video { display: block; max-width: 100%; height: auto; }
+
+/* Lenis smooth scroll baseline */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* --- Selection --- */
+::selection {
+  background: var(--color-lime);
+  color: var(--color-bg);
+}
+
+/* --- Custom scrollbar --- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border-active); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-ink-dim); }
+
+/* ==========================================================================
+   Typography primitives
+   ========================================================================== */
+
+.font-display { font-family: var(--font-display); font-weight: 400; }
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lime);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.display-1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(52px, 8.2vw, 128px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
+.display-3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.lead {
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 1.15vw + 10px, 22px);
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  font-weight: 400;
+  max-width: 38ch;
+}
+
+.italic-accent {
+  font-style: italic;
+  color: var(--color-cream);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.frame {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 80px);
+}
+
+.frame-n {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 80px);
+}
+
+.section {
+  padding-block: clamp(80px, 12vw, 180px);
+  position: relative;
+}
+
+.section-tight {
+  padding-block: clamp(60px, 8vw, 120px);
+}
+
+/* ==========================================================================
+   Word reveal (kinetic text) — pre-animation state set by GSAP on mount
+   ========================================================================== */
+
+.reveal-words .word,
+.reveal-words .line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.reveal-words .word-inner,
+.reveal-words .line-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Progressive enhancement: if JS hasn't hydrated, show text without mask */
+html:not(.js-ready) .reveal-words .word-inner,
+html:not(.js-ready) .reveal-words .line-inner {
+  transform: none;
+}
+
+/* ==========================================================================
+   Scroll reveal primitives (GSAP ScrollTrigger hooks these)
+   ========================================================================== */
+
+.fade-up { opacity: 0; transform: translateY(40px); will-change: transform, opacity; }
+.fade-up.is-in { opacity: 1; transform: translateY(0); transition: opacity .9s var(--ease-out-expo), transform .9s var(--ease-out-expo); }
+
+.clip-reveal { clip-path: inset(0 0 100% 0); will-change: clip-path; }
+.clip-reveal.is-in { clip-path: inset(0 0 0% 0); transition: clip-path 1.1s var(--ease-out-expo); }
+
+/* ==========================================================================
+   Progress bar & cursor glow
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--color-lime);
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.cursor-glow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 30, 42, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+  contain: strict;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 900px), (hover: none) {
+  .cursor-glow { display: none; }
+}
+
+/* ==========================================================================
+   Buttons / CTAs
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  padding: 14px 26px;
+  border-radius: 999px;
+  position: relative;
+  transition: transform .4s var(--ease-out-expo), background .4s var(--ease-out-expo), color .4s var(--ease-out-expo), border-color .4s var(--ease-out-expo);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+.btn-primary:hover {
+  background: #000000;
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  color: var(--color-ink);
+  border: 1px solid var(--color-border-active);
+  background: transparent;
+}
+.btn-ghost:hover {
+  border-color: var(--color-ink);
+  background: var(--color-card);
+  transform: translateY(-2px);
+}
+.btn-arrow {
+  display: inline-block;
+  transition: transform .4s var(--ease-out-expo);
+}
+.btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* ==========================================================================
+   Accessibility: reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .reveal-words .word-inner,
+  .reveal-words .line-inner { transform: none !important; }
+  .fade-up, .clip-reveal { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .cursor-glow, .scroll-progress { display: none; }
+}

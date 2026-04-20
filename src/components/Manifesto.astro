@@ -1,0 +1,64 @@
+---
+---
+<section class="manifesto">
+  <div class="frame-n manifesto-inner">
+    <span class="eyebrow fade-up">Manifesto &middot; One line</span>
+    <p class="manifesto-copy display-2 reveal-words" data-reveal-headline>
+      We make things that <em class="italic-accent">matter to people who notice.</em>
+    </p>
+    <div class="manifesto-marker fade-up">
+      <span class="font-mono">MK &middot; London</span>
+      <span class="manifesto-line"></span>
+      <span class="font-mono">2026</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    padding-block: clamp(80px, 10vw, 160px);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    position: relative;
+  }
+  .manifesto::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, var(--color-ambient) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .manifesto-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 36px;
+    text-align: center;
+  }
+  .manifesto-inner .eyebrow {
+    justify-self: center;
+  }
+  .manifesto-copy {
+    max-width: 18ch;
+    margin-inline: auto;
+    color: var(--color-ink);
+    text-align: center;
+  }
+  .manifesto-marker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .manifesto-line {
+    width: 40px;
+    height: 1px;
+    background: var(--color-border-active);
+  }
+</style>

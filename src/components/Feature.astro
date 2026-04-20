@@ -1,0 +1,115 @@
+---
+---
+<section class="feature" aria-label="Studio imagery">
+  <div class="feature-frame">
+    <div class="feature-strip">
+      <figure class="feature-item feature-tall fade-up">
+        <img
+          src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1200&q=80"
+          alt=""
+          loading="lazy"
+        />
+        <figcaption class="font-mono">
+          <span>A · Editorial</span>
+          <span>Aesthetic Clinic · brand stills</span>
+        </figcaption>
+      </figure>
+
+      <figure class="feature-item feature-wide fade-up">
+        <img
+          src="https://images.unsplash.com/photo-1618004912476-29818d81ae2e?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          loading="lazy"
+        />
+        <figcaption class="font-mono">
+          <span>Art direction</span>
+          <span>Surfaces, pastel · 2026</span>
+        </figcaption>
+      </figure>
+
+      <figure class="feature-item feature-square fade-up">
+        <img
+          src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80"
+          alt=""
+          loading="lazy"
+        />
+        <figcaption class="font-mono">
+          <span>Architecture</span>
+          <span>Light study · London</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature {
+    padding-block: clamp(60px, 8vw, 120px);
+    background: var(--color-bg);
+  }
+  .feature-frame {
+    max-width: 1680px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 3vw, 40px);
+  }
+  .feature-strip {
+    display: grid;
+    grid-template-columns: 0.85fr 1.35fr 0.8fr;
+    gap: clamp(14px, 1.6vw, 24px);
+    align-items: stretch;
+  }
+  .feature-item {
+    position: relative;
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 24px 60px -30px rgba(20, 20, 24, 0.35);
+  }
+  .feature-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.04) saturate(0.95);
+    transition: transform 10s var(--ease-out-expo);
+  }
+  .feature-item:hover img { transform: scale(1.04); }
+
+  .feature-tall { aspect-ratio: 4 / 5; }
+  .feature-wide { aspect-ratio: 16 / 10; }
+  .feature-square { aspect-ratio: 1 / 1; }
+
+  .feature-item figcaption {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    background: rgba(242, 237, 225, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 999px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .feature-item figcaption span:first-child { color: var(--color-cream); }
+
+  @media (max-width: 900px) {
+    .feature-strip {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    .feature-wide { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 520px) {
+    .feature-strip { grid-template-columns: 1fr; }
+    .feature-wide { grid-column: auto; order: 0; }
+  }
+</style>

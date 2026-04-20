@@ -1,0 +1,124 @@
+---
+const principles = [
+  {
+    num: '01',
+    title: 'Considered',
+    body: 'Nothing ships without reason. Every element earns its place. If it doesn&rsquo;t serve the brand or the reader, it doesn&rsquo;t go in.',
+  },
+  {
+    num: '02',
+    title: 'Crafted',
+    body: 'Built from scratch, not assembled from templates. We use AI where it sharpens the work, never where it flattens it.',
+  },
+  {
+    num: '03',
+    title: 'Committed',
+    body: 'Small roster, long relationships. We don&rsquo;t take on what we can&rsquo;t finish properly, and we stay through the launch.',
+  },
+];
+---
+
+<section id="approach" class="section approach">
+  <div class="frame">
+    <div class="approach-grid">
+      <aside class="approach-aside">
+        <span class="eyebrow">02 &mdash; Approach</span>
+        <h2 class="display-2 reveal-words" data-reveal-headline>
+          Three rules. <em class="italic-accent">No exceptions.</em>
+        </h2>
+        <p class="lead fade-up">
+          We built this studio to fix what frustrated us about working with agencies from the buying side. Every rule below comes from a time we watched a project get it wrong.
+        </p>
+      </aside>
+
+      <ol class="approach-list">
+        {principles.map((p, i) => (
+          <li class="approach-item fade-up" style={`--d: ${i * 0.12}s`}>
+            <div class="approach-num font-mono">{p.num}</div>
+            <h3 class="approach-title display-3">{p.title}</h3>
+            <p class="approach-body" set:html={p.body}></p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .approach {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(100px, 12vw, 180px);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(48px, 8vw, 140px);
+    align-items: start;
+  }
+
+  .approach-aside {
+    display: grid;
+    gap: 24px;
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  .approach-aside h2 em { font-style: italic; }
+
+  .approach-list {
+    list-style: none;
+    display: grid;
+    gap: 1px;
+    background: var(--color-border);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .approach-item {
+    background: var(--color-bg);
+    padding: clamp(32px, 4vw, 56px) 0;
+    padding-left: clamp(20px, 2.5vw, 40px);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: baseline;
+    transition: background .5s var(--ease-out-expo);
+    transition-delay: var(--d);
+  }
+  .approach-item:hover { background: var(--color-surface); }
+
+  .approach-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--color-lime);
+  }
+  .approach-title {
+    color: var(--color-ink);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .approach-body {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.65;
+    color: var(--color-ink-muted);
+    max-width: 48ch;
+    grid-column: 2;
+  }
+  .approach-item { grid-template-areas: "num title" ". body"; }
+  .approach-num { grid-area: num; padding-top: 10px; }
+  .approach-title { grid-area: title; }
+  .approach-body { grid-area: body; }
+
+  @media (max-width: 900px) {
+    .approach-grid { grid-template-columns: 1fr; gap: 48px; }
+    .approach-aside { position: static; }
+    .approach-item {
+      grid-template-columns: 1fr;
+      grid-template-areas: "num" "title" "body";
+      gap: 12px;
+      padding-left: 20px;
+    }
+    .approach-body { grid-column: 1; }
+  }
+</style>
