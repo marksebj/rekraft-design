@@ -14,18 +14,10 @@
       <span class="hero-year font-mono" data-hero-eyebrow>Est. 2026</span>
     </div>
 
-    <div class="hero-body">
-      <h1 class="display-1 reveal-words" data-hero-headline>
+    <div class="hero-body" data-tilt3d-parent>
+      <h1 class="display-1 reveal-words hero-headline" data-hero-headline data-tilt3d>
         Made to stand out.<br /><em class="italic-accent">Built to stand up.</em>
       </h1>
-
-      <aside class="hero-tile" aria-hidden="true">
-        <div class="hero-tile-mark" data-tilt3d-parent>
-          <span class="hero-tile-mark-top font-mono">studio</span>
-          <span class="hero-tile-mark-word font-display" data-tilt3d>design</span>
-          <span class="hero-tile-mark-bottom font-mono">— est. 2026</span>
-        </div>
-      </aside>
     </div>
 
     <div class="hero-foot">
@@ -106,77 +98,29 @@
   }
 
   .hero-body {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: clamp(32px, 4vw, 80px);
+    display: block;
     width: 100%;
-  }
-
-  .hero h1 {
-    max-width: 18ch;
-    margin-top: clamp(20px, 4vw, 60px);
-  }
-  .hero h1 em { font-style: italic; }
-
-  .hero-tile {
-    width: clamp(220px, 22vw, 340px);
-    display: grid;
-    gap: 12px;
-    align-self: end;
-    margin-bottom: 4px;
-  }
-  .hero-tile-mark {
-    aspect-ratio: 4 / 5;
-    border-radius: 10px;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    box-shadow: 0 12px 40px -20px rgba(20, 20, 24, 0.35);
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 24px;
-    overflow: hidden;
-    position: relative;
-    perspective: 900px;
+    perspective: 1400px;
     perspective-origin: 50% 50%;
+    min-height: clamp(280px, 42vh, 520px);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(20px, 4vw, 60px);
   }
-  .hero-tile-mark::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 30% 20%, var(--color-ambient) 0%, transparent 55%),
-      linear-gradient(180deg, transparent 0%, rgba(139, 30, 42, 0.04) 100%);
-    pointer-events: none;
-  }
-  .hero-tile-mark-top,
-  .hero-tile-mark-bottom {
-    position: relative;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-  }
-  .hero-tile-mark-top { color: var(--color-cream); }
-  .hero-tile-mark-word {
-    position: relative;
-    align-self: center;
-    justify-self: center;
-    font-style: italic;
-    font-size: clamp(56px, 8vw, 120px);
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-    color: var(--color-cream);
-    text-align: center;
+
+  .hero-headline {
+    max-width: 20ch;
     transform-style: preserve-3d;
     will-change: transform;
     cursor: grab;
     user-select: none;
+    /* subtle double-layer shadow gives the type dimensional weight when it rotates */
     text-shadow:
-      -1px 0 0 rgba(139, 30, 42, 0.15),
-      1px 0 0 rgba(139, 30, 42, 0.08);
+      0 1px 0 rgba(20, 20, 24, 0.02),
+      0 8px 40px rgba(20, 20, 24, 0.06);
   }
-  .hero-tile-mark-bottom { text-align: right; }
+  .hero-headline:active { cursor: grabbing; }
+  .hero-headline em { font-style: italic; }
 
   .hero-foot {
     display: grid;
@@ -220,12 +164,9 @@
     50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
   }
 
-  @media (max-width: 1100px) {
-    .hero-body { grid-template-columns: 1fr; gap: 24px; }
-    .hero-tile { justify-self: start; width: min(300px, 70%); }
-  }
   @media (max-width: 900px) {
     .hero { padding-top: 100px; }
+    .hero-body { perspective: 1000px; min-height: auto; }
     .hero-foot {
       grid-template-columns: 1fr;
       gap: 24px;
@@ -234,6 +175,5 @@
   }
   @media (max-width: 520px) {
     .hero-top { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .hero-tile { display: none; }
   }
 </style>

@@ -233,16 +233,23 @@ function initTilt3D() {
     const target = parent.querySelector<HTMLElement>('[data-tilt3d]');
     if (!target) return;
 
+    // Per-element tuning via data attrs (with sensible defaults)
+    const maxRotY = Number(parent.dataset.tiltY ?? 18);      // yaw range (°)
+    const maxRotX = Number(parent.dataset.tiltX ?? 12);      // pitch range (°)
+    const pullStrength = Number(parent.dataset.tiltPull ?? 0.02); // magnetic translate as fraction of dim
+    const wobble = parent.hasAttribute('data-tilt3d-wobble');
+
     let hovering = false;
     let idleTween: gsap.core.Tween | null = null;
 
     const startIdleWobble = () => {
+      if (!wobble) return;
       idleTween?.kill();
       const idle = { rx: 0, ry: 0 };
       idleTween = gsap.to(idle, {
-        rx: 8,
-        ry: -12,
-        duration: 4.5,
+        rx: maxRotX * 0.35,
+        ry: -maxRotY * 0.4,
+        duration: 5,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
@@ -264,15 +271,19 @@ function initTilt3D() {
       const rect = parent.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;   // 0..1
       const y = (e.clientY - rect.top) / rect.height;   // 0..1
-      const rotateY = (x - 0.5) * 70;                   // -35..35
-      const rotateX = -(y - 0.5) * 45;                  // -22..22 (inverted: top tilts back)
+      const rotateY = (x - 0.5) * 2 * maxRotY;          // symmetric around 0
+      const rotateX = -(y - 0.5) * 2 * maxRotX;         // inverted: top tilts back
+      const tx = (x - 0.5) * rect.width * pullStrength;
+      const ty = (y - 0.5) * rect.height * pullStrength;
 
       gsap.to(target, {
         rotateY,
         rotateX,
+        x: tx,
+        y: ty,
         duration: 0.55,
         ease: 'power2.out',
-        transformPerspective: 900,
+        transformPerspective: 1200,
       });
     };
 
@@ -281,17 +292,18 @@ function initTilt3D() {
       gsap.to(target, {
         rotateY: 0,
         rotateX: 0,
-        duration: 1.2,
+        x: 0,
+        y: 0,
+        duration: 1.3,
         ease: 'elastic.out(1, 0.45)',
-        onComplete: () => { if (!hovering) startIdleWobble(); },
+        onComplete: () => { if (!hovering && wobble) startIdleWobble(); },
       });
     };
 
     parent.addEventListener('mousemove', onMove);
     parent.addEventListener('mouseleave', onLeave);
 
-    // Seed the idle wobble so the word is alive even before first hover
-    gsap.delayedCall(1.6, () => { if (!hovering) startIdleWobble(); });
+    if (wobble) gsap.delayedCall(2, () => { if (!hovering) startIdleWobble(); });
   });
 }
 
