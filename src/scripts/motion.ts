@@ -303,7 +303,9 @@ function initTilt3D() {
     parent.addEventListener('mousemove', onMove);
     parent.addEventListener('mouseleave', onLeave);
 
-    if (wobble) gsap.delayedCall(2, () => { if (!hovering) startIdleWobble(); });
+    // Stagger wobble starts per element so a row of 3 cards breathes out of sync
+    const phase = Number(parent.dataset.wobblePhase ?? Math.random() * 2);
+    if (wobble) gsap.delayedCall(1.5 + phase * 0.8, () => { if (!hovering) startIdleWobble(); });
   });
 }
 

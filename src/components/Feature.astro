@@ -1,43 +1,48 @@
 ---
+const items = [
+  {
+    src: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Spaces',
+    caption: 'Boutique hotel · 2026',
+    shape: 'tall',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1600&q=80',
+    tag: 'Art direction',
+    caption: 'Property, considered · 2026',
+    shape: 'wide',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80',
+    tag: 'Architecture',
+    caption: 'Light study · London',
+    shape: 'square',
+  },
+];
 ---
+
 <section class="feature" aria-label="Studio imagery">
   <div class="feature-frame">
     <div class="feature-strip">
-      <figure class="feature-item feature-tall fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1200&q=80"
-          alt=""
-          loading="lazy"
-        />
-        <figcaption class="font-mono">
-          <span>A · Editorial</span>
-          <span>Aesthetic Clinic · brand stills</span>
-        </figcaption>
-      </figure>
-
-      <figure class="feature-item feature-wide fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1618004912476-29818d81ae2e?auto=format&fit=crop&w=1600&q=80"
-          alt=""
-          loading="lazy"
-        />
-        <figcaption class="font-mono">
-          <span>Art direction</span>
-          <span>Surfaces, pastel · 2026</span>
-        </figcaption>
-      </figure>
-
-      <figure class="feature-item feature-square fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80"
-          alt=""
-          loading="lazy"
-        />
-        <figcaption class="font-mono">
-          <span>Architecture</span>
-          <span>Light study · London</span>
-        </figcaption>
-      </figure>
+      {items.map((item, i) => (
+        <figure
+          class={`feature-item feature-${item.shape} fade-up`}
+          data-tilt3d-parent
+          data-tilt3d-wobble
+          data-tilt-y="8"
+          data-tilt-x="6"
+          data-tilt-pull="0.012"
+          data-wobble-phase={i}
+        >
+          <div class="feature-item-inner" data-tilt3d>
+            <img src={item.src} alt="" loading="lazy" />
+          </div>
+          <figcaption class="font-mono">
+            <span>{item.tag}</span>
+            <span>{item.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
     </div>
   </div>
 </section>
@@ -58,16 +63,35 @@
     gap: clamp(14px, 1.6vw, 24px);
     align-items: stretch;
   }
+
   .feature-item {
     position: relative;
     margin: 0;
     border-radius: 12px;
-    overflow: hidden;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     box-shadow: 0 24px 60px -30px rgba(20, 20, 24, 0.35);
+    /* 3D container for the inner card */
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    overflow: visible; /* tilted inner gets clipped only where we want */
   }
-  .feature-item img {
+
+  .feature-tall { aspect-ratio: 4 / 5; }
+  .feature-wide { aspect-ratio: 16 / 10; }
+  .feature-square { aspect-ratio: 1 / 1; }
+
+  .feature-item-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .feature-item-inner img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -75,14 +99,11 @@
     filter: contrast(1.04) saturate(0.95);
     transition: transform 10s var(--ease-out-expo);
   }
-  .feature-item:hover img { transform: scale(1.04); }
-
-  .feature-tall { aspect-ratio: 4 / 5; }
-  .feature-wide { aspect-ratio: 16 / 10; }
-  .feature-square { aspect-ratio: 1 / 1; }
+  .feature-item:hover .feature-item-inner img { transform: scale(1.03); }
 
   .feature-item figcaption {
     position: absolute;
+    z-index: 2;
     bottom: 16px;
     left: 16px;
     right: 16px;
@@ -90,7 +111,7 @@
     justify-content: space-between;
     gap: 12px;
     padding: 8px 12px;
-    background: rgba(242, 237, 225, 0.85);
+    background: rgba(242, 237, 225, 0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 999px;
@@ -98,6 +119,8 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-ink-muted);
+    /* caption stays flat — doesn't rotate with the image */
+    transform: translateZ(0);
   }
   .feature-item figcaption span:first-child { color: var(--color-cream); }
 
