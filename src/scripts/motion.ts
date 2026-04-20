@@ -220,6 +220,44 @@ function initScrollReveals() {
 }
 
 /* --------------------------------------------------------------------------
+   Magnetic hover — applies to [data-magnetic] elements
+   Tracks the cursor within the element's bounds and translates subtly toward it.
+   Uses GSAP for the tween so release has a spring feel.
+   -------------------------------------------------------------------------- */
+
+function initMagnetic() {
+  if (prefersReducedMotion || matchMedia('(hover: none)').matches) return;
+
+  document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach((el) => {
+    const strength = Number(el.dataset.magnetic || 0.3);
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(el, {
+        x: x * strength,
+        y: y * strength,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+    };
+
+    const onLeave = () => {
+      gsap.to(el, {
+        x: 0,
+        y: 0,
+        duration: 1.0,
+        ease: 'elastic.out(1, 0.35)',
+      });
+    };
+
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+  });
+}
+
+/* --------------------------------------------------------------------------
    Navigation state — shrinks on scroll
    -------------------------------------------------------------------------- */
 
@@ -245,6 +283,7 @@ function boot() {
   initCursorGlow();
   initHeroReveal();
   initScrollReveals();
+  initMagnetic();
   initNav();
 }
 

@@ -1,6 +1,7 @@
 ---
 ---
 <footer class="footer">
+  <div class="footer-watermark font-display" aria-hidden="true">rekraft</div>
   <div class="frame footer-inner">
     <div class="footer-mark">
       <img src="/images/ReKraft Logo.png" alt="Rekraft Design" width="28" height="28" />
@@ -52,9 +53,31 @@
     border-top: 1px solid var(--color-border);
     padding-block: clamp(56px, 6vw, 96px);
     background: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-watermark {
+    position: absolute;
+    left: 50%;
+    bottom: -4vw;
+    transform: translateX(-50%);
+    font-size: clamp(140px, 26vw, 420px);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    font-weight: 400;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(20, 20, 24, 0.08);
+    text-stroke: 1px rgba(20, 20, 24, 0.08);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
   }
 
   .footer-inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: clamp(40px, 5vw, 80px);
   }

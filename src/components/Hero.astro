@@ -20,17 +20,10 @@
       </h1>
 
       <aside class="hero-tile" aria-hidden="true">
-        <div class="hero-tile-img">
-          <img
-            src="https://images.unsplash.com/photo-1618004912476-29818d81ae2e?auto=format&fit=crop&w=900&q=80"
-            alt=""
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="hero-tile-meta font-mono">
-          <span>Now building</span>
-          <span>Aesthetic Clinic · London</span>
+        <div class="hero-tile-mark">
+          <span class="hero-tile-mark-top font-mono">studio</span>
+          <span class="hero-tile-mark-word font-display">design</span>
+          <span class="hero-tile-mark-bottom font-mono">— est. 2026</span>
         </div>
       </aside>
     </div>
@@ -40,10 +33,10 @@
         Brand, websites, and social for brands that mean business.
       </p>
       <div class="hero-ctas" data-hero-ctas>
-        <a href="#work" class="btn btn-primary">
+        <a href="#work" class="btn btn-primary" data-magnetic="0.25">
           See the work <span class="btn-arrow">&rarr;</span>
         </a>
-        <a href="#contact" class="btn btn-ghost">Start a project</a>
+        <a href="#contact" class="btn btn-ghost" data-magnetic="0.2">Start a project</a>
       </div>
     </div>
 
@@ -133,32 +126,53 @@
     align-self: end;
     margin-bottom: 4px;
   }
-  .hero-tile-img {
+  .hero-tile-mark {
     aspect-ratio: 4 / 5;
     border-radius: 10px;
-    overflow: hidden;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     box-shadow: 0 12px 40px -20px rgba(20, 20, 24, 0.35);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 24px;
+    overflow: hidden;
+    position: relative;
   }
-  .hero-tile-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: contrast(1.04) saturate(1.05);
-    transition: transform 8s var(--ease-out-expo);
+  .hero-tile-mark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, var(--color-ambient) 0%, transparent 55%),
+      linear-gradient(180deg, transparent 0%, rgba(139, 30, 42, 0.04) 100%);
+    pointer-events: none;
   }
-  .hero-tile:hover .hero-tile-img img { transform: scale(1.04); }
-  .hero-tile-meta {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
+  .hero-tile-mark-top,
+  .hero-tile-mark-bottom {
+    position: relative;
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
   }
-  .hero-tile-meta span:first-child { color: var(--color-cream); }
+  .hero-tile-mark-top { color: var(--color-cream); }
+  .hero-tile-mark-word {
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    font-style: italic;
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--color-cream);
+    text-align: center;
+    transform: translateY(-4%);
+    transition: transform 1.2s var(--ease-out-expo);
+  }
+  .hero-tile-mark:hover .hero-tile-mark-word {
+    transform: translateY(-8%) rotate(-1.5deg);
+  }
+  .hero-tile-mark-bottom { text-align: right; }
 
   .hero-foot {
     display: grid;

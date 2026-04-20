@@ -118,7 +118,9 @@ When a new case study is added, pick one dominant tag. Don't dual-tag.
 
 Vault: `/Users/marksebj/Library/Mobile Documents/iCloud~md~obsidian/Documents/MJs Second Brain/Projects/Rekraft/`
 
-When a significant change ships (new case study, new section, palette tweak, copy rewrite), update the Obsidian note. Don't let Obsidian drift from the code.
+**Canonical note for this site:** `Business/Rekraft Design Website.md` (sibling to `Business/Rekraft Website.md` which covers the Agency). The vault README at `Projects/Rekraft/README.md` links to both arms under a "Sites (two arms)" section.
+
+When a significant change ships (new case study, new section, palette tweak, copy rewrite), update `Business/Rekraft Design Website.md`. Don't let Obsidian drift from the code.
 
 ## Contact
 
