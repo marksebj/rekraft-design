@@ -18,15 +18,15 @@ Tagline: **Made to stand out. Built to stand up.**
 
 ## Design system — "Editorial Cream"
 
-Warm cream paper foundation with near-black ink, rich cherry burgundy for italic emphasis, and deep forest green for structural accents. **This is deliberately opposite to rekraft.agency** (which is a dark "Electric Concrete" palette). The two are visual siblings, not twins.
+Warm cream paper foundation with near-black ink, rich cherry burgundy for italic emphasis, and deep ink blue (navy) for structural accents. **This is deliberately opposite to rekraft.agency** (which is a dark "Electric Concrete" palette). The two are visual siblings, not twins.
 
-Classic editorial trio: **cream + burgundy + forest green**. Think Penguin book covers, The Gentlewoman, Kinfolk.
+Classic editorial trio: **cream + cherry burgundy + deep ink blue**. Parisian library / fountain-pen ink register.
 
 ### Colour tokens (in `src/styles/global.css` under `@theme`)
 
 | Token | Hex | Usage |
 |---|---|---|
-| `--color-bg` | `#F2EDE1` | Page background — warm cream paper |
+| `--color-bg` | `#F2EDE1` | Page background, warm cream paper |
 | `--color-surface` | `#E8E2D2` | Elevated sections / dividers |
 | `--color-card` | `#FFFFFF` | Pure white cards against cream bg |
 | `--color-card-hover` | `#FAF6EC` | Card hover state |
@@ -36,10 +36,10 @@ Classic editorial trio: **cream + burgundy + forest green**. Think Penguin book 
 | `--color-ink-muted` | `#4F4B43` | Body copy |
 | `--color-ink-dim` | `#86807A` | Captions, meta |
 | `--color-ink-faint` | `#B8B1A3` | Decorative / very subtle text |
-| `--color-lime` | `#264027` | **Forest green** — structural accent (labels, bullets, nav underline, scroll progress). Name is legacy; value is green. |
-| `--color-lime-soft` | `rgba(38, 64, 39, 0.10)` | Forest green low-opacity for hovers |
-| `--color-lime-glow` | `rgba(38, 64, 39, 0.18)` | Forest green glow |
-| `--color-cream` | `#8B1E2A` | **Rich cherry burgundy** — italic emphasis accent. Tuned against Tommy's Aventador SVJ wrap. Name is legacy; value is burgundy. |
+| `--color-lime` | `#1E2E4A` | **Deep ink blue / navy**, structural accent (labels, bullets, nav underline, scroll progress). Token name is legacy; value is navy. |
+| `--color-lime-soft` | `rgba(30, 46, 74, 0.10)` | Navy low-opacity for hovers |
+| `--color-lime-glow` | `rgba(30, 46, 74, 0.18)` | Navy glow |
+| `--color-cream` | `#8B1E2A` | **Rich cherry burgundy**, italic emphasis accent. Tuned against Tommy's Aventador SVJ wrap. Token name is legacy; value is burgundy. |
 | `--color-ambient` | `rgba(139, 30, 42, 0.10)` | Burgundy-tinted ambient glow (hero / manifesto / contact) |
 
 ### Typography
@@ -56,7 +56,8 @@ Type scale utilities (`.display-1`, `.display-2`, `.display-3`, `.lead`, `.eyebr
 
 - **citizenM-disruptive**: confident, high-end, not cocky. "Businesses that mean business."
 - Lowercase in nav / eyebrows / mono labels. Title case in display headlines.
-- Italic accent is **cherry burgundy** `#8B1E2A`, never forest green. Forest green is for structure (labels, underlines, bullets), not emphasis. Ambient glows use a warm burgundy tint (not green) to keep cream + burgundy + green in balance.
+- Italic accent is **cherry burgundy** `#8B1E2A`, never navy. Navy is strictly structural (labels, underlines, bullets), not emphasis. Ambient glows use a warm burgundy tint (not navy) to keep cream + burgundy + navy in balance.
+- **No em dashes.** Not in copy, not in eyebrows. Use middle dots `·`, commas, or shorter sentences. Em dashes have been stripped sitewide and must not reappear.
 - Sub-brand wordmark in nav uses sans "rekraft" + italic serif "design" — that lockup is load-bearing. Don't redesign it casually.
 
 ## Motion
