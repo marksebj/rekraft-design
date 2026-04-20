@@ -220,6 +220,82 @@ function initScrollReveals() {
 }
 
 /* --------------------------------------------------------------------------
+   3D tilt — cursor-driven rotateX/rotateY on a [data-tilt3d] element
+   inside a [data-tilt3d-parent] container. The parent provides the
+   cursor-tracking surface; the target inside rotates.
+   Idle auto-wobble starts when the cursor leaves, to signal interactivity.
+   -------------------------------------------------------------------------- */
+
+function initTilt3D() {
+  if (prefersReducedMotion || matchMedia('(hover: none)').matches) return;
+
+  document.querySelectorAll<HTMLElement>('[data-tilt3d-parent]').forEach((parent) => {
+    const target = parent.querySelector<HTMLElement>('[data-tilt3d]');
+    if (!target) return;
+
+    let hovering = false;
+    let idleTween: gsap.core.Tween | null = null;
+
+    const startIdleWobble = () => {
+      idleTween?.kill();
+      const idle = { rx: 0, ry: 0 };
+      idleTween = gsap.to(idle, {
+        rx: 8,
+        ry: -12,
+        duration: 4.5,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        onUpdate: () => {
+          if (hovering) return;
+          gsap.set(target, { rotateX: idle.rx, rotateY: idle.ry });
+        },
+      });
+    };
+
+    const stopIdleWobble = () => {
+      idleTween?.kill();
+      idleTween = null;
+    };
+
+    const onMove = (e: MouseEvent) => {
+      hovering = true;
+      stopIdleWobble();
+      const rect = parent.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;   // 0..1
+      const y = (e.clientY - rect.top) / rect.height;   // 0..1
+      const rotateY = (x - 0.5) * 70;                   // -35..35
+      const rotateX = -(y - 0.5) * 45;                  // -22..22 (inverted: top tilts back)
+
+      gsap.to(target, {
+        rotateY,
+        rotateX,
+        duration: 0.55,
+        ease: 'power2.out',
+        transformPerspective: 900,
+      });
+    };
+
+    const onLeave = () => {
+      hovering = false;
+      gsap.to(target, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.45)',
+        onComplete: () => { if (!hovering) startIdleWobble(); },
+      });
+    };
+
+    parent.addEventListener('mousemove', onMove);
+    parent.addEventListener('mouseleave', onLeave);
+
+    // Seed the idle wobble so the word is alive even before first hover
+    gsap.delayedCall(1.6, () => { if (!hovering) startIdleWobble(); });
+  });
+}
+
+/* --------------------------------------------------------------------------
    Magnetic hover — applies to [data-magnetic] elements
    Tracks the cursor within the element's bounds and translates subtly toward it.
    Uses GSAP for the tween so release has a spring feel.
@@ -284,6 +360,7 @@ function boot() {
   initHeroReveal();
   initScrollReveals();
   initMagnetic();
+  initTilt3D();
   initNav();
 }
 

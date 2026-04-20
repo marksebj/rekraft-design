@@ -20,9 +20,9 @@
       </h1>
 
       <aside class="hero-tile" aria-hidden="true">
-        <div class="hero-tile-mark">
+        <div class="hero-tile-mark" data-tilt3d-parent>
           <span class="hero-tile-mark-top font-mono">studio</span>
-          <span class="hero-tile-mark-word font-display">design</span>
+          <span class="hero-tile-mark-word font-display" data-tilt3d>design</span>
           <span class="hero-tile-mark-bottom font-mono">— est. 2026</span>
         </div>
       </aside>
@@ -137,6 +137,8 @@
     padding: 24px;
     overflow: hidden;
     position: relative;
+    perspective: 900px;
+    perspective-origin: 50% 50%;
   }
   .hero-tile-mark::before {
     content: "";
@@ -166,11 +168,13 @@
     letter-spacing: -0.03em;
     color: var(--color-cream);
     text-align: center;
-    transform: translateY(-4%);
-    transition: transform 1.2s var(--ease-out-expo);
-  }
-  .hero-tile-mark:hover .hero-tile-mark-word {
-    transform: translateY(-8%) rotate(-1.5deg);
+    transform-style: preserve-3d;
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+    text-shadow:
+      -1px 0 0 rgba(139, 30, 42, 0.15),
+      1px 0 0 rgba(139, 30, 42, 0.08);
   }
   .hero-tile-mark-bottom { text-align: right; }
 
