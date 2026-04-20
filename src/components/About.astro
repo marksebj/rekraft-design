@@ -3,20 +3,19 @@
 <section id="about" class="section about">
   <div class="frame">
     <header class="about-head">
-      <span class="eyebrow">04 &mdash; About</span>
-      <h2 class="display-3 reveal-words" data-reveal-headline>
+      <span class="eyebrow">04 &middot; About</span>
+      <h2 class="display-2 reveal-words" data-reveal-headline>
         A studio built by a <em class="italic-accent">lifelong maker.</em>
       </h2>
     </header>
 
-    <div class="about-hero">
-      <!-- Left: narrative -->
-      <div class="about-bio fade-up">
+    <div class="about-grid">
+      <div class="about-text fade-up">
         <p class="about-lead">
           The studio arm of Rekraft. For businesses that care how they&rsquo;re seen.
         </p>
         <p>
-          Mark has been making things &mdash; websites, logos, brand systems &mdash; since college. Long before any of it became a business.
+          Mark has been making things since college. Websites, logos, brand systems. Long before any of it became a business.
         </p>
         <p>
           Equal parts designer and systems thinker. Treats a brand, a website, and a gallery wall as the same problem at different scales.
@@ -24,52 +23,48 @@
         <p>
           He&rsquo;s built identities for artists, helped stage shows inside physical spaces, launched products, and designed systems for serious clients. Considered, useful, never precious.
         </p>
-        <p class="about-closer">
+        <p>
           Rekraft Design is what happens when a hobby grows up.
         </p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num font-display">15+</span>
+            <span class="about-stat-label font-mono">years making</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num font-display">100s</span>
+            <span class="about-stat-label font-mono">projects shipped</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num font-display">1</span>
+            <span class="about-stat-label font-mono">point of view</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Centre: portrait on burgundy halo -->
-      <div class="about-portrait fade-up">
-        <span class="about-portrait-circle" aria-hidden="true"></span>
-        <img
-          class="about-portrait-img"
-          src="/images/mark-founder.jpg"
-          alt="Mark, founder of Rekraft Design"
-          loading="lazy"
-        />
-        <span class="about-portrait-tag font-mono" aria-hidden="true">Mark &middot; founder</span>
-      </div>
-
-      <!-- Right: oversized editorial phrase -->
-      <div class="about-phrase fade-up" aria-hidden="true">
-        <span class="about-phrase-line">made</span>
-        <span class="about-phrase-line about-phrase-italic">properly.</span>
-      </div>
+      <aside class="about-founder fade-up">
+        <div class="about-founder-img">
+          <img src="/images/mark-founder.jpg" alt="Mark, founder of Rekraft Design" loading="lazy" />
+        </div>
+        <div class="about-founder-meta">
+          <div class="about-founder-name-wrap">
+            <h3 class="about-founder-name display-3">Mark</h3>
+            <span class="about-founder-role font-mono">Founder</span>
+          </div>
+          <p class="about-founder-bio">
+            A lifelong maker. Websites, logos, and creative work for friends, artists, and brands since college.
+          </p>
+          <p class="about-founder-bio">
+            Equal parts designer, systems thinker, and collaborator. At home building a brand, a website, or a showcase inside a physical space.
+          </p>
+          <dl class="about-founder-details">
+            <div><dt class="font-mono">Based</dt><dd>London, UK</dd></div>
+            <div><dt class="font-mono">Discipline</dt><dd>Brand. Web. Space.</dd></div>
+            <div><dt class="font-mono">Available</dt><dd>Q3 2026</dd></div>
+          </dl>
+        </div>
+      </aside>
     </div>
-
-    <!-- Stats row -->
-    <div class="about-stats fade-up">
-      <div class="about-stat">
-        <span class="about-stat-num font-display">15+</span>
-        <span class="about-stat-label font-mono">years making</span>
-      </div>
-      <div class="about-stat">
-        <span class="about-stat-num font-display">100s</span>
-        <span class="about-stat-label font-mono">projects shipped</span>
-      </div>
-      <div class="about-stat">
-        <span class="about-stat-num font-display">1</span>
-        <span class="about-stat-label font-mono">point of view</span>
-      </div>
-    </div>
-
-    <!-- Meta footer row -->
-    <dl class="about-meta font-mono fade-up">
-      <div><dt>Based</dt><dd>London, UK</dd></div>
-      <div><dt>Discipline</dt><dd>Brand. Web. Space.</dd></div>
-      <div><dt>Available</dt><dd>Q3 2026</dd></div>
-    </dl>
   </div>
 </section>
 
@@ -81,181 +76,127 @@
 
   .about-head {
     display: grid;
-    gap: 18px;
-    max-width: 720px;
-    margin-bottom: clamp(56px, 7vw, 100px);
+    gap: 20px;
+    max-width: 960px;
+    margin-bottom: clamp(56px, 8vw, 100px);
   }
-  .about-head .display-3 { color: var(--color-ink); }
 
-  /* --- Main editorial hero grid: bio / portrait / phrase --- */
-  .about-hero {
+  .about-grid {
     display: grid;
-    grid-template-columns: 0.85fr 1fr 1.1fr;
-    gap: clamp(32px, 5vw, 80px);
-    align-items: center;
-    margin-bottom: clamp(64px, 8vw, 120px);
-    min-height: clamp(380px, 50vh, 620px);
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
   }
 
-  /* --- Left: narrative --- */
-  .about-bio { display: grid; gap: 16px; max-width: 44ch; }
+  .about-text { display: grid; gap: 18px; }
   .about-lead {
     font-family: var(--font-display);
-    font-size: clamp(20px, 1.4vw + 12px, 28px);
+    font-size: clamp(22px, 1.8vw + 12px, 32px);
     line-height: 1.3;
     color: var(--color-ink);
     margin-bottom: 8px;
   }
-  .about-bio p:not(.about-lead):not(.about-closer) {
-    font-size: clamp(14px, 0.45vw + 11px, 16px);
-    line-height: 1.65;
+  .about-text p:not(.about-lead) {
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.7;
     color: var(--color-ink-muted);
+    max-width: 60ch;
   }
-  .about-closer {
+  .about-text p:last-of-type {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(16px, 0.9vw + 11px, 22px);
+    color: var(--color-cream);
+    font-size: clamp(18px, 1vw + 12px, 24px);
     line-height: 1.4;
-    color: var(--color-cream);
-    padding-top: 8px;
-    border-top: 1px solid var(--color-border);
+    padding-top: 4px;
   }
 
-  /* --- Centre: portrait + burgundy circle --- */
-  .about-portrait {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    max-width: 440px;
-    margin-inline: auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .about-portrait-circle {
-    position: absolute;
-    top: 8%;
-    left: 4%;
-    width: 92%;
-    height: 84%;
-    background: var(--color-cream);
-    border-radius: 50%;
-    z-index: 0;
-    box-shadow: 0 30px 80px -40px rgba(139, 30, 42, 0.55);
-  }
-  .about-portrait-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    z-index: 1;
-    filter: grayscale(1) contrast(1.08) brightness(1.02);
-    mix-blend-mode: multiply;
-    -webkit-mask-image: radial-gradient(ellipse 68% 78% at 50% 48%, black 55%, rgba(0,0,0,0.5) 75%, transparent 96%);
-    mask-image: radial-gradient(ellipse 68% 78% at 50% 48%, black 55%, rgba(0,0,0,0.5) 75%, transparent 96%);
-  }
-  .about-portrait-tag {
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    white-space: nowrap;
-  }
-
-  /* --- Right: oversized editorial phrase --- */
-  .about-phrase {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 0.88;
-    letter-spacing: -0.035em;
-    font-size: clamp(80px, 11vw, 184px);
-  }
-  .about-phrase-line {
-    color: var(--color-ink);
-    transform-origin: left center;
-  }
-  .about-phrase-italic {
-    font-style: italic;
-    color: var(--color-cream);
-    margin-left: 0.12em;
-  }
-
-  /* --- Stats row --- */
   .about-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2vw, 32px);
-    padding-top: clamp(32px, 4vw, 56px);
-    padding-bottom: clamp(28px, 3vw, 40px);
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 32px;
     border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
   }
   .about-stat { display: grid; gap: 6px; }
   .about-stat-num {
-    font-size: clamp(40px, 3.2vw + 18px, 64px);
+    font-size: clamp(36px, 3vw + 16px, 56px);
     line-height: 1;
     color: var(--color-ink);
     letter-spacing: -0.02em;
   }
   .about-stat-label {
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
   }
 
-  /* --- Meta row --- */
-  .about-meta {
+  .about-founder {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: clamp(24px, 2vw, 32px);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2vw, 32px);
-    padding-top: clamp(20px, 2vw, 32px);
+    gap: 24px;
+    position: sticky;
+    top: 120px;
+  }
+  .about-founder-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .about-founder-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .about-founder-meta { display: grid; gap: 16px; }
+  .about-founder-name-wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .about-founder-name { line-height: 1; }
+  .about-founder-role {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+  }
+  .about-founder-bio {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+  }
+  .about-founder-bio:first-of-type {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .about-founder-details {
+    display: grid;
+    gap: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+  .about-founder-details > div {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .about-founder-details dt {
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
   }
-  .about-meta > div { display: flex; flex-direction: column; gap: 4px; }
-  .about-meta dt { color: var(--color-cream); font-weight: 500; }
-  .about-meta dd { color: var(--color-ink); font-family: var(--font-sans); text-transform: none; letter-spacing: 0.02em; font-size: 13px; }
-
-  /* --- Responsive --- */
-  @media (max-width: 1100px) {
-    .about-hero {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "portrait phrase"
-        "bio bio";
-      align-items: start;
-      gap: 56px;
-    }
-    .about-portrait { grid-area: portrait; max-width: 340px; }
-    .about-phrase { grid-area: phrase; font-size: clamp(56px, 9vw, 120px); }
-    .about-bio { grid-area: bio; max-width: 60ch; }
+  .about-founder-details dd {
+    font-size: 14px;
+    color: var(--color-ink);
   }
-  @media (max-width: 700px) {
-    .about-hero {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "portrait"
-        "phrase"
-        "bio";
-      gap: 48px;
-    }
-    .about-portrait { max-width: 280px; }
-    .about-phrase { align-items: center; text-align: center; font-size: clamp(56px, 18vw, 96px); }
-    .about-phrase-italic { margin-left: 0; }
-    .about-stats { grid-template-columns: 1fr; gap: 20px; }
-    .about-meta { grid-template-columns: 1fr; gap: 12px; }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-founder { position: static; }
+    .about-stats { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>
