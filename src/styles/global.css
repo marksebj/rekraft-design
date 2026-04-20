@@ -190,9 +190,12 @@ html.lenis, html.lenis body { height: auto; }
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  /* give italic descenders (p, g, j, y) room inside the clip box */
-  padding-bottom: 0.18em;
-  margin-bottom: -0.12em;
+  /* Italic serif glyphs extend beyond the advance box on every side:
+     top for ascenders, bottom for descenders, left for the base of a
+     leaning letter, right for the tail. Pad the clip region, then
+     offset with negative margin so layout stays as-is. */
+  padding: 0.06em 0.18em 0.2em 0.14em;
+  margin: -0.06em -0.18em -0.14em -0.14em;
 }
 .reveal-words .word-inner,
 .reveal-words .line-inner {
