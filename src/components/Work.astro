@@ -56,24 +56,34 @@ const cases = [
     </header>
 
     <div class="work-grid">
-      {cases.map((c) => (
+      {cases.map((c, i) => (
         <a href="#contact" class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}>
-          <div class="work-card-media">
-            {c.image && (
-              <img
-                class="work-card-img"
-                src={c.image}
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
-            )}
-            <div class="work-card-overlay"></div>
+          <div
+            class="work-card-media"
+            data-tilt3d-parent
+            data-tilt3d-wobble
+            data-tilt-y="7"
+            data-tilt-x="5"
+            data-tilt-pull="0.008"
+            data-wobble-phase={i}
+          >
+            <div class="work-card-media-inner" data-tilt3d>
+              {c.image && (
+                <img
+                  class="work-card-img"
+                  src={c.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <div class="work-card-overlay"></div>
+              {c.isOpenSlot && (
+                <div class="work-card-openmark font-display">+</div>
+              )}
+            </div>
             <div class="work-card-num font-mono">{c.num}</div>
             <div class="work-card-status font-mono">{c.status}</div>
-            {c.isOpenSlot && (
-              <div class="work-card-openmark font-display">+</div>
-            )}
           </div>
           <div class="work-card-info">
             <div class="work-card-tag font-mono">{c.tag}</div>
@@ -126,14 +136,25 @@ const cases = [
     aspect-ratio: 4 / 5;
     border-radius: 14px;
     position: relative;
-    overflow: hidden;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     transition: border-color .5s var(--ease-out-expo);
     box-shadow: 0 20px 60px -30px rgba(20, 20, 24, 0.4);
+    /* 3D container for the inner card */
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
   }
   .work-card.is-featured .work-card-media { aspect-ratio: 21 / 9; }
   .work-card:hover .work-card-media { border-color: var(--color-border-active); }
+
+  .work-card-media-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
 
   .work-card-img {
     position: absolute;
@@ -179,12 +200,14 @@ const cases = [
     -webkit-backdrop-filter: blur(6px);
   }
 
-  /* Open slot — dashed outline, cream bg, big plus mark */
+  /* Open slot, dashed outline, cream bg, big plus mark */
   .work-card.is-open .work-card-media {
     border-style: dashed;
     border-color: var(--color-border-active);
     background: var(--color-surface);
     box-shadow: none;
+  }
+  .work-card.is-open .work-card-media-inner {
     display: grid;
     place-items: center;
   }
