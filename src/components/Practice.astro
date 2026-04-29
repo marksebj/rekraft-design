@@ -1,48 +1,21 @@
 ---
 const principles = [
-  {
-    num: '01',
-    title: 'Considered',
-    body: 'Every element earns its place. If it doesn&rsquo;t serve, it doesn&rsquo;t ship.',
-  },
-  {
-    num: '02',
-    title: 'Crafted',
-    body: 'Built from scratch. Never from templates.',
-  },
-  {
-    num: '03',
-    title: 'Committed',
-    body: 'Small roster. We stay until launch.',
-  },
+  { num: '01', title: 'Considered', body: 'Nothing without reason.' },
+  { num: '02', title: 'Crafted', body: 'From scratch. By hand.' },
+  { num: '03', title: 'Committed', body: 'We see it through.' },
 ];
 
 const services = [
-  {
-    num: '01',
-    name: 'Brand',
-    headline: 'Identity systems that hold together.',
-    body: 'Logos, wordmarks, visual direction, guidelines.',
-  },
-  {
-    num: '02',
-    name: 'Websites',
-    headline: 'Fast, considered, built to perform.',
-    body: 'Custom-built, never themed.',
-  },
-  {
-    num: '03',
-    name: 'Social',
-    headline: 'Systems your team can actually run.',
-    body: 'Templates and content that scale.',
-  },
+  { num: '01', name: 'Brand', headline: 'Identity systems that hold together.' },
+  { num: '02', name: 'Websites', headline: 'Custom-built, never themed.' },
+  { num: '03', name: 'Social', headline: 'Systems your team can actually run.' },
 ];
 
 const process = [
-  { num: '01', title: 'Discover', body: 'Listen, audit, scope.' },
-  { num: '02', title: 'Design', body: 'Strategy, system, screens.' },
-  { num: '03', title: 'Build', body: 'Custom-built, never themed.' },
-  { num: '04', title: 'Launch', body: 'Ship, hand over, train.' },
+  { num: '01', title: 'Discover', body: 'Listen. Audit. Scope.' },
+  { num: '02', title: 'Design', body: 'Strategy. System. Screens.' },
+  { num: '03', title: 'Build', body: 'Build. Test. Refine.' },
+  { num: '04', title: 'Launch', body: 'Ship. Hand over. Train.' },
 ];
 ---
 
@@ -51,11 +24,8 @@ const process = [
     <header class="practice-head">
       <span class="eyebrow">02 &middot; Practice</span>
       <h2 class="display-2 reveal-words" data-reveal-headline>
-        How we work. <em class="italic-accent">And what we do.</em>
+        Our method. <em class="italic-accent">Our craft.</em>
       </h2>
-      <p class="lead fade-up">
-        Three rules. Three things. Four steps.
-      </p>
     </header>
 
     <div class="practice-grid">
@@ -84,7 +54,6 @@ const process = [
               <span class="practice-item-num font-mono">{s.num}</span>
               <h3 class="practice-item-title">{s.name}</h3>
               <p class="practice-item-headline">{s.headline}</p>
-              <p class="practice-item-body practice-item-body-meta">{s.body}</p>
             </li>
           ))}
         </ol>
