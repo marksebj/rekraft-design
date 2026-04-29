@@ -2,45 +2,48 @@
 const tiers = [
   {
     name: 'Discovery',
-    price: '£195',
-    priceTagline: 'Fixed price · 5 working days',
-    description: 'Paid sprint to scope your project, audit what you have, and recommend a path. Credited back in full if you commission a build.',
+    price: 'Free',
+    priceTagline: '30-minute call · No commitment',
+    description: 'A quick call to talk through what you’re building. We share an honest take and point you somewhere better if we’re not the right fit.',
     features: [
-      'Brand and site audit',
-      'Competitor scan and positioning',
-      'Project scope and timeline',
-      'A 10-page plan you keep',
+      '30-minute call, no commitment',
+      'Quick once-over of what you have',
+      'Honest take on whether we’re a fit',
+      'Project recommendation if we are',
     ],
-    cta: 'Start with Discovery',
+    cta: 'Book the call',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Discovery%20call',
     flagship: false,
   },
   {
     name: 'Website',
-    price: 'From £1,500',
+    price: 'From £1,250',
     priceTagline: 'Bespoke build · 2 to 3 weeks',
-    description: 'Custom-built site, never themed. Editorial typography, considered detail, performance and accessibility baked in.',
+    description: 'Custom-built site. Strategy, design, motion, launch. Never themed.',
     features: [
-      'Strategy, design, build, motion',
-      'Custom-built, never themed',
-      'Editorial typography',
-      'Launch, handover, training',
+      'Strategy and structure',
+      'Bespoke design pass with one revision round',
+      'Custom build (Astro or Webflow)',
+      'Launch, handover, training video',
     ],
     cta: 'Book a call',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Website%20enquiry',
     flagship: true,
     badge: 'Most requested',
   },
   {
-    name: 'Studio Project',
-    price: 'From £2,000',
-    priceTagline: 'Brand + website + launch · 3 to 4 weeks',
-    description: 'Full studio engagement. Brand identity, custom-built website, launch creative. Saves £250 vs buying separately.',
+    name: 'Brand + Site',
+    price: 'From £2,450',
+    priceTagline: 'Brand kit + bespoke site · 3 to 4 weeks',
+    description: 'Brand identity and website, built together. Everything ships aligned.',
     features: [
-      'Brand identity from the ground up',
-      'Custom-built website',
-      'Launch creative and art direction',
+      'Brand kit: mark, type, palette, mini-guidelines',
+      'Bespoke website with motion',
+      'Launch creative: 6 social templates',
       'Photography and copy direction',
     ],
     cta: 'Book a call',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Brand%20%2B%20Site%20enquiry',
     flagship: false,
   },
 ];
@@ -49,13 +52,10 @@ const tiers = [
 <section id="investment" class="section invest">
   <div class="frame">
     <header class="invest-head">
-      <span class="eyebrow">03 &middot; Investment</span>
+      <span class="eyebrow">03 &middot; Pricing</span>
       <h2 class="display-2 reveal-words" data-reveal-headline>
-        Honest numbers. <em class="italic-accent">No surprises.</em>
+        Three ways in. <em class="italic-accent">Bespoke from there.</em>
       </h2>
-      <p class="lead fade-up">
-        Three engagement formats. Bespoke when the brief calls for it.
-      </p>
     </header>
 
     <div class="invest-grid">
@@ -79,7 +79,7 @@ const tiers = [
             ))}
           </ul>
           <a
-            href="#contact"
+            href={t.ctaUrl}
             class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} invest-card-cta`}
           >
             {t.cta} <span class="btn-arrow">&rarr;</span>
