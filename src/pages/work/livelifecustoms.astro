@@ -4,24 +4,8 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Live Life Customs · Selected work · Rekraft Design';
-const description = 'Streetwear brand revival. Bold visual system, custom apparel portfolio, Instagram-only intake. Case study by Rekraft Design.';
+const description = 'London streetwear studio. Custom apparel built to order. Bold visual register, real client portfolio, Instagram-only intake. Case study by Rekraft Design.';
 const canonical = 'https://rekraft.design/work/livelifecustoms';
-
-const works = [
-  { src: '/images/work/llc/01-curmah.jpg', title: 'Curmah Joseph', meta: 'Dark Paradise · Soleil Estée · Gold foil' },
-  { src: '/images/work/llc/04-nasa.jpg', title: 'NASA Astronaut', meta: 'Apollo 11 tribute · Three badges, Saturn V' },
-  { src: '/images/work/llc/06-glute-chaser.jpg', title: 'Glute Chaser Programme', meta: 'Cursive script · Real product on tee' },
-  { src: '/images/work/llc/09-samesame.png', title: 'Same Same', meta: 'Off-White parody · Real hoodie mockup' },
-  { src: '/images/work/llc/02-atlantic.jpg', title: 'Atlantic Culture', meta: 'Fire-sleeve · Dripping-earth graphic' },
-  { src: '/images/work/llc/03-oficianado.png', title: 'Oficianado Kigali', meta: 'Cigar brand identity · Tee mockup' },
-];
-
-const palette = [
-  { name: 'Off-black', hex: '#0E0E10' },
-  { name: 'Cyan', hex: '#20B6FF' },
-  { name: 'Orange', hex: '#FF6A2C' },
-  { name: 'Warm white', hex: '#FAFAFA' },
-];
 ---
 
 <Base title={title} description={description} canonical={canonical}>
@@ -34,86 +18,70 @@ const palette = [
     <section class="section case-intro">
       <div class="frame">
         <header class="case-head">
-          <span class="eyebrow">C &middot; Brand-forward</span>
+          <span class="eyebrow">Case Study &middot; 01 &middot; Apparel</span>
           <h1 class="display-1 reveal-words" data-hero-headline>
             Live Life Customs. <em class="italic-accent">Custom everything.</em>
           </h1>
           <p class="lead fade-up">
-            A dormant streetwear brand, brought back. New visual system, IG-only intake, ready to take orders again.
+            London streetwear studio. Custom apparel built to order. Bold visual register, real client portfolio, Instagram-only intake.
           </p>
-          <div class="case-meta fade-up font-mono">
-            <span>Brand</span>
-            <span aria-hidden="true">&middot;</span>
-            <span>Website</span>
-            <span aria-hidden="true">&middot;</span>
-            <span>2026</span>
-          </div>
           <a href="https://livelifecustoms.vercel.app" target="_blank" rel="noopener" class="btn btn-primary case-cta-link fade-up">
-            View live site <span class="case-arrow-up">&#8599;</span>
+            Visit the live site <span class="case-arrow-up">&#8599;</span>
           </a>
         </header>
       </div>
     </section>
 
-    <section class="section case-block">
+    <div class="case-meta-strip">
+      <div class="frame case-meta-inner font-mono">
+        <span><b>Industry</b> &middot; Custom apparel</span>
+        <span><b>Location</b> &middot; London</span>
+        <span><b>Scope</b> &middot; Brand + website</span>
+        <span><b>Live</b> &middot; April 2026</span>
+      </div>
+    </div>
+
+    <section class="case-showcase">
       <div class="frame">
-        <div class="case-grid">
-          <div class="case-block-head">
-            <span class="eyebrow">01 &middot; Brief</span>
-            <h2 class="display-2 reveal-words" data-reveal-headline>
-              Three jobs. <em class="italic-accent">One brand.</em>
-            </h2>
+        <div class="case-browser fade-up">
+          <div class="case-browser-bar">
+            <div class="case-browser-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="case-browser-url font-mono"><b>livelifecustoms.vercel.app</b></div>
           </div>
-          <ol class="case-list">
-            <li class="fade-up">
-              <span class="case-list-num font-mono">01</span>
-              <h3 class="display-3">Revived brand</h3>
-              <p>LLC sat archived after years of custom apparel work. Equipment still here, 26-client portfolio archived. The site re-establishes LLC as a living brand, accepting commissions.</p>
-            </li>
-            <li class="fade-up">
-              <span class="case-list-num font-mono">02</span>
-              <h3 class="display-3">Portfolio piece</h3>
-              <p>Demonstrates Rekraft Design's range. Editorial cream is one register, this is the other end. Bold streetwear, opposite of restraint, same craft.</p>
-            </li>
-            <li class="fade-up">
-              <span class="case-list-num font-mono">03</span>
-              <h3 class="display-3">Family coherence</h3>
-              <p>Three sibling sites under the Rekraft umbrella. Same build discipline, distinct visual languages: cream studio, dark trades agency, black streetwear.</p>
-            </li>
-          </ol>
+          <iframe
+            class="case-browser-frame"
+            src="https://livelifecustoms.vercel.app"
+            title="Live Life Customs - live website"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          ></iframe>
+          <a class="case-browser-open" href="https://livelifecustoms.vercel.app" target="_blank" rel="noopener" aria-label="Open live site in a new tab">
+            <span>Open live site &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
 
     <section class="section case-block">
       <div class="frame">
-        <div class="case-grid">
-          <div class="case-block-head">
-            <span class="eyebrow">02 &middot; System</span>
+        <div class="case-split">
+          <div class="case-split-text fade-up">
+            <span class="eyebrow">Mobile first</span>
             <h2 class="display-2 reveal-words" data-reveal-headline>
-              Street Bold. <em class="italic-accent">Built to last.</em>
+              Instagram-only. <em class="italic-accent">By design.</em>
             </h2>
+            <p>No contact form, no email surface, no phone. Every CTA pushes to Instagram DMs. The bet is simple: people who buy custom apparel already live on Instagram, so meet them there. A neon cyan cursor-arrow tracks toward the DM button on hero load to remove any doubt about what to tap.</p>
           </div>
-          <div class="case-system">
-            <div class="case-palette">
-              {palette.map((p) => (
-                <div class="case-swatch fade-up">
-                  <div class="case-swatch-color" style={`background:${p.hex}`}></div>
-                  <div class="case-swatch-name font-mono">{p.name}</div>
-                  <div class="case-swatch-hex font-mono">{p.hex}</div>
-                </div>
-              ))}
-            </div>
-            <div class="case-typography fade-up">
-              <div class="case-type-display">LIVE BOLD.</div>
-              <div class="case-type-meta font-mono">Archivo Black &middot; Display</div>
-            </div>
-            <ul class="case-system-notes">
-              <li class="fade-up">No 3D tilt: wrong register for streetwear</li>
-              <li class="fade-up">Cyan cursor-arrow points at the IG CTA</li>
-              <li class="fade-up">Three rotating section-label variants (block, badge, tape)</li>
-              <li class="fade-up">No contact form, Instagram is the only channel</li>
-            </ul>
+          <div class="case-phone fade-up" data-d="1">
+            <iframe
+              class="case-phone-frame"
+              src="https://livelifecustoms.vercel.app"
+              title="Live Life Customs - mobile view"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -121,52 +89,66 @@ const palette = [
 
     <section class="section case-block">
       <div class="frame">
-        <header class="case-portfolio-head">
-          <span class="eyebrow">03 &middot; Selected client work</span>
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">What we built</span>
           <h2 class="display-2 reveal-words" data-reveal-headline>
-            Real client work. <em class="italic-accent">Real product.</em>
+            Street Bold. <em class="italic-accent">End to end.</em>
           </h2>
-          <p class="lead fade-up">
-            Years of custom apparel. Imagery is owned, not stock.
-          </p>
         </header>
-        <div class="case-gallery">
-          {works.map((w) => (
-            <figure class="case-figure fade-up">
-              <img src={w.src} alt={w.title} loading="lazy" decoding="async" />
-              <figcaption>
-                <div class="case-figure-title font-mono">{w.title}</div>
-                <div class="case-figure-meta font-mono">{w.meta}</div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <ol class="case-list">
+          <li class="fade-up">
+            <span class="case-list-num font-mono">01</span>
+            <h3 class="display-3">Visual system</h3>
+            <p>Off-black base, electric cyan pulled from the chimp mascot's cap and glasses, hot orange for contrast pop. Archivo Black uppercase-locked at every display tier. Streetwear cheeky voice throughout.</p>
+          </li>
+          <li class="fade-up">
+            <span class="case-list-num font-mono">02</span>
+            <h3 class="display-3">Live portfolio</h3>
+            <p>11 client cases surfaced with real product photography and original artwork. Featured: Curmah Joseph's Dark Paradise label. Three rotating section-label variants (block, badge, tape) keep the rhythm interesting.</p>
+          </li>
+          <li class="fade-up">
+            <span class="case-list-num font-mono">03</span>
+            <h3 class="display-3">Custom motion</h3>
+            <p>GSAP word reveal on the hero, magnetic CTA, Lenis smooth scroll. No 3D tilt: wrong register for streetwear. Cards lift on hover instead. A neon-cyan cursor-arrow points at the IG DM CTA on first paint.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <section class="section case-block case-cta">
+    <section class="section case-stats-section">
+      <div class="frame">
+        <ul class="case-stats">
+          <li class="fade-up">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>11</em> case studies</div>
+            <p>Real client work, real product photography. Every image is owned, none are stock.</p>
+          </li>
+          <li class="fade-up" data-d="1">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>6</em> services priced</div>
+            <p>Heat press, vinyl, embroidery, stickers, signage and more. Each with a starting price on the page.</p>
+          </li>
+          <li class="fade-up" data-d="2">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>1</em> channel</div>
+            <p>Instagram DMs. No contact form, no email, no phone. The whole site funnels there by design.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-cta">
       <div class="frame">
         <div class="case-cta-inner">
-          <span class="eyebrow">04 &middot; Outcome</span>
+          <span class="eyebrow">Next case study</span>
           <h2 class="display-2 reveal-words" data-reveal-headline>
-            Shipped. <em class="italic-accent">Then iterated.</em>
+            Want to be <em class="italic-accent">next?</em>
           </h2>
-          <ul class="case-stats">
-            <li class="fade-up">
-              <span class="case-stat-num font-display">11</span>
-              <span class="case-stat-label font-mono">case studies + open slot</span>
-            </li>
-            <li class="fade-up">
-              <span class="case-stat-num font-display">6</span>
-              <span class="case-stat-label font-mono">services priced honestly</span>
-            </li>
-            <li class="fade-up">
-              <span class="case-stat-num font-display">1</span>
-              <span class="case-stat-label font-mono">channel (Instagram)</span>
-            </li>
-          </ul>
-          <a href="https://livelifecustoms.vercel.app" target="_blank" rel="noopener" class="btn btn-primary case-cta-btn">
-            View the live site <span class="case-arrow-up">&#8599;</span>
+          <p class="lead fade-up">
+            We take on a small number of bespoke projects each quarter. If you have something serious to build, let's talk.
+          </p>
+          <a href="mailto:mark@rekraft.design?subject=Project%20Enquiry" class="btn btn-primary case-cta-btn fade-up">
+            Start a conversation <span class="case-arrow-up">&#8599;</span>
           </a>
           <a href="/#work" class="case-back-bottom font-mono">&larr; All selected work</a>
         </div>
@@ -177,9 +159,8 @@ const palette = [
 </Base>
 
 <style>
-  .case-back-wrap {
-    padding-top: clamp(96px, 12vw, 140px);
-  }
+  /* Back link */
+  .case-back-wrap { padding-top: clamp(96px, 12vw, 140px); }
   .case-back {
     display: inline-flex;
     align-items: center;
@@ -192,50 +173,180 @@ const palette = [
   }
   .case-back:hover { color: var(--color-ink); }
 
-  .case-intro {
-    padding-block: clamp(40px, 6vw, 80px) clamp(80px, 10vw, 120px);
-  }
-  .case-head {
-    display: grid;
-    gap: 24px;
-    max-width: 1080px;
-  }
-  .case-meta {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    padding-top: 8px;
-  }
+  /* Hero */
+  .case-intro { padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 96px); }
+  .case-head { display: grid; gap: 24px; max-width: 1080px; }
   .case-cta-link { justify-self: start; margin-top: 8px; }
-  .case-arrow-up {
-    display: inline-block;
-    transition: transform .4s var(--ease-out-expo);
-  }
+  .case-arrow-up { display: inline-block; transition: transform .4s var(--ease-out-expo); }
   .btn:hover .case-arrow-up { transform: translate(3px, -3px); }
 
+  /* Meta strip */
+  .case-meta-strip {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding-block: 16px;
+  }
+  .case-meta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(16px, 3vw, 36px);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .case-meta-inner b {
+    color: var(--color-ink);
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  /* Browser iframe showcase — the centrepiece */
+  .case-showcase { padding-block: clamp(56px, 8vw, 100px) clamp(24px, 4vw, 48px); }
+  .case-browser {
+    position: relative;
+    max-width: 1280px;
+    margin-inline: auto;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--color-border-active);
+    background: #0A0A0C;
+    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.45);
+    transition: border-color .35s var(--ease-out-expo), transform .35s var(--ease-out-expo), box-shadow .35s var(--ease-out-expo);
+  }
+  .case-browser:hover {
+    border-color: var(--color-lime);
+    transform: translateY(-3px);
+    box-shadow: 0 50px 150px -40px rgba(20, 20, 24, 0.55);
+  }
+  .case-browser-open {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 22px;
+    pointer-events: none;
+  }
+  .case-browser-open span {
+    pointer-events: auto;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-active);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .35s var(--ease-out-expo), transform .35s var(--ease-out-expo);
+    font-weight: 500;
+  }
+  .case-browser:hover .case-browser-open span {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .case-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: #1A1A1D;
+    border-bottom: 1px solid #2A2A2E;
+  }
+  .case-browser-dots { display: flex; gap: 8px; }
+  .case-browser-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #3A3A40;
+  }
+  .case-browser-dots span:nth-child(1) { background: #FF5F57; }
+  .case-browser-dots span:nth-child(2) { background: #FEBC2E; }
+  .case-browser-dots span:nth-child(3) { background: #28C840; }
+  .case-browser-url {
+    flex: 1;
+    padding: 6px 14px;
+    background: #0C0C0E;
+    border: 1px solid #2A2A2E;
+    border-radius: 6px;
+    font-size: 12px;
+    color: rgba(245, 240, 229, 0.6);
+    letter-spacing: 0.04em;
+  }
+  .case-browser-url b { color: #F5F0E5; font-weight: 400; }
+  .case-browser-frame {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border: 0;
+    display: block;
+    background: #0E0E10;
+  }
+
+  /* Split: copy + phone iframe */
   .case-block {
     border-top: 1px solid var(--color-border);
     padding-block: clamp(80px, 10vw, 140px);
   }
-  .case-grid {
+  .case-split {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: clamp(48px, 8vw, 140px);
-    align-items: start;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+    max-width: 1200px;
+    margin-inline: auto;
   }
-  .case-block-head {
-    position: sticky;
-    top: 120px;
-    align-self: start;
-    display: grid;
-    gap: 16px;
+  .case-split-text { display: grid; gap: 18px; }
+  .case-split-text h2 { color: var(--color-ink); }
+  .case-split-text p {
+    color: var(--color-ink-muted);
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+  .case-phone {
+    position: relative;
+    width: 300px;
+    margin-inline: auto;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 38px;
+    padding: 14px;
+    background: #1A1A1D;
+    border: 1px solid #2A2A2E;
+    box-shadow: 0 30px 80px -30px rgba(20, 20, 24, 0.45);
+  }
+  .case-phone::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 22px;
+    background: #0A0A0C;
+    border-radius: 14px;
+    z-index: 2;
+  }
+  .case-phone-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 26px;
+    display: block;
+    background: #0E0E10;
   }
 
-  /* Brief list */
+  /* What we built — numbered list (reused pattern) */
+  .case-block-head {
+    display: grid;
+    gap: 16px;
+    max-width: 720px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
   .case-list {
     list-style: none;
     display: grid;
@@ -272,154 +383,72 @@ const palette = [
     max-width: 60ch;
   }
 
-  /* System block */
-  .case-system { display: grid; gap: 40px; }
-  .case-palette {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--color-border);
-    border: 1px solid var(--color-border);
-  }
-  .case-swatch {
-    background: var(--color-bg);
-    padding: 24px 20px;
-    display: grid;
-    gap: 10px;
-  }
-  .case-swatch-color {
-    height: 80px;
-    border: 1px solid var(--color-border);
-  }
-  .case-swatch-name {
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink);
-  }
-  .case-swatch-hex {
-    font-size: 10px;
-    color: var(--color-ink-dim);
-    letter-spacing: 0.1em;
-  }
-  .case-typography {
-    background: #0E0E10;
-    padding: clamp(40px, 5vw, 64px);
-    border: 1px solid var(--color-border);
-  }
-  .case-type-display {
-    font-family: 'Archivo Black', 'Inter Tight', sans-serif;
-    font-weight: 900;
-    font-size: clamp(48px, 8vw, 120px);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    color: #FAFAFA;
-    text-transform: uppercase;
-  }
-  .case-type-meta {
-    margin-top: 16px;
-    color: #20B6FF;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .case-system-notes {
-    list-style: none;
-    display: grid;
-    gap: 12px;
-  }
-  .case-system-notes li {
-    color: var(--color-ink-muted);
-    font-size: 14px;
-    line-height: 1.5;
-    padding-left: 18px;
-    position: relative;
-  }
-  .case-system-notes li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 8px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-lime);
-  }
-
-  /* Portfolio gallery */
-  .case-portfolio-head {
-    display: grid;
-    gap: 16px;
-    max-width: 720px;
-    margin-bottom: clamp(48px, 6vw, 80px);
-  }
-  .case-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 2.5vw, 40px);
-  }
-  .case-figure {
-    display: grid;
-    gap: 14px;
-  }
-  .case-figure img {
-    aspect-ratio: 4 / 5;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
-    background: #0E0E10;
-    transition: transform .8s var(--ease-out-expo);
-  }
-  .case-figure:hover img { transform: scale(1.02); }
-  .case-figure-title {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-ink);
-  }
-  .case-figure-meta {
-    font-size: 10px;
-    color: var(--color-ink-dim);
-    letter-spacing: 0.08em;
-  }
-
-  /* Outcome */
-  .case-cta-inner {
-    display: grid;
-    gap: 28px;
-    max-width: 880px;
+  /* Live-now stats */
+  .case-stats-section {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(80px, 10vw, 140px);
   }
   .case-stats {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--color-border);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    margin-block: 16px;
+    gap: clamp(20px, 2.5vw, 40px);
+    max-width: 1280px;
+    margin-inline: auto;
   }
   .case-stats li {
-    background: var(--color-bg);
-    padding: clamp(28px, 4vw, 48px) 24px;
-    display: grid;
-    gap: 8px;
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-card);
+    transition: border-color .25s var(--ease-out-expo), transform .25s var(--ease-out-expo);
   }
-  .case-stat-num {
-    font-size: clamp(48px, 6vw, 80px);
-    line-height: 1;
-    color: var(--color-ink);
-    letter-spacing: -0.02em;
-    padding-bottom: 0.05em;
+  .case-stats li:hover {
+    border-color: var(--color-border-active);
+    transform: translateY(-2px);
   }
-  .case-stat-label {
-    font-size: 10px;
-    letter-spacing: 0.16em;
+  .case-stat-k {
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
+    margin-bottom: 14px;
+    display: block;
   }
-  .case-cta-btn { justify-self: start; }
+  .case-stat-big {
+    font-size: clamp(32px, 2.4vw + 16px, 44px);
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .case-stat-big em {
+    color: var(--color-cream);
+    font-style: italic;
+    font-weight: 400;
+    margin-right: 6px;
+  }
+  .case-stats li p {
+    font-size: 14px;
+    color: var(--color-ink-muted);
+    line-height: 1.55;
+  }
+
+  /* Bottom CTA */
+  .case-cta {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .case-cta-inner {
+    display: grid;
+    gap: 24px;
+    max-width: 880px;
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+  .case-cta-inner .lead { max-width: 56ch; }
+  .case-cta-btn { justify-self: center; }
   .case-back-bottom {
     display: inline-flex;
     align-items: center;
@@ -434,17 +463,21 @@ const palette = [
   .case-back-bottom:hover { color: var(--color-ink); }
 
   @media (max-width: 1100px) {
-    .case-grid { grid-template-columns: 1fr; gap: clamp(32px, 5vw, 64px); }
-    .case-block-head { position: static; }
-    .case-palette { grid-template-columns: repeat(2, 1fr); }
-    .case-gallery { grid-template-columns: repeat(2, 1fr); }
     .case-stats { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    .case-split { grid-template-columns: 1fr; gap: 40px; }
+    .case-browser { border-radius: 10px; }
+    .case-browser-frame { aspect-ratio: 4 / 3; }
   }
 
   @media (max-width: 700px) {
     .case-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 20px; }
     .case-list-num { grid-row: auto; padding-top: 0; }
     .case-list p { grid-column: 1; }
-    .case-gallery { grid-template-columns: 1fr; }
+    .case-phone { display: none; }
+    .case-browser-url { display: none; }
+    .case-browser-frame { aspect-ratio: 3 / 4; }
   }
 </style>
