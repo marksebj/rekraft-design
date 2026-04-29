@@ -2,7 +2,7 @@
 ---
 <section class="hero">
   <div class="hero-bg" aria-hidden="true">
-    <div class="hero-grain"></div>
+    <canvas class="hero-silk" data-silk></canvas>
     <div class="hero-glow"></div>
   </div>
 
@@ -64,14 +64,25 @@
     height: 90%;
     background: radial-gradient(ellipse at 70% 40%, var(--color-ambient) 0%, transparent 55%);
   }
-  .hero-grain {
+
+  /* Animated silk canvas — burgundy noise multiplied onto the cream page bg.
+     Paints sparse pixels (sample 3) at ~24fps; mix-blend-mode: multiply means
+     each colored pixel tints the cream beneath it instead of overlaying.
+     The whole layer fades in on load to avoid a jarring first paint.
+     Hidden entirely under prefers-reduced-motion. */
+  .hero-silk {
     position: absolute;
     inset: 0;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(20, 20, 24, 0.06) 1px, transparent 0);
-    background-size: 3px 3px;
-    opacity: 0.55;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
     mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 1.4s var(--ease-out-expo);
+  }
+  .hero-silk.is-in { opacity: 0.45; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-silk { display: none; }
   }
 
   .hero-inner {
@@ -177,3 +188,92 @@
     .hero-top { flex-direction: column; align-items: flex-start; gap: 8px; }
   }
 </style>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-silk]');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && !reduced) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      // Tunables — kept deliberately conservative for CPU budget.
+      const SPEED = 0.014;
+      const SCALE = 2.4;
+      const SAMPLE = 3;             // step (1 of 9 pixels coloured per frame)
+      const FPS_CAP = 24;
+      const FRAME_MS = 1000 / FPS_CAP;
+      // Burgundy ink colour applied via mix-blend-mode: multiply.
+      const TINT_R = 139;
+      const TINT_G = 30;
+      const TINT_B = 42;
+
+      const resize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Cheap noise function from the original (sin-based, no precomputation).
+      const noise = (x: number, y: number): number => {
+        const G = 2.71828;
+        const rx = G * Math.sin(G * x);
+        const ry = G * Math.sin(G * y);
+        return (rx * ry * (1 + x)) % 1;
+      };
+
+      let time = 0;
+      let last = 0;
+
+      const tick = (now: number) => {
+        if (now - last >= FRAME_MS) {
+          last = now;
+          const w = canvas.width;
+          const h = canvas.height;
+
+          // Reuse a fresh ImageData each frame (transparent base; we paint
+          // sparse coloured pixels and let multiply do the tinting).
+          const img = ctx.createImageData(w, h);
+          const data = img.data;
+
+          const tOffset = SPEED * time;
+
+          for (let x = 0; x < w; x += SAMPLE) {
+            for (let y = 0; y < h; y += SAMPLE) {
+              const u = (x / w) * SCALE;
+              const v = (y / h) * SCALE;
+              const tex_x = u;
+              const tex_y = v + 0.03 * Math.sin(8 * tex_x - tOffset);
+
+              const pattern = 0.6 + 0.4 * Math.sin(
+                5 * (tex_x + tex_y +
+                  Math.cos(3 * tex_x + 5 * tex_y) +
+                  0.02 * tOffset) +
+                Math.sin(20 * (tex_x + tex_y - 0.1 * tOffset)),
+              );
+
+              const rnd = noise(x, y);
+              const intensity = Math.max(0, pattern - rnd / 18 * 0.8);
+
+              const i = (y * w + x) * 4;
+              if (i < data.length) {
+                data[i] = TINT_R;
+                data[i + 1] = TINT_G;
+                data[i + 2] = TINT_B;
+                data[i + 3] = Math.min(255, Math.floor(intensity * 110));
+              }
+            }
+          }
+
+          ctx.putImageData(img, 0, 0);
+          time += 1;
+        }
+        requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+      // Fade the whole layer in once the first frame has painted.
+      requestAnimationFrame(() => canvas.classList.add('is-in'));
+    }
+  }
+</script>
