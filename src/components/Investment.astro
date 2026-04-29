@@ -1,41 +1,28 @@
 ---
-const projectTier = [
+const tiers = [
   {
     name: 'Discovery',
     price: '£195',
-    period: '5 working days · credited back if you commission a build',
-    bullets: [
+    priceTagline: 'Fixed price · 5 working days',
+    description: 'Paid sprint to scope your project, audit what you have, and recommend a path. Credited back in full if you commission a build.',
+    features: [
       'Brand and site audit',
       'Competitor scan and positioning',
-      'Project scope, timeline, recommendation',
-      'A 10-page plan you keep, no matter what',
-      'Credited back in full if you proceed',
+      'Project scope and timeline',
+      'A 10-page plan you keep',
     ],
     cta: 'Start with Discovery',
     flagship: false,
   },
   {
-    name: 'Brand Identity',
-    price: 'From £750',
-    period: '2 to 3 weeks · bespoke',
-    bullets: [
-      'Identity system: mark, type, palette',
-      'Visual direction and art direction',
-      'Brand guidelines, hand to anyone',
-      'Asset library, ready to deploy',
-    ],
-    cta: 'Book a call',
-    flagship: false,
-  },
-  {
     name: 'Website',
     price: 'From £1,500',
-    period: '2 to 3 weeks · bespoke build',
-    bullets: [
+    priceTagline: 'Bespoke build · 2 to 3 weeks',
+    description: 'Custom-built site, never themed. Editorial typography, considered detail, performance and accessibility baked in.',
+    features: [
       'Strategy, design, build, motion',
       'Custom-built, never themed',
-      'Editorial typography, considered detail',
-      'Performance and accessibility baked in',
+      'Editorial typography',
       'Launch, handover, training',
     ],
     cta: 'Book a call',
@@ -45,59 +32,17 @@ const projectTier = [
   {
     name: 'Studio Project',
     price: 'From £2,000',
-    period: '3 to 4 weeks · brand + website + launch',
-    bullets: [
+    priceTagline: 'Brand + website + launch · 3 to 4 weeks',
+    description: 'Full studio engagement. Brand identity, custom-built website, launch creative. Saves £250 vs buying separately.',
+    features: [
       'Brand identity from the ground up',
-      'Website, designed and built',
-      'Launch creative, social, art direction',
+      'Custom-built website',
+      'Launch creative and art direction',
       'Photography and copy direction',
-      'Priority delivery, dedicated lead',
     ],
     cta: 'Book a call',
     flagship: false,
   },
-];
-
-const retainerTier = [
-  {
-    name: 'Maintain',
-    price: 'From £150',
-    suffix: '/mo',
-    period: 'Monthly · 14 days notice',
-    bullets: [
-      'Hosting, monitoring, uptime',
-      'Small change requests',
-      'Performance reviews',
-      'Email support',
-    ],
-    cta: 'Talk retainer',
-    flagship: false,
-  },
-  {
-    name: 'Evolve',
-    price: 'From £450',
-    suffix: '/mo',
-    period: 'Monthly · 14 days notice',
-    bullets: [
-      'Everything in Maintain',
-      'Ongoing creative output',
-      'Quarterly strategy review',
-      'Social art direction and content',
-      'Priority WhatsApp support',
-    ],
-    cta: 'Talk retainer',
-    flagship: true,
-    badge: 'Most requested',
-  },
-];
-
-const extras = [
-  { name: 'Performance audit', price: '£95', desc: 'Lighthouse, accessibility, recommendations. Quick read on what is slowing you down.' },
-  { name: 'Copywriting', price: 'From £125', desc: 'Editorial copy for a page or section. Word by word.' },
-  { name: 'Brand review', price: '£125', desc: "Annual brand health check. What's holding up, what isn't." },
-  { name: 'Print collateral', price: 'From £195', desc: 'Cards and stationery starter. Print partners we trust.' },
-  { name: 'Photography session', price: 'From £250', desc: 'A trusted London photographer for a half-day. Studio or location.' },
-  { name: 'Motion treatment', price: 'From £295', desc: 'Cinematic motion polish on one section. Built bespoke.' },
 ];
 ---
 
@@ -109,68 +54,52 @@ const extras = [
         Honest numbers. <em class="italic-accent">No surprises.</em>
       </h2>
       <p class="lead fade-up">
-        Project work for the launches. Retainers for what comes after.
+        Three engagement formats. Bespoke when the brief calls for it.
       </p>
     </header>
 
-    <div class="invest-tabs fade-up" role="tablist" aria-label="Engagement type">
-      <button class="invest-tab is-active" data-tab="project" role="tab" aria-selected="true">Project</button>
-      <button class="invest-tab" data-tab="retainer" role="tab" aria-selected="false">Retainer</button>
-    </div>
-
-    <div class="invest-group is-active" data-group="project" role="tabpanel">
-      {projectTier.map((t) => (
+    <div class="invest-grid">
+      {tiers.map((t) => (
         <article class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}>
           {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
-          <div class="invest-name display-3">{t.name}</div>
-          <div class="invest-price font-display">{t.price}</div>
-          <div class="invest-period font-mono">{t.period}</div>
-          <ul class="invest-list">
-            {t.bullets.map((b) => <li>{b}</li>)}
-          </ul>
-          <a href="#contact" class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} btn-cta`}>
-            {t.cta} <span class="btn-arrow">&rarr;</span>
-          </a>
-        </article>
-      ))}
-    </div>
-
-    <div class="invest-group" data-group="retainer" role="tabpanel">
-      {retainerTier.map((t) => (
-        <article class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}>
-          {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
-          <div class="invest-name display-3">{t.name}</div>
-          <div class="invest-price font-display">
-            {t.price}<span class="invest-suffix font-sans">{t.suffix}</span>
-          </div>
-          <div class="invest-period font-mono">{t.period}</div>
-          <ul class="invest-list">
-            {t.bullets.map((b) => <li>{b}</li>)}
-          </ul>
-          <a href="#contact" class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} btn-cta`}>
-            {t.cta} <span class="btn-arrow">&rarr;</span>
-          </a>
-        </article>
-      ))}
-    </div>
-
-    <div class="invest-extras">
-      <div class="invest-extras-head fade-up">
-        <span class="eyebrow">Extras</span>
-        <p class="lead">Add what you need. Mix and match.</p>
-      </div>
-      <div class="invest-extras-grid">
-        {extras.map((e) => (
-          <article class="invest-extra fade-up">
-            <div class="invest-extra-top">
-              <div class="invest-extra-name">{e.name}</div>
-              <div class="invest-extra-price font-mono">{e.price}</div>
+          <header class="invest-card-head">
+            <h3 class="invest-card-name">{t.name}</h3>
+            <div class="invest-card-price-block">
+              <span class="invest-card-price font-display">{t.price}</span>
+              <span class="invest-card-price-tag font-mono">{t.priceTagline}</span>
             </div>
-            <p class="invest-extra-desc">{e.desc}</p>
-          </article>
-        ))}
-      </div>
+          </header>
+          <p class="invest-card-desc">{t.description}</p>
+          <ul class="invest-card-features">
+            {t.features.map((f) => (
+              <li class="invest-card-feature">
+                <span class="invest-card-feature-dot" aria-hidden="true"></span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#contact"
+            class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} invest-card-cta`}
+          >
+            {t.cta} <span class="btn-arrow">&rarr;</span>
+          </a>
+        </article>
+      ))}
     </div>
+
+    <article class="invest-custom fade-up">
+      <div class="invest-custom-content">
+        <span class="invest-custom-eyebrow font-mono">Something else</span>
+        <h3 class="invest-custom-title">Want something custom?</h3>
+        <p class="invest-custom-desc">
+          Retainers from £150/mo for hosting and small change requests, or £450/mo for ongoing creative output. Brand-only work, motion polish, photography days, copywriting, performance audits — tell us what you're building and we'll scope it honestly.
+        </p>
+      </div>
+      <a href="mailto:mark@rekraft.design?subject=Bespoke%20Project" class="btn btn-primary invest-custom-cta">
+        Start a conversation <span class="btn-arrow">&rarr;</span>
+      </a>
+    </article>
 
     <p class="invest-foot fade-up">
       All numbers exclude VAT. Bespoke work is quoted to scope; the figures above are honest starting points. We take on a small number of projects each quarter.
@@ -181,224 +110,189 @@ const extras = [
 <style>
   .invest {
     border-top: 1px solid var(--color-border);
-    padding-block: clamp(72px, 8vw, 120px);
+    padding-block: clamp(56px, 6vw, 96px);
   }
 
   .invest-head {
     display: grid;
-    gap: 20px;
-    margin-bottom: clamp(48px, 6vw, 80px);
+    gap: 14px;
     max-width: 720px;
+    margin-bottom: clamp(36px, 4vw, 56px);
   }
 
-  /* Tabs */
-  .invest-tabs {
-    display: inline-flex;
-    gap: 4px;
-    padding: 4px;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: var(--color-card);
-    margin-bottom: clamp(40px, 5vw, 64px);
-  }
-  .invest-tab {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    padding: 10px 22px;
-    border-radius: 999px;
-    transition: color .35s var(--ease-out-expo), background .35s var(--ease-out-expo);
-  }
-  .invest-tab:hover { color: var(--color-ink); }
-  .invest-tab.is-active {
-    color: var(--color-bg);
-    background: var(--color-ink);
+  /* Three-card pricing grid */
+  .invest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2vw, 28px);
+    margin-bottom: clamp(28px, 3vw, 40px);
   }
 
-  /* Card groups */
-  .invest-group {
-    display: none;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--color-border);
-    border: 1px solid var(--color-border);
-    margin-bottom: clamp(64px, 8vw, 100px);
-  }
-  .invest-group.is-active { display: grid; }
-
-  /* Card */
   .invest-card {
     position: relative;
-    background: var(--color-bg);
-    padding: clamp(36px, 4.5vw, 56px);
-    display: grid;
-    align-content: start;
-    gap: 16px;
-    transition: background .5s var(--ease-out-expo);
-  }
-  .invest-card:hover { background: var(--color-surface); }
-  .invest-card.is-flagship {
     background: var(--color-card);
-    box-shadow: 0 18px 50px -32px rgba(20, 20, 24, 0.22);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: clamp(28px, 2.6vw + 8px, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition:
+      transform 0.4s var(--ease-out-expo),
+      border-color 0.4s var(--ease-out-expo),
+      box-shadow 0.4s var(--ease-out-expo);
   }
-  .invest-card.is-flagship:hover { background: var(--color-card-hover); }
+  .invest-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-active);
+    box-shadow: 0 24px 60px -32px rgba(20, 20, 24, 0.28);
+  }
+  .invest-card.is-flagship {
+    border-color: var(--color-border-active);
+    box-shadow: 0 18px 50px -34px rgba(20, 20, 24, 0.22);
+  }
+  .invest-card.is-flagship:hover {
+    box-shadow: 0 28px 70px -32px rgba(20, 20, 24, 0.34);
+  }
 
   .invest-badge {
     position: absolute;
-    top: 20px;
-    right: 24px;
+    top: 18px;
+    right: 20px;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-lime);
-    padding: 6px 10px;
+    padding: 5px 10px;
     border: 1px solid var(--color-lime);
     border-radius: 999px;
     background: var(--color-lime-soft);
   }
 
-  .invest-name {
-    color: var(--color-ink);
-    margin-bottom: 4px;
+  /* Card head: name + price */
+  .invest-card-head {
+    display: grid;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
   }
-  .invest-price {
-    font-size: clamp(40px, 4vw + 10px, 64px);
+  .invest-card-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 1.6vw + 10px, 32px);
     line-height: 1;
+    letter-spacing: -0.015em;
     color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .invest-card-price-block {
+    display: grid;
+    gap: 4px;
+  }
+  .invest-card-price {
+    font-size: clamp(36px, 3.2vw, 56px);
+    line-height: 1;
     letter-spacing: -0.02em;
+    color: var(--color-ink);
     padding-bottom: 0.06em;
   }
-  .invest-suffix {
-    font-size: 16px;
-    color: var(--color-ink-dim);
-    letter-spacing: 0.01em;
-    margin-left: 4px;
-    font-weight: 400;
-  }
-  .invest-period {
+  .invest-card-price-tag {
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
-    line-height: 1.5;
+    line-height: 1.4;
   }
-  .invest-list {
+
+  .invest-card-desc {
+    font-size: clamp(14px, 0.3vw + 12px, 15px);
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+    max-width: 38ch;
+  }
+
+  .invest-card-features {
     list-style: none;
     display: grid;
     gap: 10px;
-    padding-top: 16px;
-    margin-top: 8px;
-    border-top: 1px solid var(--color-border);
+    padding-top: 8px;
+    margin-top: auto;
   }
-  .invest-list li {
-    font-size: 14px;
+  .invest-card-feature {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    align-items: start;
+    gap: 12px;
+    font-size: 13px;
     line-height: 1.5;
     color: var(--color-ink-muted);
-    padding-left: 18px;
-    position: relative;
   }
-  .invest-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 9px;
+  .invest-card-feature-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: var(--color-lime);
+    margin-top: 7px;
+    margin-left: 4px;
   }
-  .btn-cta { margin-top: 20px; justify-content: center; }
 
-  /* Extras */
-  .invest-extras-head {
-    display: grid;
-    gap: 12px;
-    margin-bottom: clamp(32px, 4vw, 56px);
-    max-width: 600px;
+  .invest-card-cta {
+    margin-top: 4px;
+    justify-content: center;
+    width: 100%;
   }
-  .invest-extras-grid {
+
+  /* Custom Request card — full-width, cream surface */
+  .invest-custom {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--color-border);
+    grid-template-columns: 1fr auto;
+    gap: clamp(24px, 4vw, 60px);
+    align-items: center;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: clamp(28px, 3vw, 44px);
   }
-  .invest-extra {
-    background: var(--color-bg);
-    padding: clamp(24px, 3vw, 36px);
+  .invest-custom-content {
     display: grid;
-    gap: 12px;
-    align-content: start;
-    transition: background .4s var(--ease-out-expo);
+    gap: 10px;
+    max-width: 64ch;
   }
-  .invest-extra:hover { background: var(--color-surface); }
-  .invest-extra-top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .invest-extra-name {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 1.4vw + 8px, 26px);
-    line-height: 1.2;
-    color: var(--color-ink);
-  }
-  .invest-extra-price {
+  .invest-custom-eyebrow {
     font-size: 11px;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-lime);
+    color: var(--color-ink-dim);
   }
-  .invest-extra-desc {
-    font-size: 14px;
-    line-height: 1.55;
+  .invest-custom-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(24px, 1.6vw + 10px, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .invest-custom-desc {
+    font-size: clamp(14px, 0.3vw + 12px, 15px);
+    line-height: 1.6;
     color: var(--color-ink-muted);
   }
+  .invest-custom-cta { justify-self: start; }
 
   .invest-foot {
     font-family: var(--font-sans);
-    font-size: 13px;
-    line-height: 1.65;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--color-ink-dim);
     max-width: 64ch;
-    margin-top: clamp(48px, 6vw, 72px);
-    padding-top: 32px;
+    margin-top: clamp(24px, 3vw, 36px);
+    padding-top: 24px;
     border-top: 1px solid var(--color-border);
   }
 
-  @media (max-width: 1100px) {
-    .invest-extras-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 900px) {
-    .invest-group { grid-template-columns: 1fr; }
-    .invest-extras-grid { grid-template-columns: 1fr; }
-    .invest-badge { top: 16px; right: 16px; }
+  @media (max-width: 1000px) {
+    .invest-grid { grid-template-columns: 1fr; }
+    .invest-custom { grid-template-columns: 1fr; gap: 20px; }
   }
 </style>
-
-<script>
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  const tabs = document.querySelectorAll<HTMLButtonElement>('.invest-tab');
-  const groups = document.querySelectorAll<HTMLElement>('.invest-group');
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-      tabs.forEach((t) => {
-        const isActive = t === tab;
-        t.classList.toggle('is-active', isActive);
-        t.setAttribute('aria-selected', String(isActive));
-      });
-      groups.forEach((g) => {
-        g.classList.toggle('is-active', g.dataset.group === target);
-      });
-      // Tab change shifts layout below; refresh trigger positions so .fade-up elements still reveal correctly.
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    });
-  });
-</script>
