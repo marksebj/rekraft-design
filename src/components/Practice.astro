@@ -28,13 +28,13 @@ const services = [
     num: '02',
     name: 'Websites',
     headline: 'Fast, considered, built to perform.',
-    body: 'Custom-built, never themed. Designed to convert without feeling like a funnel.',
+    body: 'Custom-built, never themed.',
   },
   {
     num: '03',
     name: 'Social',
     headline: 'Systems your team can actually run.',
-    body: 'Templates and content that scale. The brand holds together whoever is posting.',
+    body: 'Templates and content that scale.',
   },
 ];
 
@@ -54,72 +54,56 @@ const process = [
         How we work. <em class="italic-accent">And what we do.</em>
       </h2>
       <p class="lead fade-up">
-        Three rules. Three things. We go deep on what matters.
+        Three rules. Three things. Four steps.
       </p>
     </header>
 
-    <div class="practice-block">
-      <div class="practice-sub-head fade-up">
-        <span class="practice-sub-eyebrow font-mono">Principles</span>
-        <span class="practice-sub-rule" aria-hidden="true"></span>
-      </div>
-      <ol class="cat-list">
-        {principles.map((p) => (
-          <li class="cat-row fade-up">
-            <span class="cat-row-bracket cat-row-bracket-tl" aria-hidden="true"></span>
-            <span class="cat-row-bracket cat-row-bracket-br" aria-hidden="true"></span>
-            <span class="cat-row-num font-mono">{p.num}</span>
-            <div class="cat-row-content">
-              <h3 class="cat-row-title">{p.title}</h3>
-              <p class="cat-row-subtitle" set:html={p.body}></p>
-            </div>
-            <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
-          </li>
-        ))}
-      </ol>
-    </div>
+    <div class="practice-grid">
+      <article class="practice-col fade-up">
+        <header class="practice-col-head">
+          <span class="practice-col-eyebrow font-mono">Principles</span>
+        </header>
+        <ol class="practice-col-list">
+          {principles.map((p) => (
+            <li class="practice-item">
+              <span class="practice-item-num font-mono">{p.num}</span>
+              <h3 class="practice-item-title">{p.title}</h3>
+              <p class="practice-item-body" set:html={p.body}></p>
+            </li>
+          ))}
+        </ol>
+      </article>
 
-    <div class="practice-block">
-      <div class="practice-sub-head fade-up">
-        <span class="practice-sub-eyebrow font-mono">Services</span>
-        <span class="practice-sub-rule" aria-hidden="true"></span>
-      </div>
-      <ol class="cat-list">
-        {services.map((s) => (
-          <li class="cat-row is-service fade-up">
-            <span class="cat-row-bracket cat-row-bracket-tl" aria-hidden="true"></span>
-            <span class="cat-row-bracket cat-row-bracket-br" aria-hidden="true"></span>
-            <div class="cat-row-prefix">
-              <span class="cat-row-num font-mono">{s.num}</span>
-              <span class="cat-row-name font-mono">{s.name}</span>
-            </div>
-            <div class="cat-row-content">
-              <h3 class="cat-row-title cat-row-title-italic">{s.headline}</h3>
-              <p class="cat-row-subtitle">{s.body}</p>
-            </div>
-            <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
-          </li>
-        ))}
-      </ol>
-    </div>
+      <article class="practice-col fade-up">
+        <header class="practice-col-head">
+          <span class="practice-col-eyebrow font-mono">Services</span>
+        </header>
+        <ol class="practice-col-list">
+          {services.map((s) => (
+            <li class="practice-item">
+              <span class="practice-item-num font-mono">{s.num}</span>
+              <h3 class="practice-item-title">{s.name}</h3>
+              <p class="practice-item-headline">{s.headline}</p>
+              <p class="practice-item-body practice-item-body-meta">{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </article>
 
-    <div class="practice-block">
-      <div class="practice-sub-head fade-up">
-        <span class="practice-sub-eyebrow font-mono">Process</span>
-        <span class="practice-sub-rule" aria-hidden="true"></span>
-      </div>
-      <ol class="practice-process">
-        {process.map((step, i) => (
-          <li class="practice-process-step fade-up">
-            <span class="practice-process-num font-mono">{step.num}</span>
-            <h3 class="practice-process-title">{step.title}</h3>
-            <p class="practice-process-body">{step.body}</p>
-            {i < process.length - 1 && (
-              <span class="practice-process-arrow font-mono" aria-hidden="true">&rarr;</span>
-            )}
-          </li>
-        ))}
-      </ol>
+      <article class="practice-col fade-up">
+        <header class="practice-col-head">
+          <span class="practice-col-eyebrow font-mono">Process</span>
+        </header>
+        <ol class="practice-col-list">
+          {process.map((p) => (
+            <li class="practice-item">
+              <span class="practice-item-num font-mono">{p.num}</span>
+              <h3 class="practice-item-title">{p.title}</h3>
+              <p class="practice-item-body">{p.body}</p>
+            </li>
+          ))}
+        </ol>
+      </article>
     </div>
   </div>
 </section>
@@ -134,239 +118,100 @@ const process = [
     display: grid;
     gap: 14px;
     max-width: 720px;
-    margin-bottom: clamp(36px, 4vw, 56px);
+    margin-bottom: clamp(28px, 3vw, 48px);
   }
 
-  .practice-block + .practice-block {
-    margin-top: clamp(40px, 5vw, 72px);
+  /* Three-column horizontal grid: Principles | Services | Process */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.1fr;
+    gap: clamp(28px, 3.5vw, 56px);
+    max-width: 1180px;
+    align-items: start;
   }
 
-  /* Sub-section header: small mono label + horizontal rule */
-  .practice-sub-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-    max-width: 1080px;
+  .practice-col {
+    display: grid;
+    gap: clamp(18px, 2vw, 24px);
+    align-content: start;
+    /* Vertical divider between columns at desktop */
+    padding-right: clamp(16px, 2vw, 32px);
+    border-right: 1px solid var(--color-border);
   }
-  .practice-sub-eyebrow {
+  .practice-col:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .practice-col-head {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .practice-col-eyebrow {
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-ink-dim);
-    flex-shrink: 0;
-  }
-  .practice-sub-rule {
-    flex: 1;
-    height: 1px;
-    background: var(--color-border);
   }
 
-  /* Shared category-list row pattern */
-  .cat-list {
+  .practice-col-list {
     list-style: none;
     display: grid;
-    gap: 8px;
-    max-width: 1080px;
+    gap: clamp(20px, 2vw, 28px);
   }
-  .cat-row {
-    position: relative;
-    height: 88px;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-card);
+
+  .practice-item {
     display: grid;
-    grid-template-columns: 48px 1fr auto;
-    align-items: center;
-    padding: 0 24px;
-    column-gap: 20px;
-    overflow: hidden;
-    transition:
-      height 0.45s var(--ease-out-expo),
-      border-color 0.45s var(--ease-out-expo),
-      background 0.45s var(--ease-out-expo),
-      box-shadow 0.45s var(--ease-out-expo);
+    gap: 6px;
   }
-  .cat-row:hover {
-    height: 116px;
-    border-color: var(--color-border-active);
-    background: var(--color-card-hover);
-    box-shadow: 0 18px 32px -28px rgba(20, 20, 24, 0.22);
-  }
-
-  /* Service-row variant: wider prefix column with a divider */
-  .cat-row.is-service {
-    height: 96px;
-    grid-template-columns: 200px 1fr auto;
-    padding: 0 28px;
-    column-gap: 28px;
-  }
-  .cat-row.is-service:hover { height: 124px; }
-  .cat-row-prefix {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    border-right: 1px solid var(--color-border);
-    height: 100%;
-    padding-right: 24px;
-    align-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cat-row-num {
+  .practice-item-num {
     font-size: 11px;
     letter-spacing: 0.2em;
     color: var(--color-lime);
   }
-  .cat-row-name {
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink);
-  }
-  .cat-row-content {
-    display: grid;
-    gap: 4px;
-  }
-  .cat-row-title {
+  .practice-item-title {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: clamp(20px, 1.4vw + 10px, 28px);
+    font-size: clamp(20px, 1.2vw + 10px, 28px);
     line-height: 1.05;
     letter-spacing: -0.015em;
     color: var(--color-ink);
     padding-bottom: 0.04em;
   }
-  .cat-row-title-italic {
+  .practice-item-body {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 0.2vw + 12px, 14px);
+    line-height: 1.5;
+    color: var(--color-ink-muted);
+  }
+  .practice-item-headline {
+    font-family: var(--font-display);
     font-style: italic;
     color: var(--color-cream);
+    font-size: clamp(16px, 0.6vw + 12px, 19px);
+    line-height: 1.25;
+    margin-top: 2px;
   }
-  .cat-row-subtitle {
-    font-family: var(--font-sans);
-    font-size: clamp(13px, 0.3vw + 11px, 15px);
-    line-height: 1.5;
+  .practice-item-body-meta {
     color: var(--color-ink-dim);
-    max-width: 64ch;
-  }
-  .cat-row.is-service .cat-row-subtitle { color: var(--color-ink-muted); }
-
-  .cat-row-arrow {
-    font-size: 13px;
-    color: var(--color-lime);
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.3s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
-  }
-  .cat-row:hover .cat-row-arrow {
-    opacity: 1;
-    transform: translateX(0);
+    font-size: clamp(12px, 0.2vw + 11px, 13px);
+    margin-top: 2px;
   }
 
-  /* Corner brackets in navy */
-  .cat-row-bracket {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s var(--ease-out-expo);
-  }
-  .cat-row-bracket-tl {
-    top: 8px;
-    left: 8px;
-    border-top: 1px solid var(--color-lime);
-    border-left: 1px solid var(--color-lime);
-  }
-  .cat-row-bracket-br {
-    bottom: 8px;
-    right: 8px;
-    border-bottom: 1px solid var(--color-lime);
-    border-right: 1px solid var(--color-lime);
-  }
-  .cat-row:hover .cat-row-bracket { opacity: 1; }
-
-  /* Process strip — 4-column horizontal layout, no card chrome */
-  .practice-process {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    max-width: 1080px;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-  }
-  .practice-process-step {
-    position: relative;
-    padding: clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 28px);
-    display: grid;
-    gap: 8px;
-    align-content: start;
-  }
-  .practice-process-step + .practice-process-step {
-    border-left: 1px solid var(--color-border);
-  }
-  .practice-process-num {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--color-lime);
-  }
-  .practice-process-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(22px, 1.6vw + 8px, 30px);
-    line-height: 1;
-    letter-spacing: -0.015em;
-    color: var(--color-ink);
-    padding-bottom: 0.04em;
-  }
-  .practice-process-body {
-    font-family: var(--font-sans);
-    font-size: clamp(13px, 0.3vw + 11px, 14px);
-    line-height: 1.5;
-    color: var(--color-ink-dim);
-  }
-  .practice-process-arrow {
-    position: absolute;
-    top: 50%;
-    right: -8px;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    background: var(--color-bg);
-    color: var(--color-lime);
-    display: grid;
-    place-items: center;
-    font-size: 12px;
-    line-height: 1;
-    z-index: 2;
-  }
-
-  @media (max-width: 800px) {
-    .cat-row.is-service {
+  @media (max-width: 900px) {
+    .practice-grid {
       grid-template-columns: 1fr;
-      height: auto;
-      min-height: 96px;
-      row-gap: 12px;
-      padding: 18px 20px;
+      gap: clamp(32px, 5vw, 48px);
     }
-    .cat-row.is-service .cat-row-prefix {
-      border-right: none;
+    .practice-col {
+      padding-right: 0;
+      border-right: 0;
+      padding-bottom: clamp(24px, 4vw, 36px);
       border-bottom: 1px solid var(--color-border);
-      padding: 0 0 12px;
-      height: auto;
     }
-  }
-  @media (max-width: 700px) {
-    .cat-row {
-      height: auto;
-      min-height: 86px;
-      grid-template-columns: 36px 1fr;
-      padding: 18px 20px;
+    .practice-col:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
     }
-    .cat-row-arrow { display: none; }
-    .practice-process { grid-template-columns: repeat(2, 1fr); }
-    .practice-process-step:nth-child(2n+1) { border-left: 0; }
-    .practice-process-step:nth-child(n+3) { border-top: 1px solid var(--color-border); }
-    .practice-process-arrow { display: none; }
   }
 </style>
