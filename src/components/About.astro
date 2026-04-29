@@ -12,6 +12,16 @@ const profile = {
     { label: 'Instagram', url: '#', svg: 'instagram' },
   ],
 };
+
+const consult = {
+  revolvingText: 'TALK TO MARK · START A PROJECT · TALK TO MARK · START A PROJECT · ',
+  popupHeading: 'Start a project',
+  popupBadge: 'Free intro',
+  popupLead: 'We reply within 24 hours. If it’s a fit, we book a call. If not, we point you somewhere better.',
+  popupMeta: ['Small roster', 'Selective intake', 'London · worldwide', 'Q3 2026 availability'],
+  ctaText: 'Email Mark',
+  ctaUrl: 'mailto:mark@rekraft.design?subject=New%20project%20enquiry',
+};
 ---
 
 <section id="about" class="section about">
@@ -27,14 +37,33 @@ const profile = {
     </header>
 
     <div class="about-profile fade-up">
-      <div class="about-profile-img">
-        <img
-          src={profile.imageUrl}
-          alt={`${profile.name}, founder of Rekraft Design`}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+      <button
+        class="about-consult"
+        data-consult-trigger
+        aria-haspopup="dialog"
+        aria-controls="consultPopup"
+        aria-label="Start a project — open booking info"
+      >
+        <svg class="about-consult-text" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <path id="aboutConsultPath" d="M 100, 100 m -84, 0 a 84,84 0 1,1 168,0 a 84,84 0 1,1 -168,0" />
+          </defs>
+          <text font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2" fill="currentColor">
+            <textPath href="#aboutConsultPath" startOffset="0%">{consult.revolvingText}</textPath>
+          </text>
+        </svg>
+        <span class="about-consult-img">
+          <img
+            src={profile.imageUrl}
+            alt={`${profile.name}, founder of Rekraft Design`}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        </span>
+        <span class="about-consult-arrow font-mono" aria-hidden="true">&rarr;</span>
+      </button>
+
       <div class="about-profile-card">
         <header class="about-profile-head">
           <h3 class="about-profile-name">{profile.name}</h3>
@@ -80,6 +109,36 @@ const profile = {
   </div>
 </section>
 
+<!-- Consult popup, fixed-position modal -->
+<div class="consult-popup" data-consult-popup>
+  <div class="consult-backdrop" data-consult-close aria-hidden="true"></div>
+  <div
+    id="consultPopup"
+    class="consult-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="consultHeading"
+  >
+    <button class="consult-close" data-consult-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </button>
+    <div class="consult-card-head">
+      <h3 id="consultHeading" class="consult-heading">{consult.popupHeading}</h3>
+      <span class="consult-badge font-mono">{consult.popupBadge}</span>
+    </div>
+    <p class="consult-lead">{consult.popupLead}</p>
+    <ul class="consult-meta font-mono">
+      {consult.popupMeta.map((m) => <li>{m}</li>)}
+    </ul>
+    <a href={consult.ctaUrl} class="btn btn-primary consult-cta">
+      {consult.ctaText} <span class="btn-arrow">&rarr;</span>
+    </a>
+  </div>
+</div>
+
 <style>
   .about {
     border-top: 1px solid var(--color-border);
@@ -93,30 +152,85 @@ const profile = {
     margin-bottom: clamp(36px, 4vw, 64px);
   }
 
-  /* Profile-card pattern: square portrait + overlapping bio card */
+  /* Profile-card pattern: revolving-text avatar + overlapping bio card */
   .about-profile {
     display: flex;
     align-items: center;
     max-width: 1100px;
   }
 
-  .about-profile-img {
+  /* Circular consult button (replaces the square portrait) */
+  .about-consult {
     flex: 0 0 auto;
-    width: 460px;
-    height: 460px;
-    border-radius: 24px;
+    position: relative;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-ink-dim);
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+  .about-consult:hover { transform: scale(1.03); }
+  .about-consult:focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 6px;
+  }
+
+  .about-consult-text {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: consult-rotate 22s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes consult-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .about-consult-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
     overflow: hidden;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    box-shadow: 0 18px 40px -22px rgba(20, 20, 24, 0.35);
   }
-  .about-profile-img img {
+  .about-consult-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     user-select: none;
   }
 
+  .about-consult-arrow {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: var(--color-bg);
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    box-shadow: 0 8px 24px -10px rgba(20, 20, 24, 0.5);
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .about-consult:hover .about-consult-arrow { transform: translate(2px, -2px); }
+
+  /* Bio card (unchanged from previous version) */
   .about-profile-card {
     position: relative;
     z-index: 2;
@@ -126,17 +240,13 @@ const profile = {
     border: 1px solid var(--color-border);
     border-radius: 24px;
     padding: clamp(28px, 2.6vw + 8px, 44px);
-    margin-left: -80px;
+    margin-left: -64px;
     display: grid;
     gap: 16px;
     box-shadow: 0 30px 80px -42px rgba(20, 20, 24, 0.32);
   }
 
-  .about-profile-head {
-    display: grid;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
+  .about-profile-head { display: grid; gap: 8px; margin-bottom: 4px; }
   .about-profile-name {
     font-family: var(--font-display);
     font-weight: 400;
@@ -158,9 +268,7 @@ const profile = {
     line-height: 1.65;
     color: var(--color-ink-muted);
   }
-  .about-profile-bio:first-of-type {
-    color: var(--color-ink);
-  }
+  .about-profile-bio:first-of-type { color: var(--color-ink); }
 
   .about-profile-closer {
     font-family: var(--font-display);
@@ -173,12 +281,7 @@ const profile = {
     border-top: 1px solid var(--color-border);
   }
 
-  /* Social icons: dark circles with light glyphs */
-  .about-profile-socials {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-  }
+  .about-profile-socials { display: flex; gap: 12px; margin-top: 8px; }
   .about-profile-social {
     width: 44px;
     height: 44px;
@@ -187,42 +290,169 @@ const profile = {
     color: var(--color-bg);
     display: grid;
     place-items: center;
-    transition:
-      background 0.3s var(--ease-out-expo),
-      transform 0.3s var(--ease-out-expo);
+    transition: background 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
   }
   .about-profile-social:hover {
     background: #000;
     transform: translateY(-2px);
   }
-  .about-profile-social svg {
-    width: 18px;
-    height: 18px;
-  }
+  .about-profile-social svg { width: 18px; height: 18px; }
 
-  /* Tablet: shrink portrait so the overlap still works */
   @media (max-width: 1100px) {
-    .about-profile-img {
-      width: 360px;
-      height: 360px;
-    }
+    .about-consult { width: 320px; height: 320px; }
   }
-
-  /* Mobile: stack image on top, card slides up under it */
   @media (max-width: 800px) {
-    .about-profile {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .about-profile-img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1 / 1;
-    }
+    .about-profile { flex-direction: column; align-items: center; }
+    .about-consult { width: min(320px, 80vw); height: min(320px, 80vw); }
     .about-profile-card {
       margin-left: 0;
-      margin-top: -36px;
+      margin-top: -32px;
       max-width: 100%;
     }
   }
+
+  /* Consult popup modal */
+  .consult-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    place-items: center;
+    padding: 24px;
+  }
+  .consult-popup.is-open {
+    display: grid;
+  }
+
+  .consult-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 20, 24, 0.32);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .consult-card {
+    position: relative;
+    z-index: 1;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    padding: clamp(28px, 3vw, 44px);
+    max-width: 480px;
+    width: 100%;
+    display: grid;
+    gap: 18px;
+    box-shadow: 0 40px 100px -40px rgba(20, 20, 24, 0.45);
+  }
+
+  .consult-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.3s var(--ease-out-expo);
+  }
+  .consult-close:hover { background: var(--color-surface); }
+  .consult-close svg { width: 16px; height: 16px; }
+
+  .consult-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-right: 40px;
+  }
+  .consult-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(28px, 2.4vw + 10px, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .consult-badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-lime);
+    padding: 5px 10px;
+    border: 1px solid var(--color-lime);
+    border-radius: 999px;
+    background: var(--color-lime-soft);
+  }
+  .consult-lead {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink-muted);
+  }
+  .consult-meta {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    padding: 14px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .consult-meta li {
+    position: relative;
+    padding-left: 12px;
+  }
+  .consult-meta li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 1px;
+    background: var(--color-lime);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .consult-cta {
+    justify-content: center;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-consult-text { animation: none; }
+    .consult-card, .consult-backdrop { transition: none; }
+  }
 </style>
+
+<script>
+  const trigger = document.querySelector<HTMLButtonElement>('[data-consult-trigger]');
+  const popup = document.querySelector<HTMLElement>('[data-consult-popup]');
+  const closeButtons = document.querySelectorAll<HTMLElement>('[data-consult-close]');
+
+  function open() {
+    popup?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    popup?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  trigger?.addEventListener('click', open);
+  closeButtons.forEach((btn) => btn.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup?.classList.contains('is-open')) close();
+  });
+</script>
