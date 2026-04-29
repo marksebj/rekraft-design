@@ -103,6 +103,44 @@ const tabs = [
   { id: 'oneoff', label: 'One-off' },
   { id: 'retainer', label: 'Retainer' },
 ];
+
+const addons = [
+  {
+    name: 'Brand kit',
+    price: 'From £195',
+    description: 'Mark, type, palette, and anything else that makes a brand a brand. Includes a 30-minute discovery call.',
+  },
+  {
+    name: 'Product photography',
+    price: 'From £250/day',
+    description: 'Studio-style shoots. Ship the items to us, we shoot them, edited and delivered ready to use.',
+  },
+  {
+    name: 'On-site photography',
+    price: 'From £450/day',
+    description: 'On-location shoots for a service or space. Travel and venue extras quoted separately.',
+  },
+  {
+    name: 'Copywriting',
+    price: 'From £145',
+    description: 'Editorial copy scoped to need. A single page, a full website rebrand, or general business copy.',
+  },
+  {
+    name: 'Brand review',
+    price: '£125',
+    description: 'Multi-page brand health report. Design, setup, ease of use. Detailed, 5 to 10 pages with imagery.',
+  },
+  {
+    name: 'Domain + email setup',
+    price: '£95',
+    description: 'Custom domain, DNS configuration, Google Workspace email up and running.',
+  },
+  {
+    name: 'Google Maps + Store setup',
+    price: '£95',
+    description: 'Google Business Profile, Maps listing, hours, photos, services. Verified and live.',
+  },
+];
 ---
 
 <section id="investment" class="section invest">
@@ -200,15 +238,33 @@ const tabs = [
       </div>
     </div>
 
+    <details class="invest-addons fade-up">
+      <summary class="invest-addons-summary">
+        <div class="invest-addons-summary-content">
+          <span class="invest-addons-eyebrow font-mono">Add-ons</span>
+          <span class="invest-addons-title">Bolt anything onto a tier or a retainer.</span>
+        </div>
+        <span class="invest-addons-toggle font-mono" aria-hidden="true">+</span>
+      </summary>
+      <ol class="invest-addons-list">
+        {addons.map((a) => (
+          <li class="invest-addon">
+            <div class="invest-addon-head">
+              <h4 class="invest-addon-name">{a.name}</h4>
+              <span class="invest-addon-price font-mono">{a.price}</span>
+            </div>
+            <p class="invest-addon-desc">{a.description}</p>
+          </li>
+        ))}
+      </ol>
+    </details>
+
     <article class="invest-custom fade-up">
       <div class="invest-custom-content">
         <span class="invest-custom-eyebrow font-mono">Something else</span>
         <h3 class="invest-custom-title">Or something else entirely.</h3>
-        <p class="invest-custom-extras font-mono">
-          Brand-only &middot; Motion polish &middot; Photography days &middot; Copywriting &middot; Performance audits
-        </p>
         <p class="invest-custom-close">
-          Anything that doesn&rsquo;t fit a tier. Tell us what you&rsquo;re building and we&rsquo;ll scope it honestly.
+          Anything that doesn&rsquo;t fit a tier or an add-on. Tell us what you&rsquo;re building and we&rsquo;ll scope it honestly.
         </p>
       </div>
       <a href="mailto:mark@rekraft.design?subject=Bespoke%20Project" class="btn btn-primary invest-custom-cta">
@@ -419,6 +475,109 @@ const tabs = [
     width: 100%;
   }
 
+  /* Add-ons accordion (collapsed by default) */
+  .invest-addons {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    margin-bottom: clamp(20px, 2vw, 32px);
+    overflow: hidden;
+    transition: border-color 0.3s var(--ease-out-expo);
+  }
+  .invest-addons[open] {
+    border-color: var(--color-border-active);
+  }
+  .invest-addons-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: clamp(20px, 2vw, 28px) clamp(24px, 3vw, 36px);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: clamp(16px, 2vw, 32px);
+    transition: background 0.3s var(--ease-out-expo);
+  }
+  .invest-addons-summary::-webkit-details-marker { display: none; }
+  .invest-addons-summary:hover { background: var(--color-card-hover); }
+
+  .invest-addons-summary-content {
+    display: grid;
+    gap: 6px;
+  }
+  .invest-addons-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .invest-addons-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(20px, 1.2vw + 8px, 26px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+  .invest-addons-toggle {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-border-active);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    color: var(--color-ink);
+    transition: transform 0.3s var(--ease-out-expo), background 0.3s var(--ease-out-expo), color 0.3s var(--ease-out-expo);
+  }
+  .invest-addons[open] .invest-addons-toggle {
+    background: var(--color-ink);
+    color: var(--color-bg);
+    border-color: var(--color-ink);
+    transform: rotate(45deg);
+  }
+
+  .invest-addons-list {
+    list-style: none;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+  }
+  .invest-addon {
+    padding: clamp(18px, 2vw, 24px) clamp(24px, 3vw, 36px);
+    display: grid;
+    gap: 4px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .invest-addon:last-child { border-bottom: 0; }
+
+  .invest-addon-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .invest-addon-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(18px, 0.8vw + 12px, 22px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .invest-addon-price {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-lime);
+  }
+  .invest-addon-desc {
+    font-size: clamp(13px, 0.2vw + 12px, 14px);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+    max-width: 64ch;
+  }
+
   /* Custom Request card */
   .invest-custom {
     display: grid;
@@ -450,16 +609,6 @@ const tabs = [
     color: var(--color-ink);
     padding-bottom: 0.04em;
     margin-bottom: 4px;
-  }
-  .invest-custom-extras {
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    line-height: 1.65;
-    padding-top: 12px;
-    margin-top: 4px;
-    border-top: 1px solid var(--color-border);
   }
   .invest-custom-close {
     font-size: clamp(13px, 0.3vw + 11px, 14px);
