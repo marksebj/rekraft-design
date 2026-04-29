@@ -17,10 +17,11 @@ const consult = {
   revolvingText: 'TALK TO MARK · START A PROJECT · TALK TO MARK · START A PROJECT · ',
   popupHeading: 'Start a project',
   popupBadge: 'Free intro',
-  popupLead: 'We reply within 24 hours. If it’s a fit, we book a call. If not, we point you somewhere better.',
+  popupLead: 'I reply within 24 hours. If it’s a fit, we book a call. If not, I point you somewhere better.',
   popupMeta: ['Small roster', 'Selective intake', 'London · worldwide', 'Q3 2026 availability'],
   ctaText: 'Email Mark',
   ctaUrl: 'mailto:mark@rekraft.design?subject=New%20project%20enquiry',
+  signOff: 'Mark',
 };
 ---
 
@@ -136,6 +137,7 @@ const consult = {
     <a href={consult.ctaUrl} class="btn btn-primary consult-cta">
       {consult.ctaText} <span class="btn-arrow">&rarr;</span>
     </a>
+    <span class="consult-signoff font-display">{consult.signOff}</span>
   </div>
 </div>
 
@@ -428,6 +430,17 @@ const consult = {
     justify-content: center;
     width: 100%;
     margin-top: 4px;
+  }
+
+  .consult-signoff {
+    align-self: end;
+    justify-self: end;
+    font-style: italic;
+    color: var(--color-cream);
+    font-size: clamp(20px, 1.4vw + 8px, 28px);
+    line-height: 1;
+    padding-top: 4px;
+    padding-right: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {

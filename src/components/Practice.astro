@@ -37,6 +37,13 @@ const services = [
     body: 'Templates and content that scale. The brand holds together whoever is posting.',
   },
 ];
+
+const process = [
+  { num: '01', title: 'Discover', body: 'Listen, audit, scope.' },
+  { num: '02', title: 'Design', body: 'Strategy, system, screens.' },
+  { num: '03', title: 'Build', body: 'Custom-built, never themed.' },
+  { num: '04', title: 'Launch', body: 'Ship, hand over, train.' },
+];
 ---
 
 <section id="practice" class="section practice">
@@ -91,6 +98,25 @@ const services = [
               <p class="cat-row-subtitle">{s.body}</p>
             </div>
             <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="practice-block">
+      <div class="practice-sub-head fade-up">
+        <span class="practice-sub-eyebrow font-mono">Process</span>
+        <span class="practice-sub-rule" aria-hidden="true"></span>
+      </div>
+      <ol class="practice-process">
+        {process.map((step, i) => (
+          <li class="practice-process-step fade-up">
+            <span class="practice-process-num font-mono">{step.num}</span>
+            <h3 class="practice-process-title">{step.title}</h3>
+            <p class="practice-process-body">{step.body}</p>
+            {i < process.length - 1 && (
+              <span class="practice-process-arrow font-mono" aria-hidden="true">&rarr;</span>
+            )}
           </li>
         ))}
       </ol>
@@ -259,6 +285,62 @@ const services = [
   }
   .cat-row:hover .cat-row-bracket { opacity: 1; }
 
+  /* Process strip — 4-column horizontal layout, no card chrome */
+  .practice-process {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1080px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .practice-process-step {
+    position: relative;
+    padding: clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 28px);
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+  .practice-process-step + .practice-process-step {
+    border-left: 1px solid var(--color-border);
+  }
+  .practice-process-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--color-lime);
+  }
+  .practice-process-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(22px, 1.6vw + 8px, 30px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .practice-process-body {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 0.3vw + 11px, 14px);
+    line-height: 1.5;
+    color: var(--color-ink-dim);
+  }
+  .practice-process-arrow {
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: var(--color-bg);
+    color: var(--color-lime);
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    line-height: 1;
+    z-index: 2;
+  }
+
   @media (max-width: 800px) {
     .cat-row.is-service {
       grid-template-columns: 1fr;
@@ -282,5 +364,9 @@ const services = [
       padding: 18px 20px;
     }
     .cat-row-arrow { display: none; }
+    .practice-process { grid-template-columns: repeat(2, 1fr); }
+    .practice-process-step:nth-child(2n+1) { border-left: 0; }
+    .practice-process-step:nth-child(n+3) { border-top: 1px solid var(--color-border); }
+    .practice-process-arrow { display: none; }
   }
 </style>
