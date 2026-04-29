@@ -59,8 +59,11 @@ const tiers = [
     </header>
 
     <div class="invest-grid">
-      {tiers.map((t) => (
-        <article class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}>
+      {tiers.map((t, i) => (
+        <article
+          class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}
+          style={`--reveal-delay: ${i * 0.12}s`}
+        >
           {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
           <header class="invest-card-head">
             <h3 class="invest-card-name">{t.name}</h3>
@@ -138,10 +141,27 @@ const tiers = [
     flex-direction: column;
     gap: 20px;
     transition:
+      opacity 0.4s var(--ease-out-expo),
       transform 0.4s var(--ease-out-expo),
       border-color 0.4s var(--ease-out-expo),
       box-shadow 0.4s var(--ease-out-expo);
   }
+
+  /* Entry stagger: cards reveal one-by-one when section enters viewport.
+     Each card carries `--reveal-delay` inline (0s, 0.12s, 0.24s).
+     Overrides the global .fade-up.is-in transition with the stagger. */
+  .invest-card.fade-up.is-in {
+    transition:
+      opacity 0.9s var(--ease-out-expo) var(--reveal-delay, 0s),
+      transform 0.9s var(--ease-out-expo) var(--reveal-delay, 0s);
+  }
+
+  /* Hover focus: when any card in the grid is hovered, others dim back. */
+  .invest-grid:hover .invest-card:not(:hover) {
+    opacity: 0.5;
+    transform: scale(0.97);
+  }
+
   .invest-card:hover {
     transform: translateY(-4px);
     border-color: var(--color-border-active);
@@ -153,6 +173,13 @@ const tiers = [
   }
   .invest-card.is-flagship:hover {
     box-shadow: 0 28px 70px -32px rgba(20, 20, 24, 0.34);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .invest-grid:hover .invest-card:not(:hover) {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .invest-badge {
