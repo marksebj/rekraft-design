@@ -1,4 +1,26 @@
 ---
+// Lucide-style icon SVG inner paths. Rendered inside a shared <svg> wrapper.
+const ICONS: Record<string, string> = {
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>',
+  handshake: '<circle cx="9" cy="12" r="4"/><circle cx="15" cy="12" r="4"/>',
+  compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+  pen: '<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  rocket: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+  palette: '<circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.5-9-10-9z"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  camera: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+  server: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+  gauge: '<path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+  mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/>',
+  layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  sparkles: '<path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7L12 3z"/><path d="M19 14l.85 2.15L22 17l-2.15.85L19 20l-.85-2.15L16 17l2.15-.85z"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+};
+
 const oneoffTiers = [
   {
     name: 'Discovery',
@@ -6,10 +28,10 @@ const oneoffTiers = [
     priceTagline: '30-minute call · No commitment',
     description: 'A quick call to talk through what you’re building. We share an honest take and point you somewhere better if we’re not the right fit.',
     features: [
-      '30-minute call, no commitment',
-      'Quick once-over of what you have',
-      'Honest take on whether we’re a fit',
-      'Project recommendation if we are',
+      { icon: 'phone', label: '30-min call' },
+      { icon: 'search', label: 'Quick audit' },
+      { icon: 'handshake', label: 'Honest take' },
+      { icon: 'compass', label: 'Path forward' },
     ],
     cta: 'Book the call',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Discovery%20call',
@@ -21,10 +43,10 @@ const oneoffTiers = [
     priceTagline: 'Bespoke build · 2 to 3 weeks',
     description: 'Custom-built site. Strategy, design, motion, launch. Never themed.',
     features: [
-      'Strategy and structure',
-      'Bespoke design pass with one revision round',
-      'Custom build (Astro or Webflow)',
-      'Launch, handover, training video',
+      { icon: 'grid', label: 'Strategy' },
+      { icon: 'pen', label: 'Bespoke design' },
+      { icon: 'code', label: 'Custom build' },
+      { icon: 'rocket', label: 'Launch + train' },
     ],
     cta: 'Book a call',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Website%20enquiry',
@@ -37,10 +59,10 @@ const oneoffTiers = [
     priceTagline: 'Brand kit + bespoke site · 3 to 4 weeks',
     description: 'Brand identity and website, built together. Everything ships aligned.',
     features: [
-      'Brand kit: mark, type, palette, mini-guidelines',
-      'Bespoke website with motion',
-      'Launch creative: 6 social templates',
-      'Photography and copy direction',
+      { icon: 'palette', label: 'Brand kit' },
+      { icon: 'globe', label: 'Bespoke site' },
+      { icon: 'grid', label: 'Launch creative' },
+      { icon: 'camera', label: 'Direction' },
     ],
     cta: 'Book a call',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Brand%20%2B%20Site%20enquiry',
@@ -56,10 +78,10 @@ const retainerTiers = [
     priceTagline: 'Monthly · 14 days notice',
     description: 'Keep your site healthy. Hosting, monitoring, small change requests, performance reviews. Email support.',
     features: [
-      'Hosting and uptime monitoring',
-      'Small change requests',
-      'Performance reviews',
-      'Email support',
+      { icon: 'server', label: 'Hosting' },
+      { icon: 'pen', label: 'Small changes' },
+      { icon: 'gauge', label: 'Performance' },
+      { icon: 'mail', label: 'Email support' },
     ],
     cta: 'Talk retainer',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Maintain%20retainer',
@@ -72,10 +94,10 @@ const retainerTiers = [
     priceTagline: 'Monthly · 14 days notice',
     description: 'Maintain plus ongoing creative output. Quarterly strategy reviews, content systems.',
     features: [
-      'Everything in Maintain',
-      'Ongoing creative output',
-      'Quarterly strategy review',
-      'Priority email + Slack',
+      { icon: 'layers', label: 'Includes Maintain' },
+      { icon: 'sparkles', label: 'Creative output' },
+      { icon: 'calendar', label: 'Quarterly strategy' },
+      { icon: 'mail', label: 'Priority support' },
     ],
     cta: 'Talk retainer',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Evolve%20retainer',
@@ -88,10 +110,10 @@ const retainerTiers = [
     priceTagline: 'Monthly · 14 days notice',
     description: 'Full creative partnership. Brand stewardship, monthly direction, photography quarterly, direct line.',
     features: [
-      'Everything in Evolve',
-      'Monthly creative direction',
-      'Quarterly photography day',
-      'Direct WhatsApp · same-day response',
+      { icon: 'layers', label: 'Includes Evolve' },
+      { icon: 'compass', label: 'Monthly direction' },
+      { icon: 'camera', label: 'Photography day' },
+      { icon: 'zap', label: 'Direct line' },
     ],
     cta: 'Talk retainer',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Amplify%20retainer',
@@ -185,8 +207,10 @@ const addons = [
             <ul class="invest-card-features">
               {t.features.map((f) => (
                 <li class="invest-card-feature">
-                  <span class="invest-card-feature-dot" aria-hidden="true"></span>
-                  <span>{f}</span>
+                  <span class="invest-card-feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[f.icon]}></svg>
+                  </span>
+                  <span class="invest-card-feature-label">{f.label}</span>
                 </li>
               ))}
             </ul>
@@ -222,8 +246,10 @@ const addons = [
             <ul class="invest-card-features">
               {t.features.map((f) => (
                 <li class="invest-card-feature">
-                  <span class="invest-card-feature-dot" aria-hidden="true"></span>
-                  <span>{f}</span>
+                  <span class="invest-card-feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[f.icon]}></svg>
+                  </span>
+                  <span class="invest-card-feature-label">{f.label}</span>
                 </li>
               ))}
             </ul>
@@ -444,29 +470,44 @@ const addons = [
     max-width: 38ch;
   }
 
+  /* Feature grid — 2x2 of icon-and-label pairs (graphics doing the talking). */
   .invest-card-features {
     list-style: none;
     display: grid;
-    gap: 10px;
-    padding-top: 8px;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 12px;
+    padding-top: 14px;
     margin-top: auto;
+    border-top: 1px solid var(--color-border);
   }
   .invest-card-feature {
     display: grid;
-    grid-template-columns: 16px 1fr;
-    align-items: start;
-    gap: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--color-ink-muted);
+    gap: 8px;
+    align-content: start;
   }
-  .invest-card-feature-dot {
-    width: 6px;
-    height: 6px;
+  .invest-card-feature-icon {
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
+    background: var(--color-lime-soft);
+    color: var(--color-lime);
+    display: grid;
+    place-items: center;
+    transition: background 0.3s var(--ease-out-expo), color 0.3s var(--ease-out-expo);
+  }
+  .invest-card-feature-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+  .invest-card:hover .invest-card-feature-icon {
     background: var(--color-lime);
-    margin-top: 7px;
-    margin-left: 4px;
+    color: var(--color-bg);
+  }
+  .invest-card-feature-label {
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--color-ink-muted);
+    letter-spacing: -0.005em;
   }
 
   .invest-card-cta {
