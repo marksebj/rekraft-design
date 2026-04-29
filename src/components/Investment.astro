@@ -17,7 +17,7 @@ const oneoffTiers = [
   },
   {
     name: 'Website',
-    price: 'From £1,250',
+    price: 'From £950',
     priceTagline: 'Bespoke build · 2 to 3 weeks',
     description: 'Custom-built site. Strategy, design, motion, launch. Never themed.',
     features: [
@@ -67,18 +67,34 @@ const retainerTiers = [
   },
   {
     name: 'Evolve',
-    price: 'From £450',
+    price: 'From £300',
     priceSuffix: '/mo',
     priceTagline: 'Monthly · 14 days notice',
-    description: 'Maintain plus ongoing creative output. Quarterly strategy, content systems, priority support.',
+    description: 'Maintain plus ongoing creative output. Quarterly strategy reviews, content systems.',
     features: [
       'Everything in Maintain',
       'Ongoing creative output',
       'Quarterly strategy review',
-      'Priority WhatsApp support',
+      'Priority email + Slack',
     ],
     cta: 'Talk retainer',
     ctaUrl: 'mailto:mark@rekraft.design?subject=Evolve%20retainer',
+    flagship: false,
+  },
+  {
+    name: 'Amplify',
+    price: 'From £550',
+    priceSuffix: '/mo',
+    priceTagline: 'Monthly · 14 days notice',
+    description: 'Full creative partnership. Brand stewardship, monthly direction, photography quarterly, direct line.',
+    features: [
+      'Everything in Evolve',
+      'Monthly creative direction',
+      'Quarterly photography day',
+      'Direct WhatsApp · same-day response',
+    ],
+    cta: 'Talk retainer',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Amplify%20retainer',
     flagship: false,
   },
 ];
@@ -148,7 +164,7 @@ const tabs = [
     </div>
 
     <div class="invest-group" data-group="retainer" role="tabpanel">
-      <div class="invest-grid invest-grid-2">
+      <div class="invest-grid invest-grid-3">
         {retainerTiers.map((t, i) => (
           <article
             class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}
