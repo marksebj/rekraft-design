@@ -1,5 +1,5 @@
 ---
-const tiers = [
+const oneoffTiers = [
   {
     name: 'Discovery',
     price: 'Free',
@@ -47,6 +47,46 @@ const tiers = [
     flagship: false,
   },
 ];
+
+const retainerTiers = [
+  {
+    name: 'Maintain',
+    price: 'From £150',
+    priceSuffix: '/mo',
+    priceTagline: 'Monthly · 14 days notice',
+    description: 'Keep your site healthy. Hosting, monitoring, small change requests, performance reviews. Email support.',
+    features: [
+      'Hosting and uptime monitoring',
+      'Small change requests',
+      'Performance reviews',
+      'Email support',
+    ],
+    cta: 'Talk retainer',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Maintain%20retainer',
+    flagship: false,
+  },
+  {
+    name: 'Evolve',
+    price: 'From £450',
+    priceSuffix: '/mo',
+    priceTagline: 'Monthly · 14 days notice',
+    description: 'Maintain plus ongoing creative output. Quarterly strategy, content systems, priority support.',
+    features: [
+      'Everything in Maintain',
+      'Ongoing creative output',
+      'Quarterly strategy review',
+      'Priority WhatsApp support',
+    ],
+    cta: 'Talk retainer',
+    ctaUrl: 'mailto:mark@rekraft.design?subject=Evolve%20retainer',
+    flagship: false,
+  },
+];
+
+const tabs = [
+  { id: 'oneoff', label: 'One-off' },
+  { id: 'retainer', label: 'Retainer' },
+];
 ---
 
 <section id="investment" class="section invest">
@@ -58,46 +98,96 @@ const tiers = [
       </h2>
     </header>
 
-    <div class="invest-grid">
-      {tiers.map((t, i) => (
-        <article
-          class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}
-          style={`--reveal-delay: ${i * 0.12}s`}
+    <div class="invest-tabs fade-up" role="tablist" aria-label="Pricing type">
+      {tabs.map((tab, i) => (
+        <button
+          class={`invest-tab${i === 0 ? ' is-active' : ''}`}
+          data-tab={tab.id}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          type="button"
         >
-          {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
-          <header class="invest-card-head">
-            <h3 class="invest-card-name">{t.name}</h3>
-            <div class="invest-card-price-block">
-              <span class="invest-card-price font-display">{t.price}</span>
-              <span class="invest-card-price-tag font-mono">{t.priceTagline}</span>
-            </div>
-          </header>
-          <p class="invest-card-desc">{t.description}</p>
-          <ul class="invest-card-features">
-            {t.features.map((f) => (
-              <li class="invest-card-feature">
-                <span class="invest-card-feature-dot" aria-hidden="true"></span>
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-          <a
-            href={t.ctaUrl}
-            class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} invest-card-cta`}
-          >
-            {t.cta} <span class="btn-arrow">&rarr;</span>
-          </a>
-        </article>
+          {tab.label}
+        </button>
       ))}
+    </div>
+
+    <div class="invest-group is-active" data-group="oneoff" role="tabpanel">
+      <div class="invest-grid invest-grid-3">
+        {oneoffTiers.map((t, i) => (
+          <article
+            class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}
+            style={`--reveal-delay: ${i * 0.12}s`}
+          >
+            {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
+            <header class="invest-card-head">
+              <h3 class="invest-card-name">{t.name}</h3>
+              <div class="invest-card-price-block">
+                <span class="invest-card-price font-display">{t.price}</span>
+                <span class="invest-card-price-tag font-mono">{t.priceTagline}</span>
+              </div>
+            </header>
+            <p class="invest-card-desc">{t.description}</p>
+            <ul class="invest-card-features">
+              {t.features.map((f) => (
+                <li class="invest-card-feature">
+                  <span class="invest-card-feature-dot" aria-hidden="true"></span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={t.ctaUrl}
+              class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} invest-card-cta`}
+            >
+              {t.cta} <span class="btn-arrow">&rarr;</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="invest-group" data-group="retainer" role="tabpanel">
+      <div class="invest-grid invest-grid-2">
+        {retainerTiers.map((t, i) => (
+          <article
+            class={`invest-card fade-up${t.flagship ? ' is-flagship' : ''}`}
+            style={`--reveal-delay: ${i * 0.12}s`}
+          >
+            {t.flagship && <span class="invest-badge font-mono">{t.badge}</span>}
+            <header class="invest-card-head">
+              <h3 class="invest-card-name">{t.name}</h3>
+              <div class="invest-card-price-block">
+                <span class="invest-card-price font-display">
+                  {t.price}<span class="invest-card-price-suffix font-sans">{t.priceSuffix}</span>
+                </span>
+                <span class="invest-card-price-tag font-mono">{t.priceTagline}</span>
+              </div>
+            </header>
+            <p class="invest-card-desc">{t.description}</p>
+            <ul class="invest-card-features">
+              {t.features.map((f) => (
+                <li class="invest-card-feature">
+                  <span class="invest-card-feature-dot" aria-hidden="true"></span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={t.ctaUrl}
+              class={`btn ${t.flagship ? 'btn-primary' : 'btn-ghost'} invest-card-cta`}
+            >
+              {t.cta} <span class="btn-arrow">&rarr;</span>
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
 
     <article class="invest-custom fade-up">
       <div class="invest-custom-content">
         <span class="invest-custom-eyebrow font-mono">Something else</span>
         <h3 class="invest-custom-title">Or something else entirely.</h3>
-        <p class="invest-custom-retainers">
-          Retainers from <strong>£150/mo</strong> (hosting, small changes) or <strong>£450/mo</strong> (ongoing creative output).
-        </p>
         <p class="invest-custom-extras font-mono">
           Brand-only &middot; Motion polish &middot; Photography days &middot; Copywriting &middot; Performance audits
         </p>
@@ -126,15 +216,52 @@ const tiers = [
     display: grid;
     gap: 14px;
     max-width: 720px;
-    margin-bottom: clamp(36px, 4vw, 56px);
+    margin-bottom: clamp(28px, 3vw, 40px);
   }
 
-  /* Three-card pricing grid */
+  /* Tab toggle pill */
+  .invest-tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-card);
+    margin-bottom: clamp(28px, 3vw, 40px);
+  }
+  .invest-tab {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    padding: 10px 22px;
+    border-radius: 999px;
+    transition: color 0.35s var(--ease-out-expo), background 0.35s var(--ease-out-expo);
+    cursor: pointer;
+  }
+  .invest-tab:hover { color: var(--color-ink); }
+  .invest-tab.is-active {
+    color: var(--color-bg);
+    background: var(--color-ink);
+  }
+
+  /* Card groups (one per tab) */
+  .invest-group {
+    display: none;
+    margin-bottom: clamp(28px, 3vw, 40px);
+  }
+  .invest-group.is-active { display: block; }
+
+  /* Pricing grids */
   .invest-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: clamp(20px, 2vw, 28px);
-    margin-bottom: clamp(28px, 3vw, 40px);
+  }
+  .invest-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .invest-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
   }
 
   .invest-card {
@@ -153,16 +280,14 @@ const tiers = [
       box-shadow 0.4s var(--ease-out-expo);
   }
 
-  /* Entry stagger: cards reveal one-by-one when section enters viewport.
-     Each card carries `--reveal-delay` inline (0s, 0.12s, 0.24s).
-     Overrides the global .fade-up.is-in transition with the stagger. */
+  /* Entry stagger */
   .invest-card.fade-up.is-in {
     transition:
       opacity 0.9s var(--ease-out-expo) var(--reveal-delay, 0s),
       transform 0.9s var(--ease-out-expo) var(--reveal-delay, 0s);
   }
 
-  /* Hover focus: when any card in the grid is hovered, others dim back. */
+  /* Hover focus: dim siblings within the same grid */
   .invest-grid:hover .invest-card:not(:hover) {
     opacity: 0.5;
     transform: scale(0.97);
@@ -202,7 +327,6 @@ const tiers = [
     background: var(--color-lime-soft);
   }
 
-  /* Card head: name + price */
   .invest-card-head {
     display: grid;
     gap: 14px;
@@ -218,16 +342,20 @@ const tiers = [
     color: var(--color-ink);
     padding-bottom: 0.04em;
   }
-  .invest-card-price-block {
-    display: grid;
-    gap: 4px;
-  }
+  .invest-card-price-block { display: grid; gap: 4px; }
   .invest-card-price {
     font-size: clamp(36px, 3.2vw, 56px);
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--color-ink);
     padding-bottom: 0.06em;
+  }
+  .invest-card-price-suffix {
+    font-size: 16px;
+    color: var(--color-ink-dim);
+    letter-spacing: 0.01em;
+    margin-left: 4px;
+    font-weight: 400;
   }
   .invest-card-price-tag {
     font-size: 11px;
@@ -275,7 +403,7 @@ const tiers = [
     width: 100%;
   }
 
-  /* Custom Request card — full-width, cream surface */
+  /* Custom Request card */
   .invest-custom {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -307,15 +435,6 @@ const tiers = [
     padding-bottom: 0.04em;
     margin-bottom: 4px;
   }
-  .invest-custom-retainers {
-    font-size: clamp(14px, 0.3vw + 12px, 15px);
-    line-height: 1.6;
-    color: var(--color-ink-muted);
-  }
-  .invest-custom-retainers strong {
-    color: var(--color-ink);
-    font-weight: 500;
-  }
   .invest-custom-extras {
     font-size: 11px;
     letter-spacing: 0.16em;
@@ -346,7 +465,34 @@ const tiers = [
   }
 
   @media (max-width: 1000px) {
-    .invest-grid { grid-template-columns: 1fr; }
+    .invest-grid-3 { grid-template-columns: 1fr; }
+    .invest-grid-2 { grid-template-columns: 1fr; max-width: none; }
     .invest-custom { grid-template-columns: 1fr; gap: 20px; }
   }
 </style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.invest-tab');
+  const groups = document.querySelectorAll<HTMLElement>('.invest-group');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach((t) => {
+        const isActive = t === tab;
+        t.classList.toggle('is-active', isActive);
+        t.setAttribute('aria-selected', String(isActive));
+      });
+      groups.forEach((g) => {
+        const isActive = g.dataset.group === target;
+        g.classList.toggle('is-active', isActive);
+        if (isActive) {
+          // Force reveal on cards inside the newly visible group, in case
+          // the global ScrollTrigger/IntersectionObserver hasn't fired for them
+          // (they were display:none on initial load).
+          g.querySelectorAll<HTMLElement>('.fade-up').forEach((el) => el.classList.add('is-in'));
+        }
+      });
+    });
+  });
+</script>
