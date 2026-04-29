@@ -1,0 +1,286 @@
+---
+const principles = [
+  {
+    num: '01',
+    title: 'Considered',
+    body: 'Every element earns its place. If it doesn&rsquo;t serve, it doesn&rsquo;t ship.',
+  },
+  {
+    num: '02',
+    title: 'Crafted',
+    body: 'Built from scratch. Never from templates.',
+  },
+  {
+    num: '03',
+    title: 'Committed',
+    body: 'Small roster. We stay until launch.',
+  },
+];
+
+const services = [
+  {
+    num: '01',
+    name: 'Brand',
+    headline: 'Identity systems that hold together.',
+    body: 'Logos, wordmarks, visual direction, guidelines.',
+  },
+  {
+    num: '02',
+    name: 'Websites',
+    headline: 'Fast, considered, built to perform.',
+    body: 'Custom-built, never themed. Designed to convert without feeling like a funnel.',
+  },
+  {
+    num: '03',
+    name: 'Social',
+    headline: 'Systems your team can actually run.',
+    body: 'Templates and content that scale. The brand holds together whoever is posting.',
+  },
+];
+---
+
+<section id="practice" class="section practice">
+  <div class="frame">
+    <header class="practice-head">
+      <span class="eyebrow">02 &middot; Practice</span>
+      <h2 class="display-2 reveal-words" data-reveal-headline>
+        How we work. <em class="italic-accent">And what we do.</em>
+      </h2>
+      <p class="lead fade-up">
+        Three rules. Three things. We go deep on what matters.
+      </p>
+    </header>
+
+    <div class="practice-block">
+      <div class="practice-sub-head fade-up">
+        <span class="practice-sub-eyebrow font-mono">Principles</span>
+        <span class="practice-sub-rule" aria-hidden="true"></span>
+      </div>
+      <ol class="cat-list">
+        {principles.map((p) => (
+          <li class="cat-row fade-up">
+            <span class="cat-row-bracket cat-row-bracket-tl" aria-hidden="true"></span>
+            <span class="cat-row-bracket cat-row-bracket-br" aria-hidden="true"></span>
+            <span class="cat-row-num font-mono">{p.num}</span>
+            <div class="cat-row-content">
+              <h3 class="cat-row-title">{p.title}</h3>
+              <p class="cat-row-subtitle" set:html={p.body}></p>
+            </div>
+            <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="practice-block">
+      <div class="practice-sub-head fade-up">
+        <span class="practice-sub-eyebrow font-mono">Services</span>
+        <span class="practice-sub-rule" aria-hidden="true"></span>
+      </div>
+      <ol class="cat-list">
+        {services.map((s) => (
+          <li class="cat-row is-service fade-up">
+            <span class="cat-row-bracket cat-row-bracket-tl" aria-hidden="true"></span>
+            <span class="cat-row-bracket cat-row-bracket-br" aria-hidden="true"></span>
+            <div class="cat-row-prefix">
+              <span class="cat-row-num font-mono">{s.num}</span>
+              <span class="cat-row-name font-mono">{s.name}</span>
+            </div>
+            <div class="cat-row-content">
+              <h3 class="cat-row-title cat-row-title-italic">{s.headline}</h3>
+              <p class="cat-row-subtitle">{s.body}</p>
+            </div>
+            <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .practice {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(56px, 6vw, 96px);
+  }
+
+  .practice-head {
+    display: grid;
+    gap: 14px;
+    max-width: 720px;
+    margin-bottom: clamp(36px, 4vw, 56px);
+  }
+
+  .practice-block + .practice-block {
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+
+  /* Sub-section header: small mono label + horizontal rule */
+  .practice-sub-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    max-width: 1080px;
+  }
+  .practice-sub-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    flex-shrink: 0;
+  }
+  .practice-sub-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  /* Shared category-list row pattern */
+  .cat-list {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    max-width: 1080px;
+  }
+  .cat-row {
+    position: relative;
+    height: 88px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-card);
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    padding: 0 24px;
+    column-gap: 20px;
+    overflow: hidden;
+    transition:
+      height 0.45s var(--ease-out-expo),
+      border-color 0.45s var(--ease-out-expo),
+      background 0.45s var(--ease-out-expo),
+      box-shadow 0.45s var(--ease-out-expo);
+  }
+  .cat-row:hover {
+    height: 116px;
+    border-color: var(--color-border-active);
+    background: var(--color-card-hover);
+    box-shadow: 0 18px 32px -28px rgba(20, 20, 24, 0.22);
+  }
+
+  /* Service-row variant: wider prefix column with a divider */
+  .cat-row.is-service {
+    height: 96px;
+    grid-template-columns: 200px 1fr auto;
+    padding: 0 28px;
+    column-gap: 28px;
+  }
+  .cat-row.is-service:hover { height: 124px; }
+  .cat-row-prefix {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-right: 1px solid var(--color-border);
+    height: 100%;
+    padding-right: 24px;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cat-row-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--color-lime);
+  }
+  .cat-row-name {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  .cat-row-content {
+    display: grid;
+    gap: 4px;
+  }
+  .cat-row-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(20px, 1.4vw + 10px, 28px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .cat-row-title-italic {
+    font-style: italic;
+    color: var(--color-cream);
+  }
+  .cat-row-subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 0.3vw + 11px, 15px);
+    line-height: 1.5;
+    color: var(--color-ink-dim);
+    max-width: 64ch;
+  }
+  .cat-row.is-service .cat-row-subtitle { color: var(--color-ink-muted); }
+
+  .cat-row-arrow {
+    font-size: 13px;
+    color: var(--color-lime);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+  }
+  .cat-row:hover .cat-row-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Corner brackets in navy */
+  .cat-row-bracket {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out-expo);
+  }
+  .cat-row-bracket-tl {
+    top: 8px;
+    left: 8px;
+    border-top: 1px solid var(--color-lime);
+    border-left: 1px solid var(--color-lime);
+  }
+  .cat-row-bracket-br {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 1px solid var(--color-lime);
+    border-right: 1px solid var(--color-lime);
+  }
+  .cat-row:hover .cat-row-bracket { opacity: 1; }
+
+  @media (max-width: 800px) {
+    .cat-row.is-service {
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: 96px;
+      row-gap: 12px;
+      padding: 18px 20px;
+    }
+    .cat-row.is-service .cat-row-prefix {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 0 12px;
+      height: auto;
+    }
+  }
+  @media (max-width: 700px) {
+    .cat-row {
+      height: auto;
+      min-height: 86px;
+      grid-template-columns: 36px 1fr;
+      padding: 18px 20px;
+    }
+    .cat-row-arrow { display: none; }
+  }
+</style>
