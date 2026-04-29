@@ -24,9 +24,10 @@ const cases = [
     tag: 'C · Brand-forward',
     title: 'Live Life Customs',
     meta: 'Brand · Website · 2026',
-    description: 'Streetwear brand revival. Bold visual system, custom apparel portfolio, Instagram-only intake.',
+    description: 'London streetwear studio. Custom apparel built to order, Instagram-only intake.',
     status: 'Live',
-    image: '/images/work/llc/04-nasa.jpg',
+    image: '/images/work/llc/logo.png',
+    imageFit: 'contain',
     href: '/work/livelifecustoms',
   },
   {
@@ -58,7 +59,7 @@ const cases = [
 
     <div class="work-grid">
       {cases.map((c, i) => (
-        <a href={c.href ?? '#contact'} class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}>
+        <a href={c.href ?? '#contact'} class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''} ${c.imageFit === 'contain' ? 'is-logo' : ''}`}>
           <div
             class="work-card-media"
             data-tilt3d-parent
@@ -199,6 +200,30 @@ const cases = [
     background: rgba(20, 20, 24, 0.35);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* Logo card: white bg with the logo contained, no overlay, dark meta pills */
+  .work-card.is-logo .work-card-media {
+    background: #FAFAFA;
+    border-color: var(--color-border);
+  }
+  .work-card.is-logo .work-card-img {
+    object-fit: contain;
+    padding: 14%;
+    filter: none;
+  }
+  .work-card.is-logo:hover .work-card-img { transform: none; }
+  .work-card.is-logo .work-card-overlay { display: none; }
+  .work-card.is-logo .work-card-num {
+    color: var(--color-ink-dim);
+    text-shadow: none;
+  }
+  .work-card.is-logo .work-card-status {
+    color: var(--color-ink);
+    border-color: var(--color-border-active);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   /* Open slot, dashed outline, cream bg, big plus mark */

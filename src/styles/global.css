@@ -126,8 +126,8 @@ html.lenis, html.lenis body { height: auto; }
 .display-2 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 96px);
-  line-height: 1.04;
+  font-size: clamp(36px, 4.6vw, 72px);
+  line-height: 1.06;
   letter-spacing: -0.02em;
   padding-bottom: 0.08em;
 }
@@ -135,8 +135,8 @@ html.lenis, html.lenis body { height: auto; }
 .display-3 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(28px, 3.2vw, 56px);
-  line-height: 1.12;
+  font-size: clamp(24px, 2.5vw, 44px);
+  line-height: 1.15;
   letter-spacing: -0.015em;
   padding-bottom: 0.05em;
 }
@@ -173,12 +173,12 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 .section {
-  padding-block: clamp(80px, 12vw, 180px);
+  padding-block: clamp(64px, 8vw, 120px);
   position: relative;
 }
 
 .section-tight {
-  padding-block: clamp(60px, 8vw, 120px);
+  padding-block: clamp(48px, 6vw, 88px);
 }
 
 /* ==========================================================================
