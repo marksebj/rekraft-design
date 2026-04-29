@@ -58,18 +58,10 @@ const cases = [
     </header>
 
     <div class="work-grid">
-      {cases.map((c, i) => (
-        <a href={c.href ?? '#contact'} class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''} ${c.imageFit === 'contain' ? 'is-logo' : ''}`}>
-          <div
-            class="work-card-media"
-            data-tilt3d-parent
-            data-tilt3d-wobble
-            data-tilt-y="7"
-            data-tilt-x="5"
-            data-tilt-pull="0.008"
-            data-wobble-phase={i}
-          >
-            <div class="work-card-media-inner" data-tilt3d>
+      {cases.map((c) => (
+        <a href={c.href ?? '#contact'} class={`work-card fade-up ${c.isOpenSlot ? 'is-open' : ''} ${c.imageFit === 'contain' ? 'is-logo' : ''}`}>
+          <div class="work-card-media">
+            <div class="work-card-media-inner">
               {c.image && (
                 <img
                   class="work-card-img"
@@ -105,8 +97,8 @@ const cases = [
 
 <style>
   .work {
-    padding-top: clamp(100px, 12vw, 200px);
-    padding-bottom: clamp(80px, 10vw, 160px);
+    padding-top: clamp(72px, 8vw, 120px);
+    padding-bottom: clamp(64px, 7vw, 96px);
   }
 
   .work-head {
@@ -114,7 +106,7 @@ const cases = [
     grid-template-columns: 1.2fr 0.8fr;
     gap: clamp(40px, 6vw, 120px);
     align-items: end;
-    margin-bottom: clamp(48px, 6vw, 96px);
+    margin-bottom: clamp(32px, 4vw, 56px);
   }
   .work-head-left { display: grid; gap: 20px; }
   .work-head-lead { margin-bottom: 8px; }
@@ -122,31 +114,26 @@ const cases = [
   .work-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(24px, 3vw, 48px);
+    gap: clamp(24px, 3vw, 40px);
   }
-  .work-card.is-featured { grid-column: 1 / -1; }
 
   .work-card {
     display: grid;
     grid-template-rows: auto auto;
-    gap: 24px;
-    transition: transform .6s var(--ease-out-expo);
+    gap: 16px;
+    transition: transform .5s var(--ease-out-expo);
   }
-  .work-card:hover { transform: translateY(-6px); }
+  .work-card:hover { transform: translateY(-4px); }
 
   .work-card-media {
-    aspect-ratio: 4 / 5;
-    border-radius: 14px;
+    aspect-ratio: 3 / 2;
+    border-radius: 12px;
     position: relative;
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     transition: border-color .5s var(--ease-out-expo);
-    box-shadow: 0 20px 60px -30px rgba(20, 20, 24, 0.4);
-    /* 3D container for the inner card */
-    perspective: 1200px;
-    perspective-origin: 50% 50%;
+    box-shadow: 0 16px 40px -28px rgba(20, 20, 24, 0.35);
   }
-  .work-card.is-featured .work-card-media { aspect-ratio: 21 / 9; }
   .work-card:hover .work-card-media { border-color: var(--color-border-active); }
 
   .work-card-media-inner {
@@ -154,8 +141,6 @@ const cases = [
     inset: 0;
     border-radius: inherit;
     overflow: hidden;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
 
   .work-card-img {
@@ -261,7 +246,7 @@ const cases = [
 
   .work-card-info {
     display: grid;
-    gap: 14px;
+    gap: 10px;
     padding: 0 4px;
   }
   .work-card-tag {
@@ -271,9 +256,9 @@ const cases = [
     color: var(--color-cream);
   }
   .work-card h3 {
-    font-size: clamp(28px, 3.2vw, 52px);
+    font-size: clamp(22px, 2vw, 32px);
     font-weight: 400;
-    line-height: 1.05;
+    line-height: 1.1;
     letter-spacing: -0.015em;
     color: var(--color-ink);
   }
@@ -307,6 +292,5 @@ const cases = [
   @media (max-width: 900px) {
     .work-head { grid-template-columns: 1fr; gap: 28px; }
     .work-grid { grid-template-columns: 1fr; }
-    .work-card.is-featured .work-card-media { aspect-ratio: 4 / 5; }
   }
 </style>
