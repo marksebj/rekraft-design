@@ -22,11 +22,12 @@ const cases = [
   {
     num: '03',
     tag: 'C · Brand-forward',
-    title: 'Independent Label',
+    title: 'Live Life Customs',
     meta: 'Brand · Website · 2026',
-    description: 'Identity and site for an independent record label. Expressive type, saturated colour.',
-    status: 'Showcase',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
+    description: 'Streetwear brand revival. Bold visual system, custom apparel portfolio, Instagram-only intake.',
+    status: 'Live',
+    image: '/images/work/llc/04-nasa.jpg',
+    href: '/work/livelifecustoms',
   },
   {
     num: '04',
@@ -57,7 +58,7 @@ const cases = [
 
     <div class="work-grid">
       {cases.map((c, i) => (
-        <a href="#contact" class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}>
+        <a href={c.href ?? '#contact'} class={`work-card fade-up ${c.featured ? 'is-featured' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}>
           <div
             class="work-card-media"
             data-tilt3d-parent
