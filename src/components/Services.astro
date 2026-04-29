@@ -4,22 +4,19 @@ const services = [
     num: '01',
     name: 'Brand',
     headline: 'Identity systems that hold together.',
-    body: 'Logos, wordmarks, visual direction, guidelines. Built to hold up wherever your brand shows up.',
-    deliverables: ['Identity system', 'Art direction', 'Guidelines', 'Asset library'],
+    body: 'Logos, wordmarks, visual direction, guidelines.',
   },
   {
     num: '02',
     name: 'Websites',
     headline: 'Fast, considered, built to perform.',
-    body: 'Custom-built, not themed. Designed to convert without feeling like a funnel.',
-    deliverables: ['Design', 'Development', 'CMS setup', 'Launch & support'],
+    body: 'Custom-built, never themed. Designed to convert without feeling like a funnel.',
   },
   {
     num: '03',
     name: 'Social',
     headline: 'Systems your team can actually run.',
-    body: 'Templates and content that scale. The brand holds together whoever&rsquo;s posting.',
-    deliverables: ['Content system', 'Templates', 'Monthly creative', 'Guidelines'],
+    body: 'Templates and content that scale. The brand holds together whoever is posting.',
   },
 ];
 ---
@@ -36,112 +33,167 @@ const services = [
       </p>
     </header>
 
-    <div class="services-list">
+    <ol class="cat-list">
       {services.map((s) => (
-        <article class="service fade-up">
-          <div class="service-left">
-            <span class="service-num font-mono">{s.num}</span>
-            <h3 class="service-name display-2">{s.name}</h3>
+        <li class="cat-row cat-row-service fade-up">
+          <span class="cat-row-bracket cat-row-bracket-tl" aria-hidden="true"></span>
+          <span class="cat-row-bracket cat-row-bracket-br" aria-hidden="true"></span>
+          <div class="cat-row-prefix">
+            <span class="cat-row-num font-mono">{s.num}</span>
+            <span class="cat-row-name font-mono">{s.name}</span>
           </div>
-          <div class="service-right">
-            <p class="service-headline display-3">{s.headline}</p>
-            <p class="service-body">{s.body}</p>
-            <ul class="service-deliverables">
-              {s.deliverables.map((d) => <li class="font-mono">{d}</li>)}
-            </ul>
+          <div class="cat-row-content">
+            <h3 class="cat-row-title cat-row-title-italic">{s.headline}</h3>
+            <p class="cat-row-subtitle">{s.body}</p>
           </div>
-        </article>
+          <span class="cat-row-arrow font-mono" aria-hidden="true">&rarr;</span>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
 
 <style>
   .services {
     border-top: 1px solid var(--color-border);
-    padding-block: clamp(72px, 8vw, 120px);
+    padding-block: clamp(56px, 6vw, 96px);
   }
 
   .services-head {
     display: grid;
-    gap: 20px;
-    margin-bottom: clamp(64px, 8vw, 120px);
+    gap: 14px;
     max-width: 720px;
+    margin-bottom: clamp(28px, 3vw, 48px);
   }
 
-  .services-list {
+  /* Category-list row pattern — shared shape with Approach */
+  .cat-list {
+    list-style: none;
     display: grid;
-    gap: 1px;
-    background: var(--color-border);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    gap: 8px;
+    max-width: 1080px;
+  }
+  .cat-row {
+    position: relative;
+    height: 96px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-card);
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    align-items: center;
+    padding: 0 28px;
+    column-gap: 28px;
+    overflow: hidden;
+    transition:
+      height 0.45s var(--ease-out-expo),
+      border-color 0.45s var(--ease-out-expo),
+      background 0.45s var(--ease-out-expo),
+      box-shadow 0.45s var(--ease-out-expo);
+  }
+  .cat-row:hover {
+    height: 124px;
+    border-color: var(--color-border-active);
+    background: var(--color-card-hover);
+    box-shadow: 0 18px 32px -28px rgba(20, 20, 24, 0.22);
   }
 
-  .service {
-    background: var(--color-bg);
-    display: grid;
-    grid-template-columns: minmax(260px, 1fr) 1.6fr;
-    gap: clamp(32px, 5vw, 80px);
-    padding: clamp(48px, 6vw, 80px) clamp(20px, 2.5vw, 40px);
-    transition: background .6s var(--ease-out-expo);
+  .cat-row-prefix {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-right: 1px solid var(--color-border);
+    height: 100%;
+    padding-right: 24px;
+    align-self: stretch;
+    align-content: center;
+    flex-wrap: wrap;
   }
-  .service:hover { background: var(--color-surface); }
-
-  .service-left {
-    display: grid;
-    gap: 16px;
-    align-content: start;
-  }
-  .service-num {
+  .cat-row-num {
     font-size: 11px;
     letter-spacing: 0.2em;
     color: var(--color-lime);
   }
-  .service-name {
-    font-size: clamp(56px, 8vw, 128px);
-    line-height: 0.9;
-    letter-spacing: -0.025em;
+  .cat-row-name {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--color-ink);
   }
 
-  .service-right { display: grid; gap: 20px; align-content: start; max-width: 60ch; }
-  .service-headline {
+  .cat-row-content {
+    display: grid;
+    gap: 4px;
+  }
+  .cat-row-title {
     font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(20px, 1.4vw + 10px, 28px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    padding-bottom: 0.04em;
+  }
+  .cat-row-title-italic {
     font-style: italic;
     color: var(--color-cream);
-    font-size: clamp(22px, 2vw + 10px, 34px);
-    line-height: 1.2;
   }
-  .service-body {
-    font-size: clamp(15px, 0.6vw + 12px, 18px);
-    line-height: 1.65;
+  .cat-row-subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 0.3vw + 11px, 15px);
+    line-height: 1.5;
     color: var(--color-ink-muted);
+    max-width: 64ch;
   }
-  .service-deliverables {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 12px;
-    padding-top: 20px;
-    border-top: 1px solid var(--color-border);
+  .cat-row-arrow {
+    font-size: 13px;
+    color: var(--color-lime);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
   }
-  .service-deliverables li {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    padding: 6px 12px;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
+  .cat-row:hover .cat-row-arrow {
+    opacity: 1;
+    transform: translateX(0);
   }
 
-  @media (max-width: 900px) {
-    .service {
+  .cat-row-bracket {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out-expo);
+  }
+  .cat-row-bracket-tl {
+    top: 8px;
+    left: 8px;
+    border-top: 1px solid var(--color-lime);
+    border-left: 1px solid var(--color-lime);
+  }
+  .cat-row-bracket-br {
+    bottom: 8px;
+    right: 8px;
+    border-bottom: 1px solid var(--color-lime);
+    border-right: 1px solid var(--color-lime);
+  }
+  .cat-row:hover .cat-row-bracket { opacity: 1; }
+
+  @media (max-width: 800px) {
+    .cat-row {
+      height: auto;
+      min-height: 96px;
+      padding: 18px 20px;
       grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 40px 20px;
+      column-gap: 0;
+      row-gap: 12px;
     }
-    .service-name { font-size: clamp(48px, 14vw, 96px); }
+    .cat-row-prefix {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 0 12px;
+      height: auto;
+    }
+    .cat-row-arrow { display: none; }
   }
 </style>
