@@ -372,13 +372,13 @@ const addons = [
     flex-direction: column;
     gap: 20px;
     transition:
-      opacity 0.4s var(--ease-out-expo),
-      transform 0.4s var(--ease-out-expo),
-      border-color 0.4s var(--ease-out-expo),
-      box-shadow 0.4s var(--ease-out-expo);
+      opacity 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo),
+      border-color 0.25s var(--ease-out-expo),
+      box-shadow 0.25s var(--ease-out-expo);
   }
 
-  /* Entry stagger */
+  /* Entry stagger — slower transition for the reveal-on-scroll moment */
   .invest-card.fade-up.is-in {
     transition:
       opacity 0.9s var(--ease-out-expo) var(--reveal-delay, 0s),

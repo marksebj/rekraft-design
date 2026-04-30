@@ -11,7 +11,7 @@
       <span class="eyebrow" data-hero-eyebrow>
         Independent design studio · London
       </span>
-      <span class="hero-year font-mono" data-hero-eyebrow>Est. 2026</span>
+      <span class="hero-year font-mono" data-hero-eyebrow>Available Q3 2026</span>
     </div>
 
     <div class="hero-body" data-tilt3d-parent>
@@ -111,14 +111,19 @@
     width: 100%;
     perspective: 1400px;
     perspective-origin: 50% 50%;
-    min-height: clamp(280px, 42vh, 520px);
+    /* Anchor H1 to the top of its zone instead of centering it — the prior
+       flex centre layout left ~300px of dead air above the headline on
+       full-viewport monitors. Padding-top adds a measured beat below the
+       eyebrow row; the 1fr middle row's residual space now sits BELOW the
+       headline as breathing room before the lead+CTAs. */
+    min-height: clamp(220px, 36vh, 440px);
     display: flex;
-    align-items: center;
-    padding-block: clamp(20px, 4vw, 60px);
+    align-items: flex-start;
+    padding-top: clamp(24px, 3vw, 56px);
+    padding-bottom: clamp(20px, 4vw, 60px);
   }
 
   .hero-headline {
-    max-width: 20ch;
     transform-style: preserve-3d;
     will-change: transform;
     cursor: grab;
@@ -127,6 +132,12 @@
     text-shadow:
       0 1px 0 rgba(20, 20, 24, 0.02),
       0 8px 40px rgba(20, 20, 24, 0.06);
+  }
+  /* Cap line length only at narrow viewports — at desktop the explicit <br>
+     in the markup carries the line break, so the prior 20ch cap was redundant
+     and made the H1 wrap awkwardly when content was edited. */
+  @media (max-width: 720px) {
+    .hero-headline { max-width: 18ch; }
   }
   .hero-headline:active { cursor: grabbing; }
   .hero-headline em { font-style: italic; }
@@ -138,6 +149,21 @@
     gap: 48px;
     padding-top: 24px;
     border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+  /* Vertical rule between the lead (left) and the CTA pair (right) on desktop
+     so the wide 1fr gap doesn't read as orphaned columns. */
+  @media (min-width: 901px) {
+    .hero-foot::after {
+      content: "";
+      position: absolute;
+      top: 32px;
+      bottom: 8px;
+      right: clamp(140px, 18vw, 220px);
+      width: 1px;
+      background: var(--color-border);
+      opacity: 0.7;
+    }
   }
   .hero-ctas {
     display: flex;

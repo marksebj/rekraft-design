@@ -151,7 +151,7 @@ const consult = {
     display: grid;
     gap: 14px;
     max-width: 720px;
-    margin-bottom: clamp(36px, 4vw, 64px);
+    margin-bottom: clamp(28px, 2.5vw, 40px);
   }
 
   /* Profile-card pattern: revolving-text avatar + overlapping bio card */
@@ -232,7 +232,7 @@ const consult = {
   }
   .about-consult:hover .about-consult-arrow { transform: translate(2px, -2px); }
 
-  /* Bio card (unchanged from previous version) */
+  /* Bio card — overlaps the avatar on the left for layered editorial composition */
   .about-profile-card {
     position: relative;
     z-index: 2;
@@ -242,7 +242,7 @@ const consult = {
     border: 1px solid var(--color-border);
     border-radius: 24px;
     padding: clamp(28px, 2.6vw + 8px, 44px);
-    margin-left: -64px;
+    margin-left: -80px;
     display: grid;
     gap: 16px;
     box-shadow: 0 30px 80px -42px rgba(20, 20, 24, 0.32);
@@ -356,11 +356,11 @@ const consult = {
     background: var(--color-card);
     border: 1px solid var(--color-border);
     border-radius: 24px;
-    padding: clamp(28px, 3vw, 44px);
-    max-width: 480px;
+    padding: clamp(32px, 3.4vw, 56px);
+    max-width: 600px;
     width: 100%;
     display: grid;
-    gap: 18px;
+    gap: 20px;
     box-shadow: 0 40px 100px -40px rgba(20, 20, 24, 0.45);
   }
 
