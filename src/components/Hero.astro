@@ -65,21 +65,20 @@
     background: radial-gradient(ellipse at 70% 40%, var(--color-ambient) 0%, transparent 55%);
   }
 
-  /* Animated silk canvas — burgundy noise multiplied onto the cream page bg.
-     Paints sparse pixels (sample 3) at ~24fps; mix-blend-mode: multiply means
-     each colored pixel tints the cream beneath it instead of overlaying.
-     The whole layer fades in on load to avoid a jarring first paint.
-     Hidden entirely under prefers-reduced-motion. */
+  /* Animated silk canvas — burgundy noise painted directly onto the cream page bg.
+     Paints sparse pixels (sample 3) at ~24fps. Earlier versions used a 1.4s opacity
+     fade-in via .is-in toggle, but on some devices/browsers the transition stalled
+     mid-way and left the layer effectively invisible. The fade was decoration, not
+     load-bearing — pinning opacity directly is reliable and visually identical
+     once the first frame paints. Hidden entirely under prefers-reduced-motion. */
   .hero-silk {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 1.4s var(--ease-out-expo);
+    opacity: 0.65;
   }
-  .hero-silk.is-in { opacity: 0.65; }
   @media (prefers-reduced-motion: reduce) {
     .hero-silk { display: none; }
   }
@@ -182,8 +181,16 @@
       gap: 28px;
     }
     .hero-scroll-cue { display: none; }
-    .hero-ctas { width: 100%; }
-    .hero-ctas .btn { flex: 1 1 0; justify-content: center; padding: 16px 22px; }
+    .hero-ctas {
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hero-ctas .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px 22px;
+    }
   }
   @media (max-width: 520px) {
     .hero-top {
@@ -281,8 +288,6 @@
       };
 
       requestAnimationFrame(tick);
-      // Fade the whole layer in once the first frame has painted.
-      requestAnimationFrame(() => canvas.classList.add('is-in'));
     }
   }
 </script>

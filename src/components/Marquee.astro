@@ -38,7 +38,7 @@ const run = [...items, ...items, ...items];
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 160px;
+    width: clamp(40px, 12vw, 160px);
     z-index: 2;
     pointer-events: none;
   }
@@ -57,8 +57,8 @@ const run = [...items, ...items, ...items];
   .marquee-item {
     display: inline-flex;
     align-items: center;
-    gap: clamp(32px, 5vw, 72px);
-    font-size: clamp(32px, 5vw, 72px);
+    gap: clamp(24px, 5vw, 72px);
+    font-size: clamp(26px, 5vw, 72px);
     font-style: italic;
     line-height: 1;
     color: var(--color-ink);
