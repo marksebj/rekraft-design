@@ -1,0 +1,483 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = 'Fusa Kitchen · Selected work · Rekraft Design';
+const description = 'Premium Japanese knife brand. Cinematic landing, brushed steel design system, scroll-pinned product reveal. Case study by Rekraft Design.';
+const canonical = 'https://rekraft.design/work/fusa-kitchen';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Nav />
+  <main class="case">
+    <div class="frame case-back-wrap">
+      <a href="/#work" class="case-back font-mono">&larr; Selected Work</a>
+    </div>
+
+    <section class="section case-intro">
+      <div class="frame">
+        <header class="case-head">
+          <span class="eyebrow">Case Study &middot; 02 &middot; Knives</span>
+          <h1 class="display-1 reveal-words" data-hero-headline>
+            Fusa Kitchen. <em class="italic-accent">Forged sharp.</em>
+          </h1>
+          <p class="lead fade-up">
+            Premium Japanese knife brand. A cinematic landing built around a single hero blade, a brushed steel design system, and a pinned-scroll reveal that lets the product do the talking.
+          </p>
+          <a href="https://fusa-kitchen.vercel.app" target="_blank" rel="noopener" class="btn btn-primary case-cta-link fade-up">
+            Visit the live site <span class="case-arrow-up">&#8599;</span>
+          </a>
+        </header>
+      </div>
+    </section>
+
+    <div class="case-meta-strip">
+      <div class="frame case-meta-inner font-mono">
+        <span><b>Industry</b> &middot; Premium kitchen goods</span>
+        <span><b>Location</b> &middot; London</span>
+        <span><b>Scope</b> &middot; Brand + website</span>
+        <span><b>Live</b> &middot; April 2026</span>
+      </div>
+    </div>
+
+    <section class="case-showcase">
+      <div class="frame">
+        <div class="case-browser fade-up">
+          <div class="case-browser-bar">
+            <div class="case-browser-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="case-browser-url font-mono"><b>fusa-kitchen.vercel.app</b></div>
+          </div>
+          <iframe
+            class="case-browser-frame"
+            src="https://fusa-kitchen.vercel.app"
+            title="Fusa Kitchen - live website"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          ></iframe>
+          <a class="case-browser-open" href="https://fusa-kitchen.vercel.app" target="_blank" rel="noopener" aria-label="Open live site in a new tab">
+            <span>Open live site &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame">
+        <div class="case-split">
+          <div class="case-split-text fade-up">
+            <span class="eyebrow">Cinematic by scroll</span>
+            <h2 class="display-2 reveal-words" data-reveal-headline>
+              Pinned for <em class="italic-accent">the reveal.</em>
+            </h2>
+            <p>The hero is a single, scroll-pinned timeline. As the visitor scrolls, a brushed-steel depth card rises from below the fold, expands to fill the viewport, and reveals the hero blade with a mouse-tracked tilt and an edge-angle dial. The whole thing was built on GSAP ScrollTrigger with a square photo plate that fits the brand's 1080x1080 archive without cropping. No film grain, no backdrop blur, no infinite animations: the cinema comes from rhythm, not effects.</p>
+          </div>
+          <div class="case-phone fade-up" data-d="1">
+            <iframe
+              class="case-phone-frame"
+              src="https://fusa-kitchen.vercel.app"
+              title="Fusa Kitchen - mobile view"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame">
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">What we built</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            Polished steel. <em class="italic-accent">Top to bottom.</em>
+          </h2>
+        </header>
+        <ol class="case-list">
+          <li class="fade-up">
+            <span class="case-list-num font-mono">01</span>
+            <h3 class="display-3">Independent visual system</h3>
+            <p>Deep ink black base, brushed steel depth card, single warm amber accent. Space Grotesk for display, Geist for UI, JetBrains Mono for technical labels. Zero shared tokens with rekraft.design. The whole point of the portfolio piece is that it reads like another studio made it.</p>
+          </li>
+          <li class="fade-up">
+            <span class="case-list-num font-mono">02</span>
+            <h3 class="display-3">Cinematic pinned-scroll hero</h3>
+            <p>One pinned timeline runs the whole opening: hero text reveals, depth card lifts, expands to fullscreen, knife plate tilts on cursor with a mouse-tracked edge-angle dial, glass badges fade in for VG-10 Damascus and Lifetime sharpening, then the card pulls back to surface a CTA. GSAP ScrollTrigger end-to-end, no library framework.</p>
+          </li>
+          <li class="fade-up">
+            <span class="case-list-num font-mono">03</span>
+            <h3 class="display-3">Brand world beyond the cart</h3>
+            <p>Four-knife asymmetric editorial gallery, three-step craft strip on the steel and the hand-finishing, recipe tease for the work after the cut, type-led footer with a giant FUSA wordmark. Asymmetric grids, restrained motion, photography as the only image content. No client logos, no testimonials, no decoration without purpose.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section case-stats-section">
+      <div class="frame">
+        <ul class="case-stats">
+          <li class="fade-up">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>4</em> hero blades</div>
+            <p>Kiritsuke, Gyuto, Cleaver, and Deba. Each numbered, hand-finished, and shipped wrapped in cloth.</p>
+          </li>
+          <li class="fade-up" data-d="1">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>15</em>&deg; edge angle</div>
+            <p>The technical spec made into the brand mark. The amber dial inside the cinematic hero tells it without a single word.</p>
+          </li>
+          <li class="fade-up" data-d="2">
+            <span class="case-stat-k font-mono">Live now</span>
+            <div class="case-stat-big font-display"><em>0</em> shared tokens</div>
+            <p>Not a single colour, font, or component is shared with rekraft.design. The portfolio brief was independence and the build proves it.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-cta">
+      <div class="frame">
+        <div class="case-cta-inner">
+          <span class="eyebrow">Next case study</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            Want to be <em class="italic-accent">next?</em>
+          </h2>
+          <p class="lead fade-up">
+            We take on a small number of bespoke projects each quarter. If you have something serious to build, let's talk.
+          </p>
+          <a href="mailto:mark@rekraft.design?subject=Project%20Enquiry" class="btn btn-primary case-cta-btn fade-up">
+            Start a conversation <span class="case-arrow-up">&#8599;</span>
+          </a>
+          <a href="/#work" class="case-back-bottom font-mono">&larr; All selected work</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* Back link */
+  .case-back-wrap { padding-top: clamp(96px, 12vw, 140px); }
+  .case-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ink-dim);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color .35s var(--ease-out-expo);
+  }
+  .case-back:hover { color: var(--color-ink); }
+
+  /* Hero */
+  .case-intro { padding-block: clamp(32px, 4vw, 56px) clamp(40px, 5vw, 64px); }
+  .case-head { display: grid; gap: 24px; max-width: 1080px; }
+  .case-cta-link { justify-self: start; margin-top: 8px; }
+  .case-arrow-up { display: inline-block; transition: transform .4s var(--ease-out-expo); }
+  .btn:hover .case-arrow-up { transform: translate(3px, -3px); }
+
+  /* Meta strip */
+  .case-meta-strip {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding-block: 16px;
+  }
+  .case-meta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(16px, 3vw, 36px);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .case-meta-inner b {
+    color: var(--color-ink);
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  /* Browser iframe showcase — the centrepiece */
+  .case-showcase { padding-block: clamp(56px, 8vw, 100px) clamp(24px, 4vw, 48px); }
+  .case-browser {
+    position: relative;
+    max-width: 1280px;
+    margin-inline: auto;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--color-border-active);
+    background: #0A0A0C;
+    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.45);
+    transition: border-color .35s var(--ease-out-expo), transform .35s var(--ease-out-expo), box-shadow .35s var(--ease-out-expo);
+  }
+  .case-browser:hover {
+    border-color: var(--color-lime);
+    transform: translateY(-3px);
+    box-shadow: 0 50px 150px -40px rgba(20, 20, 24, 0.55);
+  }
+  .case-browser-open {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 22px;
+    pointer-events: none;
+  }
+  .case-browser-open span {
+    pointer-events: auto;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-active);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .35s var(--ease-out-expo), transform .35s var(--ease-out-expo);
+    font-weight: 500;
+  }
+  .case-browser:hover .case-browser-open span {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .case-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: #1A1A1D;
+    border-bottom: 1px solid #2A2A2E;
+  }
+  .case-browser-dots { display: flex; gap: 8px; }
+  .case-browser-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #3A3A40;
+  }
+  .case-browser-dots span:nth-child(1) { background: #FF5F57; }
+  .case-browser-dots span:nth-child(2) { background: #FEBC2E; }
+  .case-browser-dots span:nth-child(3) { background: #28C840; }
+  .case-browser-url {
+    flex: 1;
+    padding: 6px 14px;
+    background: #0C0C0E;
+    border: 1px solid #2A2A2E;
+    border-radius: 6px;
+    font-size: 12px;
+    color: rgba(245, 240, 229, 0.6);
+    letter-spacing: 0.04em;
+  }
+  .case-browser-url b { color: #F5F0E5; font-weight: 400; }
+  .case-browser-frame {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border: 0;
+    display: block;
+    background: #0E0E10;
+  }
+
+  /* Split: copy + phone iframe */
+  .case-block {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(56px, 6vw, 88px);
+  }
+  .case-split {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  .case-split-text { display: grid; gap: 18px; }
+  .case-split-text h2 { color: var(--color-ink); }
+  .case-split-text p {
+    color: var(--color-ink-muted);
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+  .case-phone {
+    position: relative;
+    width: 300px;
+    margin-inline: auto;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 38px;
+    padding: 14px;
+    background: #1A1A1D;
+    border: 1px solid #2A2A2E;
+    box-shadow: 0 30px 80px -30px rgba(20, 20, 24, 0.45);
+  }
+  .case-phone::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 22px;
+    background: #0A0A0C;
+    border-radius: 14px;
+    z-index: 2;
+  }
+  .case-phone-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 26px;
+    display: block;
+    background: #0E0E10;
+  }
+
+  /* What we built — numbered list (reused pattern) */
+  .case-block-head {
+    display: grid;
+    gap: 16px;
+    max-width: 720px;
+    margin-bottom: clamp(28px, 3vw, 48px);
+  }
+  .case-list {
+    list-style: none;
+    display: grid;
+    gap: 1px;
+    background: var(--color-border);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .case-list li {
+    background: var(--color-bg);
+    padding: clamp(20px, 3vw, 36px) 0;
+    padding-left: clamp(20px, 2.5vw, 40px);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    column-gap: clamp(20px, 3vw, 40px);
+    row-gap: 14px;
+    align-items: baseline;
+    transition: background .5s var(--ease-out-expo);
+  }
+  .case-list li:hover { background: var(--color-surface); }
+  .case-list-num {
+    grid-row: span 2;
+    color: var(--color-lime);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding-top: 12px;
+  }
+  .case-list h3 { color: var(--color-ink); }
+  .case-list p {
+    grid-column: 2;
+    color: var(--color-ink-muted);
+    font-size: clamp(15px, 0.6vw + 12px, 18px);
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+
+  /* Live-now stats */
+  .case-stats-section {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(56px, 6vw, 88px);
+  }
+  .case-stats {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 40px);
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+  .case-stats li {
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-card);
+    transition: border-color .25s var(--ease-out-expo), transform .25s var(--ease-out-expo);
+  }
+  .case-stats li:hover {
+    border-color: var(--color-border-active);
+    transform: translateY(-2px);
+  }
+  .case-stat-k {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .case-stat-big {
+    font-size: clamp(32px, 2.4vw + 16px, 44px);
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .case-stat-big em {
+    color: var(--color-cream);
+    font-style: italic;
+    font-weight: 400;
+    margin-right: 6px;
+  }
+  .case-stats li p {
+    font-size: 14px;
+    color: var(--color-ink-muted);
+    line-height: 1.55;
+  }
+
+  /* Bottom CTA */
+  .case-cta {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .case-cta-inner {
+    display: grid;
+    gap: 24px;
+    max-width: 880px;
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+  .case-cta-inner .lead { max-width: 56ch; }
+  .case-cta-btn { justify-self: center; }
+  .case-back-bottom {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    transition: color .35s var(--ease-out-expo);
+  }
+  .case-back-bottom:hover { color: var(--color-ink); }
+
+  @media (max-width: 1100px) {
+    .case-stats { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    .case-split { grid-template-columns: 1fr; gap: 40px; }
+    .case-browser { border-radius: 10px; }
+    .case-browser-frame { aspect-ratio: 4 / 3; }
+  }
+
+  @media (max-width: 700px) {
+    .case-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 20px; }
+    .case-list-num { grid-row: auto; padding-top: 0; }
+    .case-list p { grid-column: 1; }
+    .case-phone { display: none; }
+    .case-browser-url { display: none; }
+    .case-browser-frame { aspect-ratio: 3 / 4; }
+  }
+</style>
