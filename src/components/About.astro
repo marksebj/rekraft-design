@@ -305,12 +305,28 @@ const consult = {
   }
   @media (max-width: 800px) {
     .about-profile { flex-direction: column; align-items: center; }
-    .about-consult { width: min(320px, 80vw); height: min(320px, 80vw); }
+    .about-consult {
+      width: min(280px, 72vw);
+      height: min(280px, 72vw);
+      color: var(--color-ink-muted); /* brighter than --ink-dim so the revolving text is readable */
+    }
+    .about-consult-arrow {
+      width: 40px;
+      height: 40px;
+      bottom: 6%;
+      right: 6%;
+    }
     .about-profile-card {
       margin-left: 0;
-      margin-top: -32px;
+      margin-top: -28px;
       max-width: 100%;
+      padding: 28px 24px;
     }
+    .about-profile-name { font-size: 36px; }
+    .about-profile-bio { font-size: 15px; line-height: 1.6; }
+    .about-profile-closer { font-size: 20px; }
+    /* Ensure the social row doesn't crowd the card edge */
+    .about-profile-socials { justify-content: flex-start; }
   }
 
   /* Consult popup modal */
@@ -441,6 +457,25 @@ const consult = {
     line-height: 1;
     padding-top: 4px;
     padding-right: 2px;
+  }
+
+  /* Popup tweaks for narrow viewports */
+  @media (max-width: 520px) {
+    .consult-popup { padding: 16px; }
+    .consult-card {
+      padding: 28px 24px;
+      gap: 16px;
+      max-width: 100%;
+    }
+    .consult-heading { font-size: 30px; }
+    .consult-card-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding-right: 36px;
+    }
+    .consult-meta { gap: 6px 14px; padding: 12px 0; }
+    .consult-cta { padding: 16px 22px; font-size: 14px; }
   }
 
   @media (prefers-reduced-motion: reduce) {

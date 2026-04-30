@@ -52,7 +52,7 @@ const cases = [
           class={`work-panel ${i === 0 ? 'is-active' : ''} ${c.imageFit === 'contain' ? 'is-logo' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}
           data-index={i}
           aria-label={`${c.title} — ${c.tag}`}
-          style={c.image && c.imageFit !== 'contain' ? `background-image: url('${c.image}')` : ''}
+          style={c.image && c.imageFit !== 'contain' ? `--panel-bg: url('${c.image}'); background-image: var(--panel-bg);` : ''}
         >
           {c.imageFit === 'contain' && c.image && (
             <img class="work-panel-logo" src={c.image} alt="" loading="lazy" decoding="async" />
@@ -289,17 +289,84 @@ const cases = [
     .work-selector {
       flex-direction: column;
       height: auto;
-      gap: 10px;
+      gap: 16px;
+      isolation: auto;
     }
-    .work-panel {
-      flex: none;
-      height: 200px;
-    }
+    /* On mobile: each panel becomes a stacked card with image up top + always-visible text below.
+       The desktop expanding-panel behaviour (only active shows text) is dropped — it relies on hover
+       and tap-twice-to-navigate, both awkward on touch. */
+    .work-panel,
     .work-panel.is-active {
       flex: none;
-      height: 280px;
+      height: auto;
+      display: grid;
+      grid-template-rows: 220px auto;
+      background-image: none !important;
+      background-color: var(--color-card);
+      border-color: var(--color-border-active);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px -34px rgba(20, 20, 24, 0.22);
     }
-    .work-panel-title { font-size: clamp(22px, 5vw, 32px); }
+    .work-panel::before {
+      content: "";
+      grid-row: 1;
+      background-image: var(--panel-bg, none);
+      background-size: cover;
+      background-position: center;
+      background-color: #18181b;
+      position: relative;
+    }
+    .work-panel.is-logo::before {
+      background-color: #FAFAFA;
+      background-image: none;
+    }
+    .work-panel.is-open::before {
+      background-color: var(--color-surface);
+      background-image: none;
+    }
+    /* Move corner labels onto the image area only */
+    .work-panel-num,
+    .work-panel-status {
+      top: 14px;
+    }
+    /* Text panel below image — always visible on mobile, no active-only logic */
+    .work-panel-overlay { display: none; }
+    .work-panel-label {
+      grid-row: 2;
+      padding: 20px 22px 22px;
+      background: var(--color-card);
+      color: var(--color-ink);
+    }
+    .work-panel-tag,
+    .work-panel-title,
+    .work-panel-desc {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .work-panel-tag { color: var(--color-cream); }
+    .work-panel-title {
+      color: var(--color-ink);
+      text-shadow: none;
+      font-size: clamp(24px, 6vw, 32px);
+    }
+    .work-panel-desc {
+      color: var(--color-ink-muted);
+      text-shadow: none;
+      font-size: 14px;
+    }
+    /* Logo panel: keep contained logo centred on the image area */
+    .work-panel.is-logo .work-panel-logo {
+      top: 110px;
+      width: clamp(80px, 28vw, 140px);
+    }
+    /* Open-slot mobile (rare) */
+    .work-panel.is-open .work-panel-plus {
+      grid-row: 1;
+      inset: auto;
+      height: 220px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

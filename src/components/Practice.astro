@@ -1,21 +1,34 @@
 ---
+const ICONS: Record<string, string> = {
+  eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',
+  pen: '<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  palette: '<circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.5-9-10-9z"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  message: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  rocket: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+};
+
 const principles = [
-  { num: '01', title: 'Considered', body: 'Nothing without reason.' },
-  { num: '02', title: 'Crafted', body: 'From scratch. By hand.' },
-  { num: '03', title: 'Committed', body: 'We see it through.' },
+  { num: '01', icon: 'eye', title: 'Considered', body: 'Nothing without reason.' },
+  { num: '02', icon: 'pen', title: 'Crafted', body: 'From scratch. By hand.' },
+  { num: '03', icon: 'check', title: 'Committed', body: 'We see it through.' },
 ];
 
 const services = [
-  { num: '01', name: 'Brand', headline: 'Identity systems that hold together.' },
-  { num: '02', name: 'Websites', headline: 'Custom-built, never themed.' },
-  { num: '03', name: 'Social', headline: 'Systems your team can actually run.' },
+  { num: '01', icon: 'palette', name: 'Brand', headline: 'Identity systems that hold together.' },
+  { num: '02', icon: 'globe', name: 'Websites', headline: 'Custom-built, never themed.' },
+  { num: '03', icon: 'message', name: 'Social', headline: 'Systems your team can actually run.' },
 ];
 
 const process = [
-  { num: '01', title: 'Discover', body: 'Listen. Audit. Scope.' },
-  { num: '02', title: 'Design', body: 'Strategy. System. Screens.' },
-  { num: '03', title: 'Build', body: 'Build. Test. Refine.' },
-  { num: '04', title: 'Launch', body: 'Ship. Hand over. Train.' },
+  { num: '01', icon: 'compass', title: 'Discover', body: 'Listen. Audit. Scope.' },
+  { num: '02', icon: 'grid', title: 'Design', body: 'Strategy. System. Screens.' },
+  { num: '03', icon: 'code', title: 'Build', body: 'Build. Test. Refine.' },
+  { num: '04', icon: 'rocket', title: 'Launch', body: 'Ship. Hand over. Train.' },
 ];
 ---
 
@@ -36,6 +49,9 @@ const process = [
         <ol class="practice-col-list">
           {principles.map((p) => (
             <li class="practice-item">
+              <span class="practice-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[p.icon]}></svg>
+              </span>
               <span class="practice-item-num font-mono">{p.num}</span>
               <h3 class="practice-item-title">{p.title}</h3>
               <p class="practice-item-body" set:html={p.body}></p>
@@ -51,6 +67,9 @@ const process = [
         <ol class="practice-col-list">
           {services.map((s) => (
             <li class="practice-item">
+              <span class="practice-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[s.icon]}></svg>
+              </span>
               <span class="practice-item-num font-mono">{s.num}</span>
               <h3 class="practice-item-title">{s.name}</h3>
               <p class="practice-item-headline">{s.headline}</p>
@@ -66,6 +85,9 @@ const process = [
         <ol class="practice-col-list">
           {process.map((p) => (
             <li class="practice-item">
+              <span class="practice-item-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[p.icon]}></svg>
+              </span>
               <span class="practice-item-num font-mono">{p.num}</span>
               <h3 class="practice-item-title">{p.title}</h3>
               <p class="practice-item-body">{p.body}</p>
@@ -131,14 +153,39 @@ const process = [
 
   .practice-item {
     display: grid;
-    gap: 6px;
+    grid-template-columns: 36px 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 14px;
+    row-gap: 4px;
+  }
+  .practice-item-icon {
+    grid-row: 1 / span 3;
+    grid-column: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-lime-soft);
+    color: var(--color-lime);
+    display: grid;
+    place-items: center;
+    align-self: start;
+    transition: background 0.3s var(--ease-out-expo), color 0.3s var(--ease-out-expo);
+  }
+  .practice-item-icon svg { width: 16px; height: 16px; }
+  .practice-item:hover .practice-item-icon {
+    background: var(--color-lime);
+    color: var(--color-bg);
   }
   .practice-item-num {
+    grid-column: 2;
     font-size: 11px;
     letter-spacing: 0.2em;
     color: var(--color-lime);
+    align-self: center;
+    line-height: 1;
   }
   .practice-item-title {
+    grid-column: 2;
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(20px, 1.2vw + 10px, 28px);
@@ -148,12 +195,14 @@ const process = [
     padding-bottom: 0.04em;
   }
   .practice-item-body {
+    grid-column: 2;
     font-family: var(--font-sans);
     font-size: clamp(13px, 0.2vw + 12px, 14px);
     line-height: 1.5;
     color: var(--color-ink-muted);
   }
   .practice-item-headline {
+    grid-column: 2;
     font-family: var(--font-display);
     font-style: italic;
     color: var(--color-cream);
@@ -161,26 +210,27 @@ const process = [
     line-height: 1.25;
     margin-top: 2px;
   }
-  .practice-item-body-meta {
-    color: var(--color-ink-dim);
-    font-size: clamp(12px, 0.2vw + 11px, 13px);
-    margin-top: 2px;
-  }
 
   @media (max-width: 900px) {
     .practice-grid {
       grid-template-columns: 1fr;
-      gap: clamp(32px, 5vw, 48px);
+      gap: clamp(36px, 5vw, 48px);
     }
     .practice-col {
       padding-right: 0;
       border-right: 0;
-      padding-bottom: clamp(24px, 4vw, 36px);
+      padding-bottom: clamp(28px, 4vw, 40px);
       border-bottom: 1px solid var(--color-border);
     }
     .practice-col:last-child {
       padding-bottom: 0;
       border-bottom: 0;
+    }
+    .practice-col-list {
+      gap: clamp(22px, 4vw, 28px);
+    }
+    .practice-item-title {
+      font-size: clamp(22px, 5.5vw, 28px);
     }
   }
 </style>

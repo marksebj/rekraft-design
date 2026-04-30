@@ -675,6 +675,33 @@ const addons = [
     .invest-grid-2 { grid-template-columns: 1fr; max-width: none; }
     .invest-custom { grid-template-columns: 1fr; gap: 20px; }
   }
+
+  @media (max-width: 720px) {
+    /* Sticky tab toggle so it stays visible while scrolling through cards */
+    .invest-tabs {
+      position: sticky;
+      top: 80px;
+      z-index: 5;
+      align-self: start;
+      box-shadow: 0 8px 24px -16px rgba(20, 20, 24, 0.18);
+    }
+    /* Disable hover-dim on touch (was already a no-op without :hover, but make explicit) */
+    .invest-grid:hover .invest-card:not(:hover) {
+      opacity: 1;
+      transform: none;
+    }
+    /* Card hover lift shouldn't fire on touch (sometimes does briefly) */
+    .invest-card:hover {
+      transform: none;
+    }
+    .invest-card { padding: 26px 22px; }
+    .invest-card-name { font-size: 26px; }
+    .invest-card-price { font-size: 40px; }
+    /* Custom request CTA full-width on mobile */
+    .invest-custom-cta { justify-self: stretch; width: 100%; justify-content: center; }
+    /* Make the addons summary tap target taller */
+    .invest-addons-summary { padding: 22px 22px; }
+  }
 </style>
 
 <script>

@@ -1,4 +1,10 @@
 ---
+const links = [
+  { href: '#work', label: 'Work' },
+  { href: '#practice', label: 'Practice' },
+  { href: '#investment', label: 'Investment' },
+  { href: '#about', label: 'About' },
+];
 ---
 <nav data-nav class="nav">
   <div class="nav-inner">
@@ -10,17 +16,75 @@
       </span>
     </a>
     <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#practice">Practice</a>
-      <a href="#investment">Investment</a>
-      <a href="#about">About</a>
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </div>
     <a href="#about" class="nav-cta">
       <span>Start a project</span>
       <span class="btn-arrow">&rarr;</span>
     </a>
+    <button
+      class="nav-burger"
+      data-nav-burger
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="navDrawer"
+      type="button"
+    >
+      <span class="nav-burger-line"></span>
+      <span class="nav-burger-line"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer (full-screen, cream theme) -->
+<div
+  id="navDrawer"
+  class="nav-drawer"
+  data-nav-drawer
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site navigation"
+>
+  <div class="nav-drawer-head">
+    <a href="/" class="nav-drawer-logo" data-nav-close-link aria-label="Rekraft Design home">
+      <img src="/images/ReKraft Logo.png" alt="" width="32" height="32" />
+      <span class="nav-wordmark">
+        <span class="nav-brand">rekraft</span>
+        <span class="nav-brand-sub">design</span>
+      </span>
+    </a>
+    <button
+      class="nav-drawer-close"
+      data-nav-close
+      aria-label="Close navigation"
+      type="button"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <ul class="nav-drawer-list">
+    {links.map((l, i) => (
+      <li class="nav-drawer-item" style={`--i: ${i}`}>
+        <a href={l.href} data-nav-close-link>
+          <span class="nav-drawer-num font-mono">0{i + 1}</span>
+          <span class="nav-drawer-label">{l.label}</span>
+          <span class="nav-drawer-arrow font-mono" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="nav-drawer-foot">
+    <a href="mailto:mark@rekraft.design" class="nav-drawer-mail font-mono" data-nav-close-link>mark@rekraft.design</a>
+    <a href="#about" class="btn btn-primary nav-drawer-cta" data-nav-close-link>
+      Start a project <span class="btn-arrow">&rarr;</span>
+    </a>
+  </div>
+</div>
 
 <style>
   .nav {
@@ -138,12 +202,230 @@
   }
   .nav-cta:hover .btn-arrow { transform: translateX(3px); }
 
+  /* Burger button — hidden on desktop, shows below 900px */
+  .nav-burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-active);
+    background: transparent;
+    color: var(--color-ink);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    transition: background 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo);
+    cursor: pointer;
+  }
+  .nav-burger:hover {
+    background: var(--color-card);
+    border-color: var(--color-ink);
+  }
+  .nav-burger-line {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.4s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo);
+  }
+  .nav-burger.is-open .nav-burger-line:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .nav-burger.is-open .nav-burger-line:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
   @media (max-width: 900px) {
     .nav-links { display: none; }
-    .nav-inner { grid-template-columns: auto 1fr; }
+    .nav-cta { display: none; }
+    .nav-burger { display: inline-flex; }
+    .nav-inner {
+      grid-template-columns: 1fr auto;
+      padding: 8px 8px 8px 18px;
+    }
   }
-  @media (max-width: 520px) {
-    .nav-cta span:first-child { display: none; }
-    .nav-cta { padding: 10px 14px; }
+
+  /* ==========================================================================
+     Mobile drawer — full-screen, cream theme, staggered link reveal
+     ========================================================================== */
+
+  .nav-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: var(--color-bg);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 20px;
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition: transform 0.6s var(--ease-out-expo), visibility 0s linear 0.6s;
+  }
+  .nav-drawer.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.7s var(--ease-out-expo), visibility 0s linear 0s;
+  }
+  .nav-drawer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 0%, var(--color-ambient) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .nav-drawer-head {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px 4px 8px;
+  }
+  .nav-drawer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-drawer-logo img {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+  .nav-drawer-close {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-active);
+    background: transparent;
+    color: var(--color-ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.3s var(--ease-out-expo);
+  }
+  .nav-drawer-close:hover { background: var(--color-card); }
+  .nav-drawer-close svg { width: 18px; height: 18px; }
+
+  .nav-drawer-list {
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    display: grid;
+    align-content: center;
+    gap: 4px;
+    padding: 24px 8px;
+  }
+  .nav-drawer-item {
+    border-bottom: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s var(--ease-out-expo) calc(0.18s + var(--i, 0) * 0.07s),
+      transform 0.6s var(--ease-out-expo) calc(0.18s + var(--i, 0) * 0.07s);
+  }
+  .nav-drawer.is-open .nav-drawer-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-drawer-item:last-child { border-bottom: 0; }
+  .nav-drawer-item a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 18px;
+    padding: 22px 4px;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 14vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    padding-bottom: 0.06em;
+    transition: color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+  }
+  .nav-drawer-item a:active {
+    color: var(--color-cream);
+    transform: translateX(4px);
+  }
+  .nav-drawer-num {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--color-ink-dim);
+    align-self: center;
+  }
+  .nav-drawer-label {
+    font-family: var(--font-display);
+  }
+  .nav-drawer-arrow {
+    align-self: center;
+    font-size: 16px;
+    color: var(--color-ink-dim);
+  }
+
+  .nav-drawer-foot {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 16px;
+    padding: 8px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s var(--ease-out-expo) 0.5s,
+      transform 0.6s var(--ease-out-expo) 0.5s;
+  }
+  .nav-drawer.is-open .nav-drawer-foot {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-drawer-mail {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .nav-drawer-cta {
+    width: 100%;
+    justify-content: center;
+    padding-block: 18px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-drawer { transition: none; }
+    .nav-drawer-item, .nav-drawer-foot { transition: none; }
   }
 </style>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>('[data-nav-burger]');
+  const drawer = document.querySelector<HTMLElement>('[data-nav-drawer]');
+  const closeButtons = document.querySelectorAll<HTMLElement>('[data-nav-close]');
+  const closeLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-close-link]');
+
+  function openDrawer() {
+    drawer?.classList.add('is-open');
+    burger?.classList.add('is-open');
+    burger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawer?.classList.remove('is-open');
+    burger?.classList.remove('is-open');
+    burger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burger?.addEventListener('click', () => {
+    if (drawer?.classList.contains('is-open')) closeDrawer();
+    else openDrawer();
+  });
+  closeButtons.forEach((btn) => btn.addEventListener('click', closeDrawer));
+  closeLinks.forEach((a) => a.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('is-open')) closeDrawer();
+  });
+</script>

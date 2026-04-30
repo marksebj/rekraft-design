@@ -132,7 +132,16 @@
   }
 
   @media (max-width: 720px) {
-    .footer-nav { grid-template-columns: repeat(2, 1fr); }
-    .footer-base { flex-direction: column; gap: 8px; }
+    .footer-nav { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+    .footer-base { flex-direction: column; gap: 8px; align-items: flex-start; }
+    .footer-watermark {
+      font-size: clamp(100px, 32vw, 220px);
+      bottom: -2vw;
+    }
+    .footer { padding-block: clamp(48px, 8vw, 72px); }
+    .footer-inner { gap: 36px; }
+  }
+  @media (max-width: 380px) {
+    .footer-nav { grid-template-columns: 1fr; gap: 24px; }
   }
 </style>
