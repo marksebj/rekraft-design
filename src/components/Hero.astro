@@ -151,24 +151,24 @@
     border-top: 1px solid var(--color-border);
     position: relative;
   }
-  /* Vertical rule between the lead (left) and the CTA pair (right) on desktop
-     so the wide 1fr gap doesn't read as orphaned columns. */
-  @media (min-width: 901px) {
-    .hero-foot::after {
-      content: "";
-      position: absolute;
-      top: 32px;
-      bottom: 8px;
-      right: clamp(140px, 18vw, 220px);
-      width: 1px;
-      background: var(--color-border);
-      opacity: 0.7;
-    }
-  }
+  /* Vertical rule sits at the boundary between the lead column (1fr) and the
+     CTA column (auto), placed via border-left on the CTAs so it tracks the
+     actual column edge instead of a fragile right-offset. The previous
+     absolute-positioned ::after at right: clamp(140px, 18vw, 220px) fell
+     inside the See the work button and read as a glitch. */
   .hero-ctas {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+  }
+  @media (min-width: 901px) {
+    .hero-ctas {
+      align-self: stretch;
+      align-items: flex-end;
+      border-left: 1px solid var(--color-border);
+      padding-left: clamp(32px, 4vw, 56px);
+      padding-top: 24px;
+    }
   }
 
   .hero-scroll-cue {
