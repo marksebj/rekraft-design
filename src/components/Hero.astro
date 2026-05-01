@@ -9,26 +9,25 @@
   <div class="frame hero-inner">
     <div class="hero-top">
       <span class="eyebrow" data-hero-eyebrow>
-        Independent design studio · London
+        Independent design studio &middot; London
       </span>
       <span class="hero-year font-mono" data-hero-eyebrow>Available Q3 2026</span>
     </div>
 
     <div class="hero-body" data-tilt3d-parent>
-      <h1 class="display-1 reveal-words hero-headline" data-hero-headline data-tilt3d>
-        Made to stand out.<br /><em class="italic-accent">Built to stand up.</em>
+      <h1 class="hero-mark reveal-words" data-hero-headline data-tilt3d>
+        <span class="hero-mark-rekraft">rekraft</span><em class="hero-mark-design italic-accent">design</em>
       </h1>
     </div>
 
     <div class="hero-foot">
       <p class="lead" data-hero-sub>
-        Brand, websites, and social for brands that want to be felt, not just seen.
+        Made to stand out. <em class="italic-accent">Built to stand up.</em>
       </p>
       <div class="hero-ctas" data-hero-ctas>
         <a href="#work" class="btn btn-primary" data-magnetic="0.25">
           See the work <span class="btn-arrow">&rarr;</span>
         </a>
-        <a href="#about" class="btn btn-ghost" data-magnetic="0.2">Start a project</a>
       </div>
     </div>
 
@@ -107,40 +106,55 @@
   }
 
   .hero-body {
-    display: block;
     width: 100%;
     perspective: 1400px;
     perspective-origin: 50% 50%;
-    /* Anchor H1 to the top of its zone instead of centering it — the prior
-       flex centre layout left ~300px of dead air above the headline on
-       full-viewport monitors. Padding-top adds a measured beat below the
-       eyebrow row; the 1fr middle row's residual space now sits BELOW the
-       headline as breathing room before the lead+CTAs. */
-    min-height: clamp(220px, 36vh, 440px);
+    min-height: clamp(220px, 50vh, 600px);
     display: flex;
-    align-items: flex-start;
-    padding-top: clamp(24px, 3vw, 56px);
-    padding-bottom: clamp(20px, 4vw, 60px);
+    align-items: center;
+    justify-content: center;
+    padding-block: clamp(24px, 4vw, 80px);
   }
 
-  .hero-headline {
+  /* Oversized splash-threshold wordmark: rekraft in serif at viewport scale,
+     italic burgundy "design" tucked next to it as the load-bearing lockup
+     enlarged. Lockup pattern from the nav, blown up to take the room.
+     Letter-spacing pulled tighter at this scale because the type already
+     reads at maximum presence. */
+  .hero-mark {
+    margin: 0;
+    text-align: center;
+    line-height: 0.86;
+    letter-spacing: -0.04em;
+    color: var(--color-ink);
     transform-style: preserve-3d;
     will-change: transform;
     cursor: grab;
     user-select: none;
-    /* subtle double-layer shadow gives the type dimensional weight when it rotates */
     text-shadow:
       0 1px 0 rgba(20, 20, 24, 0.02),
       0 8px 40px rgba(20, 20, 24, 0.06);
   }
-  /* Cap line length only at narrow viewports — at desktop the explicit <br>
-     in the markup carries the line break, so the prior 20ch cap was redundant
-     and made the H1 wrap awkwardly when content was edited. */
-  @media (max-width: 720px) {
-    .hero-headline { max-width: 18ch; }
+  .hero-mark:active { cursor: grabbing; }
+  .hero-mark-rekraft {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 22vw, 320px);
+    font-weight: 400;
+    color: var(--color-ink);
   }
-  .hero-headline:active { cursor: grabbing; }
-  .hero-headline em { font-style: italic; }
+  .hero-mark-design {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(56px, 17vw, 256px);
+    color: var(--color-cream);
+    margin-left: 0.04em;
+    letter-spacing: -0.03em;
+  }
+  .hero-mark em { font-style: italic; }
+
+  @media (max-width: 720px) {
+    .hero-mark { letter-spacing: -0.03em; }
+  }
 
   .hero-foot {
     display: grid;
