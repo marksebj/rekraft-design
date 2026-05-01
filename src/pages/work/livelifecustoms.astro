@@ -4,7 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
 const title = 'Live Life Customs · Selected work · Rekraft Design';
-const description = 'London streetwear studio. Custom apparel built to order. Bold visual register, real client portfolio, Instagram-only intake. Case study by Rekraft Design.';
+const description = 'Live Life Customs builds bespoke streetwear for the artists, brands, and crews that London actually wears. We built a site that reads like the work. Case study by Rekraft Design.';
 const canonical = 'https://rekraft.design/work/livelifecustoms';
 ---
 
@@ -23,7 +23,7 @@ const canonical = 'https://rekraft.design/work/livelifecustoms';
             Live Life Customs. <em class="italic-accent">Custom everything.</em>
           </h1>
           <p class="lead fade-up">
-            London streetwear studio. Custom apparel built to order. Bold visual register, real client portfolio, Instagram-only intake.
+            Live Life Customs builds bespoke streetwear for the artists, brands, and crews that London actually wears. We built a site that reads <em class="italic-accent">like the work.</em>
           </p>
           <a href="https://livelifecustoms.vercel.app" target="_blank" rel="noopener" class="btn btn-primary case-cta-link fade-up">
             Visit the live site <span class="case-arrow-up">&#8599;</span>
@@ -41,75 +41,86 @@ const canonical = 'https://rekraft.design/work/livelifecustoms';
       </div>
     </div>
 
-    <section class="case-showcase">
+    {/* Opening establishing shot: the homepage, brand register at first glance. */}
+    <section class="case-shot-section case-shot-section--first">
       <div class="frame">
-        <div class="case-browser fade-up">
-          <div class="case-browser-bar">
-            <div class="case-browser-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="case-browser-url font-mono"><b>livelifecustoms.vercel.app</b></div>
-          </div>
-          <iframe
-            class="case-browser-frame"
-            src="https://livelifecustoms.vercel.app"
-            title="Live Life Customs - live website"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-          ></iframe>
-          <a class="case-browser-open" href="https://livelifecustoms.vercel.app" target="_blank" rel="noopener" aria-label="Open live site in a new tab">
-            <span>Open live site &rarr;</span>
-          </a>
-        </div>
+        <figure class="case-shot fade-up">
+          <img src="/images/work/llc/hero.jpg" alt="Live Life Customs homepage, off-black canvas with electric cyan headline and the chimp brand mark" loading="lazy" />
+        </figure>
       </div>
     </section>
 
     <section class="section case-block">
-      <div class="frame">
-        <div class="case-split">
-          <div class="case-split-text fade-up">
-            <span class="eyebrow">Mobile first</span>
-            <h2 class="display-2 reveal-words" data-reveal-headline>
-              Instagram-only. <em class="italic-accent">By design.</em>
-            </h2>
-            <p>No contact form, no email surface, no phone. Every CTA pushes to Instagram DMs. The bet is simple: people who buy custom apparel already live on Instagram, so meet them there. A neon cyan cursor-arrow tracks toward the DM button on hero load to remove any doubt about what to tap.</p>
-          </div>
-          <div class="case-phone fade-up" data-d="1">
-            <iframe
-              class="case-phone-frame"
-              src="https://livelifecustoms.vercel.app"
-              title="Live Life Customs - mobile view"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section case-block">
-      <div class="frame">
+      <div class="frame case-text">
         <header class="case-block-head fade-up">
-          <span class="eyebrow">What we built</span>
+          <span class="eyebrow">The ambition</span>
           <h2 class="display-2 reveal-words" data-reveal-headline>
-            Street Bold. <em class="italic-accent">End to end.</em>
+            Streetwear gets <em class="italic-accent">a real shopfront.</em>
+          </h2>
+        </header>
+        <div class="case-prose fade-up">
+          <p>Live Life Customs has built a London streetwear practice the hard way: heat press, iron-on vinyl, embroidery, stickers, signage. Real product, real clients, real work that gets worn at events and in lookbooks across the city.</p>
+          <p>What they did not have was a digital presence that read the same way. They needed a site bold enough to match the cut and sew, useful enough to actually convert browsers into orders, honest about how the studio actually takes work in.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* Featured client work: Curmah Joseph's Dark Paradise label. */}
+    <section class="case-shot-section">
+      <div class="frame">
+        <figure class="case-shot fade-up">
+          <img src="/images/work/llc/curmah.jpg" alt="Featured client work, Curmah Joseph's Dark Paradise label produced by Live Life Customs" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame case-text">
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">The approach</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            The DM is <em class="italic-accent">the door.</em>
+          </h2>
+        </header>
+        <div class="case-prose fade-up">
+          <p>Live Life Customs takes orders only through Instagram, by design. Their buyer is already on Instagram every day, talking to friends, watching the city's culture move, sliding into DMs.</p>
+          <p>So we built a site that honours that channel. No contact form. No email. No phone tree. Every interaction points at the conversation that already converts. The site shows the work, sets the tone, and gets out of the way.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* Portfolio depth: more of the work, real lookbook material. */}
+    <section class="case-shot-section">
+      <div class="frame">
+        <figure class="case-shot fade-up">
+          <img src="/images/work/llc/samesame.jpg" alt="Live Life Customs portfolio piece, real client product photography from a recent build" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame case-text">
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">The outcome</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            Built to <em class="italic-accent">walk the room.</em>
           </h2>
         </header>
         <ol class="case-list">
           <li class="fade-up">
             <span class="case-list-num font-mono">01</span>
-            <h3 class="display-3">Visual system</h3>
-            <p>Off-black base, electric cyan pulled from the chimp mascot's cap and glasses, hot orange for contrast pop. Archivo Black uppercase-locked at every display tier. Streetwear cheeky voice throughout.</p>
+            <h3 class="display-3">A streetwear brand world</h3>
+            <p>Off-black canvas, electric cyan pulled from the chimp mascot, hot orange for the hits. Display type that punches at every tier. Visitors land on a brand that feels lived in, not designed for them after the fact.</p>
           </li>
           <li class="fade-up">
             <span class="case-list-num font-mono">02</span>
-            <h3 class="display-3">Live portfolio</h3>
-            <p>11 client cases surfaced with real product photography and original artwork. Featured: Curmah Joseph's Dark Paradise label. Three rotating section-label variants (block, badge, tape) keep the rhythm interesting.</p>
+            <h3 class="display-3">The portfolio is the proof</h3>
+            <p>Eleven real client cases, real product photography, every image owned by the studio. Featured: Curmah Joseph's Dark Paradise label. The work sells itself, and visitors browse it like a lookbook before they think about ordering.</p>
           </li>
           <li class="fade-up">
             <span class="case-list-num font-mono">03</span>
-            <h3 class="display-3">Custom motion</h3>
-            <p>GSAP word reveal on the hero, magnetic CTA, Lenis smooth scroll. No 3D tilt: wrong register for streetwear. Cards lift on hover instead. A neon-cyan cursor-arrow points at the IG DM CTA on first paint.</p>
+            <h3 class="display-3">One channel, no friction</h3>
+            <p>Every CTA points at Instagram DMs. People who buy custom streetwear already live there. Conversion happens where conversation already happens, and the site stops trying to invent a second funnel.</p>
           </li>
         </ol>
       </div>
@@ -121,17 +132,17 @@ const canonical = 'https://rekraft.design/work/livelifecustoms';
           <li class="fade-up">
             <span class="case-stat-k font-mono">Live now</span>
             <div class="case-stat-big font-display"><em>11</em> case studies</div>
-            <p>Real client work, real product photography. Every image is owned, none are stock.</p>
+            <p>Real client work, real product photography. Every image owned by the studio, never stock.</p>
           </li>
           <li class="fade-up" data-d="1">
             <span class="case-stat-k font-mono">Live now</span>
             <div class="case-stat-big font-display"><em>6</em> services priced</div>
-            <p>Heat press, vinyl, embroidery, stickers, signage and more. Each with a starting price on the page.</p>
+            <p>Heat press, iron-on vinyl, embroidery, stickers, signage, and custom builds. Each with a starting price on the page so the buyer arrives informed.</p>
           </li>
           <li class="fade-up" data-d="2">
             <span class="case-stat-k font-mono">Live now</span>
             <div class="case-stat-big font-display"><em>1</em> channel</div>
-            <p>Instagram DMs. No contact form, no email, no phone. The whole site funnels there by design.</p>
+            <p>Instagram DMs. No contact form, no email, no phone. Every conversation lands where the studio already converts.</p>
           </li>
         </ul>
       </div>
@@ -202,151 +213,65 @@ const canonical = 'https://rekraft.design/work/livelifecustoms';
     margin-right: 4px;
   }
 
-  /* Browser iframe showcase — the centrepiece */
-  .case-showcase { padding-block: clamp(56px, 8vw, 100px) clamp(24px, 4vw, 48px); }
-  .case-browser {
-    position: relative;
+  /* Curated screenshot reveal — matches FUSA case study pattern.
+     Editorial cards with subtle lift and soft shadow. Natural aspect
+     ratio per image for editorial rhythm. */
+  .case-shot-section {
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+  .case-shot-section--first {
+    padding-top: clamp(56px, 8vw, 100px);
+  }
+  .case-shot {
     max-width: 1280px;
     margin-inline: auto;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--color-border-active);
-    background: #0A0A0C;
-    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.45);
-    transition: border-color .35s var(--ease-out-expo), transform .35s var(--ease-out-expo), box-shadow .35s var(--ease-out-expo);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 80px -40px rgba(20, 20, 24, 0.32);
+    transition: transform .5s var(--ease-out-expo), box-shadow .5s var(--ease-out-expo);
   }
-  .case-browser:hover {
-    border-color: var(--color-lime);
+  .case-shot:hover {
     transform: translateY(-3px);
-    box-shadow: 0 50px 150px -40px rgba(20, 20, 24, 0.55);
+    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.42);
   }
-  .case-browser-open {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 22px;
-    pointer-events: none;
-  }
-  .case-browser-open span {
-    pointer-events: auto;
-    background: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--color-border-active);
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .35s var(--ease-out-expo), transform .35s var(--ease-out-expo);
-    font-weight: 500;
-  }
-  .case-browser:hover .case-browser-open span {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .case-browser-bar {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    background: #1A1A1D;
-    border-bottom: 1px solid #2A2A2E;
-  }
-  .case-browser-dots { display: flex; gap: 8px; }
-  .case-browser-dots span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #3A3A40;
-  }
-  .case-browser-dots span:nth-child(1) { background: #FF5F57; }
-  .case-browser-dots span:nth-child(2) { background: #FEBC2E; }
-  .case-browser-dots span:nth-child(3) { background: #28C840; }
-  .case-browser-url {
-    flex: 1;
-    padding: 6px 14px;
-    background: #0C0C0E;
-    border: 1px solid #2A2A2E;
-    border-radius: 6px;
-    font-size: 12px;
-    color: rgba(245, 240, 229, 0.6);
-    letter-spacing: 0.04em;
-  }
-  .case-browser-url b { color: #F5F0E5; font-weight: 400; }
-  .case-browser-frame {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border: 0;
+  .case-shot img {
     display: block;
-    background: #0E0E10;
+    width: 100%;
+    height: auto;
   }
 
-  /* Split: copy + phone iframe */
+  /* Editorial section blocks — text-only ambition / approach / outcome */
   .case-block {
     border-top: 1px solid var(--color-border);
-    padding-block: clamp(56px, 6vw, 88px);
+    padding-block: clamp(64px, 8vw, 120px);
   }
-  .case-split {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(48px, 8vw, 120px);
-    align-items: center;
-    max-width: 1200px;
+  .case-text {
+    max-width: 920px;
     margin-inline: auto;
   }
-  .case-split-text { display: grid; gap: 18px; }
-  .case-split-text h2 { color: var(--color-ink); }
-  .case-split-text p {
-    color: var(--color-ink-muted);
-    font-size: clamp(15px, 0.6vw + 12px, 18px);
-    line-height: 1.65;
-    max-width: 56ch;
-  }
-  .case-phone {
-    position: relative;
-    width: 300px;
-    margin-inline: auto;
-    aspect-ratio: 9 / 19.5;
-    border-radius: 38px;
-    padding: 14px;
-    background: #1A1A1D;
-    border: 1px solid #2A2A2E;
-    box-shadow: 0 30px 80px -30px rgba(20, 20, 24, 0.45);
-  }
-  .case-phone::before {
-    content: "";
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 22px;
-    background: #0A0A0C;
-    border-radius: 14px;
-    z-index: 2;
-  }
-  .case-phone-frame {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: 26px;
-    display: block;
-    background: #0E0E10;
-  }
-
-  /* What we built — numbered list (reused pattern) */
   .case-block-head {
     display: grid;
-    gap: 16px;
-    max-width: 720px;
-    margin-bottom: clamp(28px, 3vw, 48px);
+    gap: 18px;
+    margin-bottom: clamp(28px, 4vw, 48px);
   }
+  .case-block-head .eyebrow {
+    color: var(--color-ink-dim);
+  }
+  .case-block-head h2 {
+    color: var(--color-ink);
+  }
+  .case-prose {
+    display: grid;
+    gap: 18px;
+    max-width: 60ch;
+    color: var(--color-ink-muted);
+    font-size: clamp(17px, 0.6vw + 14px, 20px);
+    line-height: 1.65;
+  }
+
+  /* Outcome list — three numbered items */
   .case-list {
     list-style: none;
     display: grid;
@@ -466,18 +391,10 @@ const canonical = 'https://rekraft.design/work/livelifecustoms';
     .case-stats { grid-template-columns: 1fr; }
   }
 
-  @media (max-width: 900px) {
-    .case-split { grid-template-columns: 1fr; gap: 40px; }
-    .case-browser { border-radius: 10px; }
-    .case-browser-frame { aspect-ratio: 4 / 3; }
-  }
-
   @media (max-width: 700px) {
     .case-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 20px; }
     .case-list-num { grid-row: auto; padding-top: 0; }
     .case-list p { grid-column: 1; }
-    .case-phone { display: none; }
-    .case-browser-url { display: none; }
-    .case-browser-frame { aspect-ratio: 3 / 4; }
+    .case-shot { border-radius: 10px; }
   }
 </style>
