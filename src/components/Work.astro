@@ -6,8 +6,9 @@ const cases = [
     title: 'Rekraft Agency',
     description: 'Productised agency for UK tradespeople. Dark, opinionated, services-as-menu-items, with a playbook that does the qualifying.',
     status: 'Live',
-    image: '/images/work/rekraft-agency/logo.png',
-    imageFit: 'contain',
+    image: '/images/work/rekraft-agency/hero.jpg',
+    badge: '/images/work/rekraft-agency/logo.png',
+    badgeBg: '#0A0807',
     href: 'https://rekraft.agency',
   },
   {
@@ -17,6 +18,8 @@ const cases = [
     description: 'Premium Damascus chef knives. Astro single-product editorial, scroll-scrubbed Higgs rotation hero, cook-first copy.',
     status: 'Live',
     image: '/images/work/fusa/hero.jpg',
+    badge: '/images/work/fusa/logo.png',
+    badgeBg: '#100904',
     href: '/work/fusa-kitchen',
   },
   {
@@ -25,8 +28,9 @@ const cases = [
     title: 'Live Life Customs',
     description: 'London streetwear studio. Custom apparel built to order, Instagram-only intake.',
     status: 'Live',
-    image: '/images/work/llc/logo.png',
-    imageFit: 'contain',
+    image: '/images/work/llc/hero.jpg',
+    badge: '/images/work/llc/logo.png',
+    badgeBg: '#0A0A0A',
     href: '/work/livelifecustoms',
   },
 ];
@@ -50,16 +54,15 @@ const cases = [
       {cases.map((c, i) => (
         <a
           href={c.href}
-          class={`work-panel ${i === 0 ? 'is-active' : ''} ${c.imageFit === 'contain' ? 'is-logo' : ''} ${c.isOpenSlot ? 'is-open' : ''}`}
+          class={`work-panel ${i === 0 ? 'is-active' : ''}`}
           data-index={i}
           aria-label={`${c.title} — ${c.tag}`}
-          style={c.image && c.imageFit !== 'contain' ? `--panel-bg: url('${c.image}'); background-image: var(--panel-bg);` : ''}
+          style={`--panel-bg: url('${c.image}'); background-image: var(--panel-bg); --badge-bg: ${c.badgeBg || '#0A0807'};`}
         >
-          {c.imageFit === 'contain' && c.image && (
-            <img class="work-panel-logo" src={c.image} alt="" loading="lazy" decoding="async" />
-          )}
-          {c.isOpenSlot && (
-            <div class="work-panel-plus font-display" aria-hidden="true">+</div>
+          {c.badge && (
+            <div class="work-panel-badge" aria-hidden="true">
+              <img src={c.badge} alt="" loading="lazy" decoding="async" />
+            </div>
           )}
           <div class="work-panel-overlay" aria-hidden="true"></div>
           <div class="work-panel-num font-mono">{c.num}</div>
@@ -130,19 +133,33 @@ const cases = [
     outline-offset: 2px;
   }
 
-  /* LLC logo panel — light surface, contained logo */
-  .work-panel.is-logo {
-    background-color: #FAFAFA;
-  }
-  .work-panel-logo {
+  /* Corner badge — small circle with the brand mark, top-right of each card */
+  .work-panel-badge {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: clamp(64px, 38%, 200px);
-    aspect-ratio: 1 / 1;
+    top: 16px;
+    right: 16px;
+    width: clamp(40px, 6vw, 56px);
+    height: clamp(40px, 6vw, 56px);
+    border-radius: 50%;
+    background: var(--badge-bg, #0A0807);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    z-index: 3;
+    transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+  }
+  .work-panel:hover .work-panel-badge,
+  .work-panel.is-active .work-panel-badge {
+    transform: scale(1.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  }
+  .work-panel-badge img {
+    width: 72%;
+    height: 72%;
     object-fit: contain;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+    display: block;
   }
 
   /* Open-slot panel — dashed, cream */
