@@ -36,61 +36,72 @@ const canonical = 'https://rekraft.design/work/fusa-kitchen';
       <div class="frame case-meta-inner font-mono">
         <span><b>Industry</b> &middot; Premium kitchen goods</span>
         <span><b>Location</b> &middot; London</span>
-        <span><b>Scope</b> &middot; Brand + website + AI motion</span>
+        <span><b>Scope</b> &middot; Brand + website</span>
         <span><b>Live</b> &middot; May 2026</span>
       </div>
     </div>
 
-    <section class="case-showcase">
+    {/* Opening establishing shot: the homepage hero, the brand moment. */}
+    <section class="case-shot-section case-shot-section--first">
       <div class="frame">
-        <div class="case-browser fade-up">
-          <div class="case-browser-bar">
-            <div class="case-browser-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="case-browser-url font-mono"><b>fusa-kitchen.vercel.app</b></div>
-          </div>
-          <iframe
-            class="case-browser-frame"
-            src="https://fusa-kitchen.vercel.app"
-            title="Fusa Kitchen - live website"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-          ></iframe>
-          <a class="case-browser-open" href="https://fusa-kitchen.vercel.app" target="_blank" rel="noopener" aria-label="Open live site in a new tab">
-            <span>Open live site &rarr;</span>
-          </a>
-        </div>
+        <figure class="case-shot fade-up">
+          <img src="/images/work/fusa/hero.jpg" alt="FUSA Damascus homepage, the Kiritsuke knife centred on a deep sage panel" loading="lazy" />
+        </figure>
       </div>
     </section>
 
     <section class="section case-block">
-      <div class="frame">
-        <div class="case-split">
-          <div class="case-split-text fade-up">
-            <span class="eyebrow">Cinematic control</span>
-            <h2 class="display-2 reveal-words" data-reveal-headline>
-              Examine the steel <em class="italic-accent">at your pace.</em>
-            </h2>
-            <p>We replaced the standard product gallery with a tactile digital environment. As visitors scroll, the knife rotates fluidly in direct response to their movement. A seamless, frame-perfect inspection of the craft that makes shopping online feel as physical as <em class="italic-accent">holding the knife in hand.</em></p>
-          </div>
-          <div class="case-phone fade-up" data-d="1">
-            <iframe
-              class="case-phone-frame"
-              src="https://fusa-kitchen.vercel.app"
-              title="Fusa Kitchen - mobile view"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section case-block">
-      <div class="frame">
+      <div class="frame case-text">
         <header class="case-block-head fade-up">
-          <span class="eyebrow">What it delivers</span>
+          <span class="eyebrow">The ambition</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            A knife earns its price. <em class="italic-accent">The site has to earn it too.</em>
+          </h2>
+        </header>
+        <div class="case-prose fade-up">
+          <p>FUSA forged a Kiritsuke at the price point of small luxury: hand-forged, 67-layer Damascus, a knife built to last a working career. They needed a digital home that read the same way.</p>
+          <p>Quiet enough to feel premium. Focused enough to stop the scroll. Brave enough to put one product at the centre of the entire site.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* The single-product editorial PDP, proof of the focus. */}
+    <section class="case-shot-section">
+      <div class="frame">
+        <figure class="case-shot fade-up">
+          <img src="/images/work/fusa/pdp.jpg" alt="The Kiritsuke product page, single-product editorial layout with the knife full-bleed below the headline" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame case-text">
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">The approach</span>
+          <h2 class="display-2 reveal-words" data-reveal-headline>
+            Sell <em class="italic-accent">one knife.</em>
+          </h2>
+        </header>
+        <div class="case-prose fade-up">
+          <p>We threw out the standard commerce playbook. No grid of products, no carousel of categories, no menu of options. The Kiritsuke is the brand.</p>
+          <p>Every section serves the same singular intent: the visitor leaves wanting that knife. The other three knives wait in their own lineup, ready when the relationship is.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* The lineup page: depth on demand, never in the way. */}
+    <section class="case-shot-section">
+      <div class="frame">
+        <figure class="case-shot fade-up">
+          <img src="/images/work/fusa/lineup.jpg" alt="The collection page revealing the three secondary knives, kept off the main story until the visitor is ready" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section case-block">
+      <div class="frame case-text">
+        <header class="case-block-head fade-up">
+          <span class="eyebrow">The outcome</span>
           <h2 class="display-2 reveal-words" data-reveal-headline>
             Built to <em class="italic-accent">match the knife.</em>
           </h2>
@@ -202,151 +213,66 @@ const canonical = 'https://rekraft.design/work/fusa-kitchen';
     margin-right: 4px;
   }
 
-  /* Browser iframe showcase — the centrepiece */
-  .case-showcase { padding-block: clamp(56px, 8vw, 100px) clamp(24px, 4vw, 48px); }
-  .case-browser {
-    position: relative;
+  /* Curated screenshot reveal — the new centrepiece pattern.
+     Replaces the live-iframe-as-centrepiece. Editorial cards with subtle
+     lift and soft shadow, fade-up on scroll. Natural aspect ratio per
+     image (some wide, some tall) for editorial rhythm. */
+  .case-shot-section {
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+  .case-shot-section--first {
+    padding-top: clamp(56px, 8vw, 100px);
+  }
+  .case-shot {
     max-width: 1280px;
     margin-inline: auto;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--color-border-active);
-    background: #0A0A0C;
-    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.45);
-    transition: border-color .35s var(--ease-out-expo), transform .35s var(--ease-out-expo), box-shadow .35s var(--ease-out-expo);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 80px -40px rgba(20, 20, 24, 0.32);
+    transition: transform .5s var(--ease-out-expo), box-shadow .5s var(--ease-out-expo);
   }
-  .case-browser:hover {
-    border-color: var(--color-lime);
+  .case-shot:hover {
     transform: translateY(-3px);
-    box-shadow: 0 50px 150px -40px rgba(20, 20, 24, 0.55);
+    box-shadow: 0 40px 120px -40px rgba(20, 20, 24, 0.42);
   }
-  .case-browser-open {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 22px;
-    pointer-events: none;
-  }
-  .case-browser-open span {
-    pointer-events: auto;
-    background: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--color-border-active);
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .35s var(--ease-out-expo), transform .35s var(--ease-out-expo);
-    font-weight: 500;
-  }
-  .case-browser:hover .case-browser-open span {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .case-browser-bar {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
-    background: #1A1A1D;
-    border-bottom: 1px solid #2A2A2E;
-  }
-  .case-browser-dots { display: flex; gap: 8px; }
-  .case-browser-dots span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #3A3A40;
-  }
-  .case-browser-dots span:nth-child(1) { background: #FF5F57; }
-  .case-browser-dots span:nth-child(2) { background: #FEBC2E; }
-  .case-browser-dots span:nth-child(3) { background: #28C840; }
-  .case-browser-url {
-    flex: 1;
-    padding: 6px 14px;
-    background: #0C0C0E;
-    border: 1px solid #2A2A2E;
-    border-radius: 6px;
-    font-size: 12px;
-    color: rgba(245, 240, 229, 0.6);
-    letter-spacing: 0.04em;
-  }
-  .case-browser-url b { color: #F5F0E5; font-weight: 400; }
-  .case-browser-frame {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border: 0;
+  .case-shot img {
     display: block;
-    background: #0E0E10;
+    width: 100%;
+    height: auto;
   }
 
-  /* Split: copy + phone iframe */
+  /* Editorial section blocks — text-only ambition / approach / outcome */
   .case-block {
     border-top: 1px solid var(--color-border);
-    padding-block: clamp(56px, 6vw, 88px);
+    padding-block: clamp(64px, 8vw, 120px);
   }
-  .case-split {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(48px, 8vw, 120px);
-    align-items: center;
-    max-width: 1200px;
+  .case-text {
+    max-width: 920px;
     margin-inline: auto;
   }
-  .case-split-text { display: grid; gap: 18px; }
-  .case-split-text h2 { color: var(--color-ink); }
-  .case-split-text p {
-    color: var(--color-ink-muted);
-    font-size: clamp(15px, 0.6vw + 12px, 18px);
-    line-height: 1.65;
-    max-width: 56ch;
-  }
-  .case-phone {
-    position: relative;
-    width: 300px;
-    margin-inline: auto;
-    aspect-ratio: 9 / 19.5;
-    border-radius: 38px;
-    padding: 14px;
-    background: #1A1A1D;
-    border: 1px solid #2A2A2E;
-    box-shadow: 0 30px 80px -30px rgba(20, 20, 24, 0.45);
-  }
-  .case-phone::before {
-    content: "";
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 22px;
-    background: #0A0A0C;
-    border-radius: 14px;
-    z-index: 2;
-  }
-  .case-phone-frame {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: 26px;
-    display: block;
-    background: #0E0E10;
-  }
-
-  /* What we built — numbered list (reused pattern) */
   .case-block-head {
     display: grid;
-    gap: 16px;
-    max-width: 720px;
-    margin-bottom: clamp(28px, 3vw, 48px);
+    gap: 18px;
+    margin-bottom: clamp(28px, 4vw, 48px);
   }
+  .case-block-head .eyebrow {
+    color: var(--color-ink-dim);
+  }
+  .case-block-head h2 {
+    color: var(--color-ink);
+  }
+  .case-prose {
+    display: grid;
+    gap: 18px;
+    max-width: 60ch;
+    color: var(--color-ink-muted);
+    font-size: clamp(17px, 0.6vw + 14px, 20px);
+    line-height: 1.65;
+  }
+
+  /* Outcome list — three numbered items */
   .case-list {
     list-style: none;
     display: grid;
@@ -466,18 +392,10 @@ const canonical = 'https://rekraft.design/work/fusa-kitchen';
     .case-stats { grid-template-columns: 1fr; }
   }
 
-  @media (max-width: 900px) {
-    .case-split { grid-template-columns: 1fr; gap: 40px; }
-    .case-browser { border-radius: 10px; }
-    .case-browser-frame { aspect-ratio: 4 / 3; }
-  }
-
   @media (max-width: 700px) {
     .case-list li { grid-template-columns: 1fr; gap: 12px; padding-left: 20px; }
     .case-list-num { grid-row: auto; padding-top: 0; }
     .case-list p { grid-column: 1; }
-    .case-phone { display: none; }
-    .case-browser-url { display: none; }
-    .case-browser-frame { aspect-ratio: 3 / 4; }
+    .case-shot { border-radius: 10px; }
   }
 </style>
