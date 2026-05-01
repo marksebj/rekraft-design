@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Privacy · Rekraft Design';
+const description = 'How Rekraft Design collects, uses, and protects your data.';
+const canonical = 'https://rekraft.design/privacy';
+const lastUpdated = '1 May 2026';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <Nav />
+  <main class="legal">
+    <div class="frame legal-back-wrap">
+      <a href="/" class="legal-back font-mono">&larr; Home</a>
+    </div>
+
+    <section class="section legal-hero">
+      <div class="frame">
+        <header class="legal-head">
+          <span class="eyebrow">Legal</span>
+          <h1 class="display-1">Privacy.</h1>
+          <p class="lead">How we handle the information you share with us, in plain English.</p>
+          <p class="legal-meta font-mono">Last updated &middot; {lastUpdated}</p>
+        </header>
+      </div>
+    </section>
+
+    <section class="section legal-body">
+      <div class="frame legal-prose">
+
+        <h2>Who we are</h2>
+        <p>Rekraft Design is a small independent design studio based in London, UK. The site is operated by Mark, sole trader. If you contact us about a project, send an email, or interact with the site, this notice covers how we look after the information you share.</p>
+
+        <h2>What we collect</h2>
+        <p>Three categories, kept deliberately narrow:</p>
+        <ul>
+          <li><strong>What you give us directly.</strong> Your name, email, company, project brief, and any creative assets you share when you contact us about working together.</li>
+          <li><strong>Standard site analytics.</strong> Anonymous information about how the site is used: pages viewed, approximate location, browser, and device. We use this to understand which pages land and which need work. No advertising trackers, no third-party data brokers.</li>
+          <li><strong>Email correspondence.</strong> The contents of any emails you send us, so we can pick up the thread when you write back.</li>
+        </ul>
+
+        <h2>How we use it</h2>
+        <p>To respond to your enquiries, scope and deliver client work, send invoices, comply with our legal and tax obligations, and improve the site over time. That is the full list.</p>
+
+        <h2>How we share it</h2>
+        <p>We never sell your data. We share it only with the small number of sub-processors needed to run the studio: our email host, our website host, and our accounting tools. Each one is bound by their own data protection terms.</p>
+
+        <h2>How long we keep it</h2>
+        <p>Project communications and assets for the life of the project plus six years, to meet UK tax and contract retention requirements. Speculative enquiries that do not turn into work are deleted after twelve months.</p>
+
+        <h2>Cookies</h2>
+        <p>The site uses minimal essential cookies for its own session and accessibility settings. We do not run advertising trackers or third-party profiling cookies. If we ever add analytics that require consent, we will surface a clear banner and update this page.</p>
+
+        <h2>Your rights</h2>
+        <p>Under UK GDPR and the Data Protection Act 2018, you have the right to access the personal data we hold about you, correct it, delete it, restrict how it is used, object to specific uses, and request a copy in a portable format. Email us at <a href="mailto:mark@rekraft.design">mark@rekraft.design</a> and we will respond within thirty days. You also have the right to complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+        <h2>International transfers</h2>
+        <p>Some of our sub-processors store data outside the UK. Where that is the case, we rely on the UK International Data Transfer Agreement or equivalent safeguards to keep your data protected to UK standards.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this notice or the data we hold about you go to <a href="mailto:mark@rekraft.design">mark@rekraft.design</a>.</p>
+
+        <p class="legal-foot">This notice may be updated from time to time. The date at the top will reflect the latest version.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal-back-wrap { padding-top: clamp(96px, 12vw, 140px); }
+  .legal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ink-dim);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color .35s var(--ease-out-expo);
+  }
+  .legal-back:hover { color: var(--color-ink); }
+
+  .legal-hero { padding-block: clamp(32px, 4vw, 56px) clamp(40px, 5vw, 64px); }
+  .legal-head {
+    display: grid;
+    gap: 16px;
+    max-width: 800px;
+  }
+  .legal-head h1 { color: var(--color-ink); }
+  .legal-head .lead { color: var(--color-ink-muted); max-width: 60ch; }
+  .legal-meta {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    margin-top: 8px;
+  }
+
+  .legal-body {
+    border-top: 1px solid var(--color-border);
+    padding-block: clamp(48px, 6vw, 96px);
+  }
+  .legal-prose {
+    max-width: 720px;
+    margin-inline: auto;
+    color: var(--color-ink-muted);
+    font-size: clamp(16px, 0.5vw + 14px, 18px);
+    line-height: 1.7;
+  }
+  .legal-prose h2 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-size: clamp(24px, 2vw + 12px, 36px);
+    line-height: 1.2;
+    margin-top: clamp(40px, 4vw, 56px);
+    margin-bottom: 16px;
+  }
+  .legal-prose h2:first-of-type { margin-top: 0; }
+  .legal-prose p { margin-bottom: 16px; }
+  .legal-prose ul {
+    margin: 0 0 24px 0;
+    padding-left: 22px;
+    display: grid;
+    gap: 10px;
+  }
+  .legal-prose li { padding-left: 4px; }
+  .legal-prose strong { color: var(--color-ink); font-weight: 600; }
+  .legal-prose a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-cream);
+    text-underline-offset: 4px;
+    transition: text-decoration-color .25s var(--ease-out-expo);
+  }
+  .legal-prose a:hover { text-decoration-color: var(--color-ink); }
+
+  .legal-foot {
+    margin-top: clamp(40px, 4vw, 64px);
+    padding-top: clamp(24px, 3vw, 36px);
+    border-top: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-ink-dim);
+  }
+</style>
