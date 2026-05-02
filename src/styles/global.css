@@ -235,24 +235,6 @@ html:not(.js-ready) .reveal-words .line-inner {
   opacity: 0.65;
 }
 
-.cursor-glow {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 30, 42, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 1;
-  will-change: transform;
-  contain: strict;
-  mix-blend-mode: multiply;
-}
-
-@media (max-width: 900px), (hover: none) {
-  .cursor-glow { display: none; }
-}
 
 /* ==========================================================================
    Buttons / CTAs

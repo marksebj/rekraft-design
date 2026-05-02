@@ -1,333 +1,211 @@
 ---
 ---
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true">
-    <canvas class="hero-silk" data-silk></canvas>
-    <div class="hero-glow"></div>
-  </div>
+<section class="hero" data-hero>
+  <video
+    class="hero-video"
+    data-hero-video
+    src="/videos/hero.mp4"
+    poster="/images/hero-poster.jpg"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+    aria-hidden="true"
+  ></video>
+  <!-- Tap-to-play hint. Hidden by default. Shown only if autoplay was
+       blocked by the OS (iOS Low Power Mode, Reduce Motion, etc.) so the
+       user has a clear affordance to start playback. Fades out once the
+       video reports it's actually playing. -->
+  <button
+    class="hero-play-hint"
+    data-hero-play-hint
+    type="button"
+    aria-label="Play hero video"
+    hidden
+  >
+    <span class="hero-play-hint-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </span>
+    <span class="hero-play-hint-label">Tap to play</span>
+  </button>
 
-  <div class="frame hero-inner">
-    <div class="hero-top">
-      <span class="eyebrow" data-hero-eyebrow>
-        Independent design studio &middot; London
-      </span>
-      <span class="hero-year font-mono" data-hero-eyebrow>Available Q3 2026</span>
-    </div>
-
-    <div class="hero-body" data-tilt3d-parent>
-      <h1 class="hero-mark reveal-words" data-hero-headline data-tilt3d>
-        <span class="hero-mark-rekraft">rekraft</span><em class="hero-mark-design italic-accent">design</em>
-      </h1>
-    </div>
-
-    <div class="hero-foot">
-      <p class="lead" data-hero-sub>
-        Made to stand out. <em class="italic-accent">Built to stand up.</em>
-      </p>
-      <div class="hero-ctas" data-hero-ctas>
-        <a href="#work" class="btn btn-primary" data-magnetic="0.25">
-          See the work <span class="btn-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <span>scroll</span>
-      <span class="hero-scroll-line"></span>
-    </div>
-  </div>
+  <!-- Bottom-edge fade so the dark video bleeds into the cream Manifesto
+       section below rather than ending on a hard horizontal cut. -->
+  <div class="hero-veil" aria-hidden="true"></div>
 </section>
 
 <style>
+  /* Cinematic full-bleed video hero. No type overlay (returning later).
+     Black surface under the video so there is no cream flash before the
+     first frame paints; cream-fade at the bottom edge dissolves into the
+     Manifesto section. */
   .hero {
-    min-height: 100svh;
-    display: grid;
-    align-items: end;
-    padding-top: 120px;
-    padding-bottom: clamp(48px, 6vw, 80px);
     position: relative;
+    height: 100svh;
+    width: 100%;
     overflow: hidden;
+    background: #000;
   }
 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero-glow {
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 75%;
-    height: 90%;
-    background: radial-gradient(ellipse at 70% 40%, var(--color-ambient) 0%, transparent 55%);
-  }
-
-  /* Animated silk canvas — burgundy noise painted directly onto the cream page bg.
-     Paints sparse pixels (sample 3) at ~24fps. Earlier versions used a 1.4s opacity
-     fade-in via .is-in toggle, but on some devices/browsers the transition stalled
-     mid-way and left the layer effectively invisible. The fade was decoration, not
-     load-bearing — pinning opacity directly is reliable and visually identical
-     once the first frame paints. Hidden entirely under prefers-reduced-motion. */
-  .hero-silk {
+  .hero-video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    opacity: 0.65;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.2s var(--ease-out-expo);
+    will-change: opacity;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-silk { display: none; }
-  }
-
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: clamp(32px, 4vw, 64px);
-    min-height: calc(100svh - 120px);
-    width: 100%;
+  .hero-video.is-ready {
+    opacity: 1;
   }
 
-  .hero-top {
-    display: flex;
-    justify-content: space-between;
+  /* Tap-to-play hint. Visible only when autoplay was blocked. Subtle
+     mono label + play icon, centred, with a soft scrim behind so it
+     reads on top of any video frame. */
+  .hero-play-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 18vh;
+    transform: translateX(-50%);
+    display: inline-flex;
     align-items: center;
-    gap: 20px;
-  }
-  .hero-year {
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-ink-dim);
+    color: var(--color-bg);
+    background: rgba(20, 20, 24, 0.55);
+    border: 1px solid rgba(242, 237, 225, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out-expo);
+  }
+  .hero-play-hint[hidden] { display: none; }
+  .hero-play-hint.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    animation: hero-play-pulse 2s ease-in-out infinite;
+  }
+  .hero-play-hint-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+  }
+  .hero-play-hint-icon svg { width: 100%; height: 100%; }
+
+  @keyframes hero-play-pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50%      { transform: translateX(-50%) scale(1.04); }
   }
 
-  .hero-body {
-    width: 100%;
-    perspective: 1400px;
-    perspective-origin: 50% 50%;
-    min-height: clamp(220px, 50vh, 600px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-block: clamp(24px, 4vw, 80px);
-  }
-
-  /* Oversized splash-threshold wordmark: rekraft in serif at viewport scale,
-     italic burgundy "design" tucked next to it as the load-bearing lockup
-     enlarged. Lockup pattern from the nav, blown up to take the room.
-     Letter-spacing pulled tighter at this scale because the type already
-     reads at maximum presence. */
-  .hero-mark {
-    margin: 0;
-    text-align: center;
-    line-height: 0.86;
-    letter-spacing: -0.04em;
-    color: var(--color-ink);
-    transform-style: preserve-3d;
-    will-change: transform;
-    cursor: grab;
-    user-select: none;
-    text-shadow:
-      0 1px 0 rgba(20, 20, 24, 0.02),
-      0 8px 40px rgba(20, 20, 24, 0.06);
-  }
-  .hero-mark:active { cursor: grabbing; }
-  .hero-mark-rekraft {
-    font-family: var(--font-display);
-    font-size: clamp(72px, 22vw, 320px);
-    font-weight: 400;
-    color: var(--color-ink);
-  }
-  .hero-mark-design {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(56px, 17vw, 256px);
-    color: var(--color-cream);
-    margin-left: 0.04em;
-    letter-spacing: -0.03em;
-  }
-  .hero-mark em { font-style: italic; }
-
-  @media (max-width: 720px) {
-    .hero-mark { letter-spacing: -0.03em; }
-  }
-
-  .hero-foot {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--color-border);
-    position: relative;
-  }
-  /* Vertical rule sits at the boundary between the lead column (1fr) and the
-     CTA column (auto), placed via border-left on the CTAs so it tracks the
-     actual column edge instead of a fragile right-offset. The previous
-     absolute-positioned ::after at right: clamp(140px, 18vw, 220px) fell
-     inside the See the work button and read as a glitch. */
-  .hero-ctas {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  @media (min-width: 901px) {
-    .hero-ctas {
-      align-self: stretch;
-      align-items: flex-end;
-      border-left: 1px solid var(--color-border);
-      padding-left: clamp(32px, 4vw, 56px);
-      padding-top: 24px;
-    }
-  }
-
-  .hero-scroll-cue {
+  /* Cream fade at the bottom edge — 14vh dissolve from transparent to
+     the page background so the cinematic dark video transitions into the
+     Manifesto cream surface without a hard cut. */
+  .hero-veil {
     position: absolute;
+    left: 0;
     right: 0;
-    bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    writing-mode: vertical-rl;
+    bottom: 0;
+    height: 14vh;
+    background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%);
+    pointer-events: none;
+    z-index: 2;
   }
-  .hero-scroll-line {
-    writing-mode: horizontal-tb;
-    display: block;
-    width: 1px;
-    height: 56px;
-    background: linear-gradient(to bottom, var(--color-ink-dim), transparent);
-    animation: scroll-pulse 2.4s var(--ease-out-expo) infinite;
-  }
-  @keyframes scroll-pulse {
-    0%, 100% { transform: scaleY(0.5); transform-origin: top; opacity: 0.4; }
-    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+
+  /* Reduced-motion: hold on the poster, no autoplay loop. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      opacity: 1;
+      animation: none;
+    }
   }
 
   @media (max-width: 900px) {
-    .hero { padding-top: 100px; }
-    .hero-body { perspective: 1000px; min-height: auto; padding-block: clamp(32px, 8vw, 80px); }
-    .hero-foot {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-    .hero-scroll-cue { display: none; }
-    .hero-ctas {
-      width: 100%;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .hero-ctas .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 16px 22px;
-    }
-  }
-  @media (max-width: 520px) {
-    .hero-top {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .eyebrow { font-size: 10px; letter-spacing: 0.16em; }
-    .hero-headline { max-width: 14ch; }
+    .hero { height: 100svh; }
+    .hero-veil { height: 10vh; }
   }
 </style>
 
 <script>
-  const canvas = document.querySelector<HTMLCanvasElement>('[data-silk]');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* iOS Safari is fussy about autoplay video. The `autoplay muted playsinline`
+     attribute set is the documented contract, but Safari sometimes still
+     refuses without an explicit `.play()` call once the video is buffered.
+     Worse, that play() call returns a Promise that REJECTS silently if the
+     OS blocks it (Low Power Mode, Reduce Motion at the OS level, certain
+     network conditions). We handle both: try play() on canplay, catch the
+     reject, fall back to playing on the first user touch/tap. */
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  const hint = document.querySelector<HTMLButtonElement>('[data-hero-play-hint]');
 
-  if (canvas && !reduced) {
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      // Tunables — kept deliberately conservative for CPU budget.
-      const SPEED = 0.014;
-      const SCALE = 2.4;
-      const SAMPLE = 3;             // step (1 of 9 pixels coloured per frame)
-      const FPS_CAP = 24;
-      const FRAME_MS = 1000 / FPS_CAP;
-      // Burgundy ink colour applied via mix-blend-mode: multiply.
-      const TINT_R = 139;
-      const TINT_G = 30;
-      const TINT_B = 42;
+  if (video) {
+    const reveal = () => video.classList.add('is-ready');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const showHint = () => {
+      if (!hint) return;
+      hint.hidden = false;
+      // Force a reflow so the transition plays
+      requestAnimationFrame(() => hint.classList.add('is-visible'));
+    };
+    const hideHint = () => {
+      if (!hint) return;
+      hint.classList.remove('is-visible');
+      // Wait for transition to finish before hiding
+      setTimeout(() => { hint.hidden = true; }, 400);
+    };
 
-      const resize = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      };
-      resize();
-      window.addEventListener('resize', resize);
+    // Hide hint as soon as the video is actually playing
+    video.addEventListener('playing', hideHint);
 
-      // Cheap noise function from the original (sin-based, no precomputation).
-      const noise = (x: number, y: number): number => {
-        const G = 2.71828;
-        const rx = G * Math.sin(G * x);
-        const ry = G * Math.sin(G * y);
-        return (rx * ry * (1 + x)) % 1;
-      };
-
-      let time = 0;
-      let last = 0;
-
-      const tick = (now: number) => {
-        if (now - last >= FRAME_MS) {
-          last = now;
-          const w = canvas.width;
-          const h = canvas.height;
-
-          // Reuse a fresh ImageData each frame (transparent base; we paint
-          // sparse coloured pixels and let multiply do the tinting).
-          const img = ctx.createImageData(w, h);
-          const data = img.data;
-
-          const tOffset = SPEED * time;
-
-          for (let x = 0; x < w; x += SAMPLE) {
-            for (let y = 0; y < h; y += SAMPLE) {
-              const u = (x / w) * SCALE;
-              const v = (y / h) * SCALE;
-              const tex_x = u;
-              const tex_y = v + 0.03 * Math.sin(8 * tex_x - tOffset);
-
-              const pattern = 0.6 + 0.4 * Math.sin(
-                5 * (tex_x + tex_y +
-                  Math.cos(3 * tex_x + 5 * tex_y) +
-                  0.02 * tOffset) +
-                Math.sin(20 * (tex_x + tex_y - 0.1 * tOffset)),
-              );
-
-              const rnd = noise(x, y);
-              const intensity = Math.max(0, pattern - rnd / 18 * 0.8);
-
-              const i = (y * w + x) * 4;
-              if (i < data.length) {
-                data[i] = TINT_R;
-                data[i + 1] = TINT_G;
-                data[i + 2] = TINT_B;
-                data[i + 3] = Math.min(255, Math.floor(intensity * 230));
-              }
-            }
-          }
-
-          ctx.putImageData(img, 0, 0);
-          time += 1;
+    if (reduced) {
+      video.pause();
+      video.removeAttribute('autoplay');
+      reveal();
+    } else {
+      const tryPlay = () => {
+        const p = video.play();
+        if (p && typeof p.then === 'function') {
+          p.then(reveal).catch(() => {
+            // Autoplay blocked. Show the poster and the tap-to-play hint.
+            reveal();
+            showHint();
+            const startOnTouch = () => {
+              video.play().catch(() => {});
+              document.removeEventListener('touchstart', startOnTouch);
+              document.removeEventListener('click', startOnTouch);
+            };
+            document.addEventListener('touchstart', startOnTouch, { once: true, passive: true });
+            document.addEventListener('click', startOnTouch, { once: true });
+          });
+        } else {
+          reveal();
         }
-        requestAnimationFrame(tick);
       };
 
-      requestAnimationFrame(tick);
+      if (video.readyState >= 3) {
+        tryPlay();
+      } else {
+        video.addEventListener('canplay', tryPlay, { once: true });
+      }
     }
+
+    // Tap the hint itself starts playback
+    hint?.addEventListener('click', () => {
+      video.play().catch(() => {});
+    });
   }
 </script>

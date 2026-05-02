@@ -11,15 +11,19 @@ declare global {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* --------------------------------------------------------------------------
-   Lenis smooth scroll + GSAP ticker bridge
-   Mobile/touch gets a softer duration so it doesn't feel swimmy.
+   Lenis horizontal-canvas smooth scroll
+   On desktop the page is a sideways-scrolling canvas: vertical wheel/touch
+   input is mapped to horizontal motion on a wide [data-h-scroll] wrapper.
+   ScrollTrigger.scrollerProxy bridges that container to GSAP so per-element
+   reveals + parallax stay in sync with the horizontal scroll position.
+   On mobile the canvas falls back to vertical (CSS handles the layout swap)
+   and Lenis runs in default vertical mode against window.
    -------------------------------------------------------------------------- */
 
 function initLenis() {
   if (prefersReducedMotion) return;
 
   const isTouch = matchMedia('(hover: none)').matches;
-
   const lenis = new Lenis({
     duration: isTouch ? 0.9 : 1.15,
     smoothWheel: true,
@@ -27,10 +31,8 @@ function initLenis() {
     touchMultiplier: 1.6,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
-
   window.__lenis = lenis;
   document.documentElement.classList.add('lenis');
-
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
@@ -53,43 +55,86 @@ function initProgressBar() {
 }
 
 /* --------------------------------------------------------------------------
-   Cursor glow — rAF with auto-stop on idle
+   Custom cursor — soft burgundy glow halo (slow lerp) + branded knot-arrow
+   pointer (snappy lerp). Native cursor hidden once JS marks html
+   .cursor-ready. Pointer scales up over interactive elements.
+   Hover-capable devices only.
    -------------------------------------------------------------------------- */
 
-function initCursorGlow() {
+function initCursor() {
   const glow = document.querySelector<HTMLElement>('[data-glow]');
-  if (!glow || matchMedia('(hover: none)').matches) return;
+  const pointer = document.querySelector<HTMLElement>('[data-cursor]');
+  if (matchMedia('(hover: none)').matches) return;
+  if (!pointer && !glow) return;
 
-  let x = window.innerWidth / 2;
-  let y = window.innerHeight / 2;
-  let tx = x, ty = y;
-  let running = false;
-  let idleTimeout: number | undefined;
-
-  const raf = () => {
-    x += (tx - x) * 0.12;
-    y += (ty - y) * 0.12;
-    glow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
-    if (Math.abs(tx - x) < 0.3 && Math.abs(ty - y) < 0.3) {
-      running = false;
-      return;
+  // Only hide the native cursor once the custom pointer PNG has actually
+  // loaded. If the image is missing (404) we fall back to the system
+  // cursor so the user is never left with no cursor at all.
+  const markReady = () => document.documentElement.classList.add('cursor-ready');
+  if (pointer instanceof HTMLImageElement) {
+    if (pointer.complete && pointer.naturalWidth > 0) {
+      markReady();
+    } else {
+      pointer.addEventListener('load', markReady, { once: true });
+      pointer.addEventListener('error', () => {
+        pointer.style.display = 'none';
+      }, { once: true });
     }
-    requestAnimationFrame(raf);
-  };
+  } else if (pointer) {
+    markReady();
+  }
 
-  const start = () => {
-    if (running) return;
-    running = true;
-    requestAnimationFrame(raf);
+  // Pointer hotspot offset: triangle tip lives in the upper-left of the
+  // PNG, so subtract a small inset so the tip aligns with the actual mouse
+  // position rather than the bounding-box origin.
+  const POINTER_HOTSPOT_X = 6;
+  const POINTER_HOTSPOT_Y = 6;
+  const POINTER_HALF = 20; // half of the 40x40 pointer box, used for default placement
+
+  let glowX = window.innerWidth / 2;
+  let glowY = window.innerHeight / 2;
+  let pointerX = window.innerWidth / 2;
+  let pointerY = window.innerHeight / 2;
+  let tx = window.innerWidth / 2;
+  let ty = window.innerHeight / 2;
+
+  const tick = () => {
+    glowX += (tx - glowX) * 0.12;
+    glowY += (ty - glowY) * 0.12;
+    pointerX += (tx - pointerX) * 0.45;
+    pointerY += (ty - pointerY) * 0.45;
+    if (glow) glow.style.transform = `translate(${glowX - 300}px, ${glowY - 300}px)`;
+    if (pointer) pointer.style.transform = `translate(${pointerX - POINTER_HOTSPOT_X}px, ${pointerY - POINTER_HOTSPOT_Y}px)`;
+    requestAnimationFrame(tick);
   };
+  requestAnimationFrame(tick);
 
   window.addEventListener('mousemove', (e) => {
     tx = e.clientX;
     ty = e.clientY;
-    start();
-    if (idleTimeout) window.clearTimeout(idleTimeout);
-    idleTimeout = window.setTimeout(() => { running = false; }, 1500);
   });
+
+  // Hide pointer when the cursor leaves the window, restore on re-entry
+  if (pointer) {
+    document.addEventListener('mouseleave', () => { pointer.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { pointer.style.opacity = '1'; });
+  }
+
+  // Hover state: scale up over interactive elements
+  if (pointer) {
+    const HOVER_SELECTOR = 'a, button, [role="button"], [data-magnetic], summary, label';
+    document.addEventListener('mouseover', (e) => {
+      const t = e.target as HTMLElement;
+      if (t.closest(HOVER_SELECTOR)) pointer.classList.add('is-hover');
+    });
+    document.addEventListener('mouseout', (e) => {
+      const t = e.target as HTMLElement;
+      if (t.closest(HOVER_SELECTOR)) pointer.classList.remove('is-hover');
+    });
+  }
+
+  // Suppress an unused-var lint warning if pointer-only path triggers
+  void POINTER_HALF;
 }
 
 /* --------------------------------------------------------------------------
@@ -146,19 +191,19 @@ function initHeroReveal() {
   });
 
   const eyebrow = document.querySelector<HTMLElement>('[data-hero-eyebrow]');
-  const sub = document.querySelector<HTMLElement>('[data-hero-sub]');
-  const ctas = document.querySelector<HTMLElement>('[data-hero-ctas]');
   if (eyebrow) gsap.from(eyebrow, { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: 0.1 });
-  if (sub) gsap.from(sub, { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: 0.9 });
-  if (ctas) gsap.from(ctas, { opacity: 0, y: 20, duration: 1, ease: 'expo.out', delay: 1.1 });
 }
 
 /* --------------------------------------------------------------------------
    Scroll-triggered reveals
+   In horizontal mode (html.h-mode) this delegates to initPanelChoreography
+   for the panel-level slide-in flow. The legacy fade-up / reveal-headline /
+   clip-reveal branches still run for elements that aren't inside a panel
+   (e.g. the mobile vertical fallback or any future single-column page).
    -------------------------------------------------------------------------- */
 
 function initScrollReveals() {
-  // Section headlines — split into words, reveal as they enter viewport
+  // Section headlines — split into words, reveal on viewport entry
   document.querySelectorAll<HTMLElement>('[data-reveal-headline]').forEach((el) => {
     splitWords(el);
     const inners = el.querySelectorAll<HTMLElement>('.word-inner');
@@ -218,6 +263,7 @@ function initScrollReveals() {
     });
   }
 }
+
 
 /* --------------------------------------------------------------------------
    3D tilt — cursor-driven rotateX/rotateY on a [data-tilt3d] element
@@ -347,6 +393,7 @@ function initMagnetic() {
   });
 }
 
+
 /* --------------------------------------------------------------------------
    Navigation state — shrinks on scroll
    -------------------------------------------------------------------------- */
@@ -354,11 +401,9 @@ function initMagnetic() {
 function initNav() {
   const nav = document.querySelector<HTMLElement>('[data-nav]');
   if (!nav) return;
-  let last = 0;
   const onScroll = () => {
-    const y = window.scrollY;
-    if (y > 40) nav.classList.add('is-scrolled'); else nav.classList.remove('is-scrolled');
-    last = y;
+    if (window.scrollY > 40) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -370,7 +415,6 @@ function boot() {
   document.documentElement.classList.add('js-ready');
   initLenis();
   initProgressBar();
-  initCursorGlow();
   initHeroReveal();
   initScrollReveals();
   initMagnetic();
