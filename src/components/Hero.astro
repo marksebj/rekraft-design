@@ -51,6 +51,11 @@
     background: #000;
   }
 
+  /* Video is fully opaque from the start. iOS Safari (WebKit) refuses
+     to actually render frames for a video that was opacity:0 during the
+     autoplay attempt, even after the Promise resolves and the opacity
+     transitions back to 1. The hero sits on a black backdrop, so there
+     is no cream flash to fade in from anyway. */
   .hero-video {
     position: absolute;
     inset: 0;
@@ -58,11 +63,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0;
-    transition: opacity 1.2s var(--ease-out-expo);
-    will-change: opacity;
-  }
-  .hero-video.is-ready {
     opacity: 1;
   }
 
