@@ -4,7 +4,7 @@
   <video
     class="hero-video"
     data-hero-video
-    src="/videos/hero.mp4"
+    src="/videos/hero-720p.mp4"
     poster="/images/hero-poster.jpg"
     autoplay
     muted
@@ -158,54 +158,48 @@
     const showHint = () => {
       if (!hint) return;
       hint.hidden = false;
-      // Force a reflow so the transition plays
       requestAnimationFrame(() => hint.classList.add('is-visible'));
     };
     const hideHint = () => {
       if (!hint) return;
       hint.classList.remove('is-visible');
-      // Wait for transition to finish before hiding
       setTimeout(() => { hint.hidden = true; }, 400);
     };
 
-    // Hide hint as soon as the video is actually playing
-    video.addEventListener('playing', hideHint);
+    video.addEventListener('playing', () => {
+      reveal();
+      hideHint();
+    });
 
     if (reduced) {
       video.pause();
       video.removeAttribute('autoplay');
       reveal();
     } else {
-      const tryPlay = () => {
-        const p = video.play();
-        if (p && typeof p.then === 'function') {
-          p.then(reveal).catch(() => {
-            // Autoplay blocked. Show the poster and the tap-to-play hint.
-            reveal();
-            showHint();
-            const startOnTouch = () => {
-              video.play().catch(() => {});
-              document.removeEventListener('touchstart', startOnTouch);
-              document.removeEventListener('click', startOnTouch);
-            };
-            document.addEventListener('touchstart', startOnTouch, { once: true, passive: true });
-            document.addEventListener('click', startOnTouch, { once: true });
-          });
-        } else {
-          reveal();
-        }
-      };
+      /* Universal tap-to-play recovery. Always wired up so a user gesture
+         can rescue playback even if iOS deferred loading entirely on
+         cellular and `canplay` never fired. Removed once the video starts. */
+      const recover = () => video.play().catch(() => {});
+      document.addEventListener('touchstart', recover, { passive: true });
+      document.addEventListener('click', recover);
+      hint?.addEventListener('click', recover);
+      video.addEventListener('playing', () => {
+        document.removeEventListener('touchstart', recover);
+        document.removeEventListener('click', recover);
+      }, { once: true });
 
-      if (video.readyState >= 3) {
-        tryPlay();
+      /* Try immediately. play() forces a load if data isn't buffered yet,
+         and the Promise rejects fast when autoplay is blocked, which is
+         when we surface the tap-to-play hint. */
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        p.then(reveal).catch(() => {
+          reveal();
+          showHint();
+        });
       } else {
-        video.addEventListener('canplay', tryPlay, { once: true });
+        reveal();
       }
     }
-
-    // Tap the hint itself starts playback
-    hint?.addEventListener('click', () => {
-      video.play().catch(() => {});
-    });
   }
 </script>
