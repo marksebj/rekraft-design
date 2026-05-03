@@ -280,14 +280,25 @@ html:not(.js-ready) .reveal-words .line-inner {
 
 /* ==========================================================================
    Accessibility: reduced motion
+
+   Proportional, not nuclear. The previous rule killed every animation and
+   transition site-wide to 0.001ms, which left the page feeling broken
+   (frozen marquee, paused hero, no hover transitions) on any device with
+   Reduce Motion enabled or in iOS Low Power Mode.
+
+   The vestibular-disorder concern is with movement that the user doesn't
+   control: page-shifting transforms, parallax scrubs, 3D tilt, snap
+   transitions tied to scroll. Steady decorative loops (a slow marquee,
+   a muted background video) and short hover transitions are not what
+   the WCAG 2.3.3 guideline targets.
+
+   So: still snap entrance reveals to their final state (no popping in
+   from off-screen), still kill cursor glow and scroll progress, still
+   skip parallax/tilt/magnetic in JS, but let continuous decorative
+   loops keep playing and short hover/state transitions remain.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-  }
   .reveal-words .word-inner,
   .reveal-words .line-inner { transform: none !important; }
   .fade-up, .clip-reveal { opacity: 1 !important; transform: none !important; clip-path: none !important; }

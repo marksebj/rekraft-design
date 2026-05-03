@@ -129,13 +129,11 @@
     z-index: 2;
   }
 
-  /* Reduced-motion: hold on the poster, no autoplay loop. */
-  @media (prefers-reduced-motion: reduce) {
-    .hero-video {
-      opacity: 1;
-      animation: none;
-    }
-  }
+  /* Reduced-motion: nothing to override here. The video is a muted,
+     looped decorative background, not a scroll-linked or pop-up motion,
+     so we let it keep playing. The site-wide reduced-motion strategy
+     (see global.css) snaps entrance reveals to their final state but
+     doesn't kill continuous decorative loops. */
 
   @media (max-width: 900px) {
     .hero { height: 100svh; }
@@ -156,7 +154,6 @@
 
   if (video) {
     const reveal = () => video.classList.add('is-ready');
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const showHint = () => {
       if (!hint) return;
       hint.hidden = false;
@@ -173,44 +170,40 @@
       hideHint();
     });
 
-    if (reduced) {
-      video.pause();
-      video.removeAttribute('autoplay');
-      reveal();
-    } else {
-      /* Universal tap-to-play recovery. Always wired up so a user gesture
-         can rescue playback even if iOS deferred loading entirely on
-         cellular and `canplay` never fired. Removed once the video starts. */
-      const recover = () => video.play().catch(() => {});
-      document.addEventListener('touchstart', recover, { passive: true });
-      document.addEventListener('click', recover);
-      hint?.addEventListener('click', recover);
-      video.addEventListener('playing', () => {
-        document.removeEventListener('touchstart', recover);
-        document.removeEventListener('click', recover);
-      }, { once: true });
+    /* The video is a muted, looped decorative background. It's not the
+       kind of pop-up or scroll-linked motion WCAG 2.3.3 targets, so we
+       try to play it regardless of prefers-reduced-motion. If the OS
+       still blocks autoplay (Low Power Mode etc.), the tap-to-play hint
+       surfaces and the user opts in. */
+    const recover = () => video.play().catch(() => {});
+    document.addEventListener('touchstart', recover, { passive: true });
+    document.addEventListener('click', recover);
+    hint?.addEventListener('click', recover);
+    video.addEventListener('playing', () => {
+      document.removeEventListener('touchstart', recover);
+      document.removeEventListener('click', recover);
+    }, { once: true });
 
-      /* Try immediately. play() forces a load if data isn't buffered yet. */
-      const p = video.play();
-      if (p && typeof p.then === 'function') {
-        p.then(reveal).catch(() => {
-          reveal();
-          showHint();
-        });
-      } else {
+    /* Try immediately. play() forces a load if data isn't buffered yet. */
+    const p = video.play();
+    if (p && typeof p.then === 'function') {
+      p.then(reveal).catch(() => {
         reveal();
-      }
-
-      /* Belt-and-braces. Some iOS conditions cause play() to neither
-         resolve nor reject in a useful timeframe (Low Power Mode, strict
-         Safari Auto-Play settings). After 1.5s, if the video is still
-         paused, surface the tap-to-play hint regardless. */
-      setTimeout(() => {
-        if (video.paused) {
-          reveal();
-          showHint();
-        }
-      }, 1500);
+        showHint();
+      });
+    } else {
+      reveal();
     }
+
+    /* Belt-and-braces. Some iOS conditions cause play() to neither
+       resolve nor reject in a useful timeframe (Low Power Mode, strict
+       Safari Auto-Play settings). After 1.5s, if the video is still
+       paused, surface the tap-to-play hint regardless. */
+    setTimeout(() => {
+      if (video.paused) {
+        reveal();
+        showHint();
+      }
+    }, 1500);
   }
 </script>

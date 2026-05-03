@@ -79,7 +79,10 @@ const run = [...items, ...items, ...items];
     100% { transform: translate3d(-33.333%, 0, 0); }
   }
 
+  /* Reduced-motion: keep the marquee scrolling, just slower. A continuous
+     gentle horizontal drift is not the kind of sudden, scroll-linked
+     movement WCAG 2.3.3 targets; freezing it makes the page feel broken. */
   @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
+    .marquee-track { animation-duration: 180s; }
   }
 </style>
