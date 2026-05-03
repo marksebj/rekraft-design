@@ -4,7 +4,6 @@
   <video
     class="hero-video"
     data-hero-video
-    src="/videos/hero-720p.mp4"
     poster="/images/hero-poster.jpg"
     autoplay
     muted
@@ -13,7 +12,10 @@
     webkit-playsinline
     preload="auto"
     aria-hidden="true"
-  ></video>
+  >
+    <source src="/videos/hero-portrait.mp4" media="(max-width: 768px)" type="video/mp4" />
+    <source src="/videos/hero-720p.mp4" type="video/mp4" />
+  </video>
   <!-- Tap-to-play hint. Hidden by default. Shown only if autoplay was
        blocked by the OS (iOS Low Power Mode, Reduce Motion, etc.) so the
        user has a clear affordance to start playback. Fades out once the
@@ -188,9 +190,7 @@
         document.removeEventListener('click', recover);
       }, { once: true });
 
-      /* Try immediately. play() forces a load if data isn't buffered yet,
-         and the Promise rejects fast when autoplay is blocked, which is
-         when we surface the tap-to-play hint. */
+      /* Try immediately. play() forces a load if data isn't buffered yet. */
       const p = video.play();
       if (p && typeof p.then === 'function') {
         p.then(reveal).catch(() => {
@@ -200,6 +200,17 @@
       } else {
         reveal();
       }
+
+      /* Belt-and-braces. Some iOS conditions cause play() to neither
+         resolve nor reject in a useful timeframe (Low Power Mode, strict
+         Safari Auto-Play settings). After 1.5s, if the video is still
+         paused, surface the tap-to-play hint regardless. */
+      setTimeout(() => {
+        if (video.paused) {
+          reveal();
+          showHint();
+        }
+      }, 1500);
     }
   }
 </script>

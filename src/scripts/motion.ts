@@ -23,9 +23,15 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 function initLenis() {
   if (prefersReducedMotion) return;
 
-  const isTouch = matchMedia('(hover: none)').matches;
+  /* Skip Lenis on touch devices. Lenis hijacks touch scrolling and on
+     iOS Safari has known interactions with .lenis-stopped overflow:hidden
+     that can leave the page in a non-scrollable state. Native iOS touch
+     scrolling is already smooth; the wheel-driven smoothing only matters
+     on hover-capable devices. */
+  if (matchMedia('(hover: none)').matches) return;
+
   const lenis = new Lenis({
-    duration: isTouch ? 0.9 : 1.15,
+    duration: 1.15,
     smoothWheel: true,
     wheelMultiplier: 1.0,
     touchMultiplier: 1.6,
@@ -413,13 +419,18 @@ function initNav() {
 
 function boot() {
   document.documentElement.classList.add('js-ready');
-  initLenis();
-  initProgressBar();
-  initHeroReveal();
-  initScrollReveals();
-  initMagnetic();
-  initTilt3D();
-  initNav();
+  /* Each init is isolated so one throwing (e.g. a third-party lib choking
+     on an iOS Safari quirk) cannot cascade-kill the rest of the page. */
+  const safe = (name: string, fn: () => void) => {
+    try { fn(); } catch (err) { console.error(`[motion] ${name} failed`, err); }
+  };
+  safe('lenis', initLenis);
+  safe('progressBar', initProgressBar);
+  safe('heroReveal', initHeroReveal);
+  safe('scrollReveals', initScrollReveals);
+  safe('magnetic', initMagnetic);
+  safe('tilt3D', initTilt3D);
+  safe('nav', initNav);
 }
 
 if (document.readyState === 'loading') {
